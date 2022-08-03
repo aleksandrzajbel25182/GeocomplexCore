@@ -16,4 +16,8 @@
     <Folder Include="View\Pages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+  </ItemGroup>
+
 </Project>
