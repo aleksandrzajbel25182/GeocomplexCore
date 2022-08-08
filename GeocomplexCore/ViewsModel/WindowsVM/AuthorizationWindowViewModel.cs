@@ -1,7 +1,11 @@
-﻿using GeocomplexCore.BD.Context;
+﻿using Egor92.MvvmNavigation;
+using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Service;
+using GeocomplexCore.Views.Pages;
 using GeocomplexCore.ViewsModel.Base;
+using GeocomplexCore.ViewsModel.PagesVM;
 using System.Linq;
 using System.Windows.Input;
 
@@ -52,6 +56,17 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
                 if (Autrorization())
                 {
                     var mainWindow = new MainWindow();
+                    var navigationManager = new NavigationManager(mainWindow.Cont);
+
+                    //2. Определите правила навигации: зарегистрируйте ключ (строку) с соответствующими View и ViewModel для него
+
+                    navigationManager.Register<MenuView>("Menu", () => new MenuViewModel(navigationManager));
+
+                    //navigationManager.Register<UserControl2>("UserControl2", () => new UserControl2VM(navigationManager));
+
+                    //3. Отобразите стартовый UI
+                    navigationManager.Navigate("Menu");
+                   
                     mainWindow.Show();
                 }
                 else

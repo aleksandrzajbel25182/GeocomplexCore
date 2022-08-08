@@ -18,7 +18,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="652"/>
             </Grid.RowDefinitions>
-            <ContentControl Content="{Binding UserInterface}"
+            <ContentControl 
                           Grid.Row="1" Name="Cont" 
                           />
             <materialDesign:Card Background="#F2F8F1"
