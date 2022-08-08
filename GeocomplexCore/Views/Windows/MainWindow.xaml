@@ -3,10 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GeocomplexCore"
+        xmlns:local="clr-namespace:GeocomplexCore" 
+        xmlns:us="clr-namespace:GeocomplexCore.Controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="768" Width="1400">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="652"/>
+            </Grid.RowDefinitions>
+            <ContentControl Content="{Binding UserInterface}"
+                          Grid.Row="1" Name="Cont" 
+                          />
+            <materialDesign:Card Background="#F2F8F1"
+                                 Grid.Row="0" >
+                <Label VerticalAlignment="Center" 
+                       HorizontalAlignment="Left"
+                       Content="ГЛАВНОЕ МЕНЮ"
+                       FontSize="32" 
+                       FontFamily="Arvo"/>
+            </materialDesign:Card>
+        </Grid>
+        
+        <us:HamburgerMenu Grid.Column="0" Grid.Row="1"/>
 
     </Grid>
 </Window>
