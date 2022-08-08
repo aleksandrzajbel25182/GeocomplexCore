@@ -10,13 +10,16 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Resources\Icons\" />
-    <Folder Include="Service\" />
     <Folder Include="ViewsModel\PagesVM\" />
     <Folder Include="Views\Pages\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeocomplexCore.BD\GeocomplexCore.BD.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,8 @@
-﻿using GeocomplexCore.Infrastructure.Commands;
+﻿using GeocomplexCore.BD.Context;
+using GeocomplexCore.Infrastructure.Commands;
+using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
+using System.Linq;
 using System.Windows.Input;
 
 namespace GeocomplexCore.ViewsModel.WindowsVM
@@ -44,35 +47,26 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         // Действия которые должна выполнить команда
         private void OnConnectionCommandExcuted(object p)
         {
-            //connection = new NpgsqlConnection(connstring);
-            //connection.Open();
-            //string cmd = $"SELECT * FROM user_data WHERE user_login='{login}' AND user_password ='{password}'"; // Создаем запрос для вывода 
-            //NpgsqlCommand createCommand = new NpgsqlCommand(cmd, connection); // ложим запрос в команду и подключение к бд
-            //createCommand.ExecuteNonQuery();
+            try
+            {
+                if (Autrorization())
+                {
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+                }
+                else
+                {
+                    MessageService.ShowMessage("Неправильно введен логин или пароль!");
+                }
 
-            //NpgsqlDataAdapter dataAdp = new NpgsqlDataAdapter(createCommand);
-            //DataTable dt = new DataTable("user_data"); // В скобках указываем название таблицы
-            //dataAdp.Fill(dt);
+            }
+            catch (System.Exception e)
+            {
+                MessageService.ShowMessage(e.Message);
+            }
+           
 
 
-            //if (dt.Rows.Count > 0) // если такая запись существует       
-            //{
-            //    connection.Close();
-
-            //    var mainWindow = new MainWindow();
-
-            //    var modules = ReflectionHelper.CreateAllInstancesOf<IModule>();
-
-            //    var vm = new MainWindowViewModel(modules);
-            //    mainWindow.DataContext = vm;
-            //    mainWindow.Closing += (s, args) => vm.SelectedModule.Deactivate();
-            //    mainWindow.Show();
-
-            //}
-            //else
-            //{
-            //    MessageService.ShowMessage("Неправильно введен пароль или логин!");
-            //}
         }
 
         #endregion
@@ -80,7 +74,18 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         #endregion
 
+        public bool Autrorization()
+        {
+            using(GeocomplexContext db = new GeocomplexContext())
+            {
+                var autoriz = db.UserData.Where(u => u.UserLogin == Login && u.UserPassword == Password).ToArray();
 
+                if (autoriz.Length > 0)
+                    return true;
+                else
+                    return false;
+            }            
+        } 
 
 
 
