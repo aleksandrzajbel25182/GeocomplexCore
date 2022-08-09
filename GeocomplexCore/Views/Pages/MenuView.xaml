@@ -20,7 +20,7 @@
             <Button 
                     Content="Полевой дневник"
                     Style="{DynamicResource StyleMenuButton}"
-                    Command="{Binding GoToPolevoiDnevnikCommand}"/>
+                    Command="{Binding GoToPolevoiDnevnikComman}"/>
             <Button Grid.Column="1"
                     Content="Каталог"
                     Style="{DynamicResource StyleMenuButton}"/>

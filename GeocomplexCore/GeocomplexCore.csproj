@@ -8,8 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\ActionIcons\Add.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Copy.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Edit.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Remove.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Resources\Icons\" />
+    <Folder Include="Resources\Icons\HamburgerMenuIcons\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +26,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GeocomplexCore.BD\GeocomplexCore.BD.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\ActionIcons\Add.ico" />
+    <Resource Include="Resources\Icons\ActionIcons\Copy.ico" />
+    <Resource Include="Resources\Icons\ActionIcons\Edit.ico" />
+    <Resource Include="Resources\Icons\ActionIcons\Remove.ico" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="GeocomplexCore.Views.Pages.Polevoi.ProjectPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="652" d:DesignWidth="1200">
+    <Grid>
+        <DockPanel >
+            <TextBox Width="500"
+                     DockPanel.Dock="Top"
+                     Margin="100,20,0,20"
+                     FontSize="20"                     
+                     Cursor="Arrow"
+                     materialDesign:TextFieldAssist.UnderlineBrush="#166051"
+                     materialDesign:HintAssist.Hint="Пример: ГГ-1000"
+                     HorizontalAlignment="Left"/>
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+
+                <Button Style="{StaticResource StyleCircleButton}"
+                        Margin="110,0,0,0" >
+                    <Image Source="/Resources/Icons/ActionIcons/Add.ico"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+                <Button Style="{StaticResource StyleCircleButton}"
+                         Margin="40,0,0,0">
+                    <Image Source="/Resources/Icons/ActionIcons/Edit.ico"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+                <Button Style="{StaticResource StyleCircleButton}"
+                         Margin="40,0,0,0">
+                    <Image Source="/Resources/Icons/ActionIcons/Copy.ico"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+                <Button Style="{StaticResource StyleCircleButton}"
+                         Margin="40,0,0,0">
+                    <Image Source="/Resources/Icons/ActionIcons/Remove.ico"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+            </StackPanel>
+            
+            <DataGrid Name="Datagrid"
+                      Style="{DynamicResource DataGridStyle}" 
+                      ItemsSource="{Binding Userdat}"
+                      AutoGenerateColumns="False" 
+                      Width="1000"
+                      Height="500"
+                      CanUserAddRows="False">
+                
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Id" 
+                                    Binding="{Binding UserId}"
+                                    MinWidth="80"
+                                    Width="*"/>
+                    <DataGridTextColumn Header="Наименование" 
+                                    Binding="{Binding UserSurname}"
+                                    MinWidth="120"
+                                    Width="*"/>
+                    <DataGridTextColumn Header="Дата создания" 
+                                    Binding="{Binding UserName}" 
+                                    MinWidth="120"
+                                    Width="*"/>
+                    <DataGridTextColumn Header="Организация исполнитель"
+                                    Binding="{Binding UserLogin}"
+                                    MinWidth="120"
+                                    Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

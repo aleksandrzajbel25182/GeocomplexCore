@@ -4,8 +4,10 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Service;
 using GeocomplexCore.Views.Pages;
+using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.PagesVM;
+using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
 using System.Linq;
 using System.Windows.Input;
 
@@ -62,7 +64,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
                     navigationManager.Register<MenuView>("Menu", () => new MenuViewModel(navigationManager));
 
-                    //navigationManager.Register<UserControl2>("UserControl2", () => new UserControl2VM(navigationManager));
+                    navigationManager.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(navigationManager));
 
                     //3. Отобразите стартовый UI
                     navigationManager.Navigate("Menu");
