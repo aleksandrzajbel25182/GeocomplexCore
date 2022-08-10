@@ -58,8 +58,10 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
                 if (Autrorization())
                 {
                     var mainWindow = new MainWindow();
+                    
                     var navigationManager = new NavigationManager(mainWindow.Cont);
 
+                    mainWindow.DataContext = new MainWindowViewModel(navigationManager);
                     //2. Определите правила навигации: зарегистрируйте ключ (строку) с соответствующими View и ViewModel для него
 
                     navigationManager.Register<MenuView>("Menu", () => new MenuViewModel(navigationManager));

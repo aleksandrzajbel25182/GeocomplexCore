@@ -223,4 +223,36 @@
     </Style>
 
 
+    <!--Стиль ТЕКСТА НАВИГАЦИОНОГО МЕНЮ-->
+    <Style x:Key="FontStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily"
+                    Value="Arvo"/>
+        <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+        <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+        <Setter Property="Foreground"
+                    Value="White"/>
+        <Setter Property="FontSize"
+                    Value="20"/>
+    </Style>
+    <!--Стиль КНОПКИ НАВИГАЦИОНОГО МЕНЮ-->
+    <Style x:Key="ToggleButtonMenu" TargetType="{x:Type ToggleButton}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="Transparent">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+
+
+
+    </Style>
+
+
 </ResourceDictionary>

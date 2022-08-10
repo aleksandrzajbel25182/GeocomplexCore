@@ -12,10 +12,17 @@
     <None Remove="Resources\Icons\ActionIcons\Copy.ico" />
     <None Remove="Resources\Icons\ActionIcons\Edit.ico" />
     <None Remove="Resources\Icons\ActionIcons\Remove.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Архив.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Домой.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Каталог.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Лабараторные-анализы.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Полевой-дневник.ico" />
+    <None Remove="Resources\Icons\HamburgerMenuIcons\Фондовые.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Icons\HamburgerMenuIcons\" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +40,12 @@
     <Resource Include="Resources\Icons\ActionIcons\Copy.ico" />
     <Resource Include="Resources\Icons\ActionIcons\Edit.ico" />
     <Resource Include="Resources\Icons\ActionIcons\Remove.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Архив.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Домой.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Каталог.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Лабараторные-анализы.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Полевой-дневник.ico" />
+    <Resource Include="Resources\Icons\HamburgerMenuIcons\Фондовые.ico" />
   </ItemGroup>
 
 </Project>
