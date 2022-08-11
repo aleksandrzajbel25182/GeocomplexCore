@@ -72,6 +72,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
                     navigationManager.Navigate("Menu");
                    
                     mainWindow.Show();
+                 
                 }
                 else
                 {

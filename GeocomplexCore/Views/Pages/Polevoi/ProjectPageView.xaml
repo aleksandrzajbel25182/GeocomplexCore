@@ -24,7 +24,7 @@
 
                 <Button Style="{StaticResource StyleCircleButton}"
                         Margin="110,0,0,0" 
-                        Command="{Binding AddCommand}">
+                        Command="{Binding OpenChildWindow}">
                     <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                            Width="25"
                            Height="25"/>

@@ -3,9 +3,12 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.ViewsModel.Base;
+using GeocomplexCore.ViewsModel.WindowsVM;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -89,7 +92,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ICollectionView? _projectCollection;
         public ICollectionView? ProjectCollection { get => _projectCollection; set => Set(ref _projectCollection, value); }
         #endregion
-
+        MainWindowViewModel mainWindowViewModel;
 
 
         public ProjectViewModel(NavigationManager navigationManager)
@@ -99,7 +102,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             // Обворачиваем ObservableCollection в ICollectionView
             ProjectCollection = CollectionViewSource.GetDefaultView(ProjectData);
 
-            AddCommand = new LamdaCommand(OnAddCommandExcuted, CanAddCommandExecute);
+           
             GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);
 
 
@@ -115,16 +118,21 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <summary>
         /// Команда открытия нового окна для добавления проекта 
         /// </summary>
-        public ICommand AddCommand { get; }
+        private ICommand _openChildWindow;
 
-        private bool CanAddCommandExecute(object p) => true;
-
-        private void OnAddCommandExcuted(object p)
+        // Свойства доступные только для чтения для обращения к командам и их инициализации
+        public ICommand OpenChildWindow
         {
-            
-           
-
+            get
+            {
+                if (_openChildWindow == null)
+                {
+                    _openChildWindow = new OpenChildWindowCommand(mainWindowViewModel);
+                }
+                return _openChildWindow;
+            }
         }
+
 
         /// <summary>
         /// Команда открытия нового окна для добавления проекта 
@@ -134,9 +142,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private bool CanGoDistrictPageCommandExecute(object p) => true;
 
         private void OnGoDistrictPageCommandExcuted(object p)
-        {
-
-            
+        {            
 
         }
 
@@ -144,6 +150,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
         #endregion
+
+
+       
+
+
 
         /// <summary>
         /// Фильтрация 
