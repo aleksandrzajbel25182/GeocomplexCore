@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Egor92.MvvmNavigation;
+using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.Views.Pages.AddPages;
+using GeocomplexCore.ViewsModel.AddPagesVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +25,8 @@ namespace GeocomplexCore.Views.Windows
     {
         public AddWindows()
         {
-            InitializeComponent();
+            InitializeComponent();          
+
         }
     }
 }

@@ -4,7 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeocomplexCore.Views.Windows"
+        xmlns:vm="clr-namespace:GeocomplexCore.ViewsModel.AddPagesVM"
         mc:Ignorable="d"
-        Title="AddWindows" Height="450" Width="400">
-    <ContentControl />
+        Height="450" Width="400" Background="#DFE7DD">
+    
+    <!--<StackPanel>
+        <Label Content="Наименование проекта: "
+               FontSize="20"
+               Margin="15"/>
+        <TextBox Text=""
+                 FontSize="18"
+                  Margin="15"/>
+        <Label Content="Организатор исполнитель"
+               FontSize="18"
+                Margin="15"/>
+        <ComboBox ItemsSource="{Binding OrgName}"
+                  FontSize="18"
+                 Margin="15"/>
+        <Button 
+            Content="Добавить"
+            Style="{DynamicResource StyleButton}"
+            Height="40"/>
+    </StackPanel-->
+
+    <ContentControl Content="{Binding Path=CurrentVM}"/>
+    
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Egor92.MvvmNavigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,15 @@ namespace GeocomplexCore.Views.Pages.AddPages
     /// <summary>
     /// Логика взаимодействия для AddProject.xaml
     /// </summary>
-    public partial class AddProject : UserControl
+    public partial class AddProjectView : UserControl
     {
-        public AddProject()
+       
+
+        public AddProjectView()
         {
             InitializeComponent();
         }
+
+
     }
 }

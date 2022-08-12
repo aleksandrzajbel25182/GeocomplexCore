@@ -22,7 +22,7 @@ namespace GeocomplexCore
         {
             displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
             displayRootRegistry.RegisterWindowType<AddWindowsViewModel, AddWindows>();
-            displayRootRegistry.RegisterWindowType<AuthorizationWindowViewModel, AuthorizationWindow > ();
+
         }
         //protected override async void OnStartup(StartupEventArgs e)
         //{
