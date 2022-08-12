@@ -5,22 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
              mc:Ignorable="d" 
-             d:DesignHeight="652" d:DesignWidth="1200">
+             d:DesignHeight="652" d:DesignWidth="1200" Background="#F2F8F1">
     <Grid>
         <DockPanel >
-            <TextBox Width="500"
+            <DockPanel DockPanel.Dock="Top"
+                     Margin="100,20,0,20">
+                
+          
+                <Image Source="/Resources/Icons/ActionIcons/Search.ico"
+                       Margin="0,0,10,0"
+                       Width="24"
+                       Height="24"
+                      
+                     DockPanel.Dock="Left"
+                       />
+                <TextBox Width="500"
                      DockPanel.Dock="Top"
-                     Margin="100,20,0,20"
+                     
                      Text="{Binding TextToFilter , UpdateSourceTrigger=PropertyChanged}"
                      FontSize="20"                     
                      Cursor="Arrow"
                      materialDesign:TextFieldAssist.UnderlineBrush="#166051"
                      materialDesign:HintAssist.Hint="Пример: ГГ-1000"
                      HorizontalAlignment="Left"/>
+            </DockPanel>
 
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+
+            <StackPanel Orientation="Horizontal" 
+                        DockPanel.Dock="Top">
 
                 <Button Style="{StaticResource StyleCircleButton}"
                         Margin="110,0,0,0" 
@@ -56,13 +69,14 @@
                       AutoGenerateColumns="False" 
                       Width="1000"
                       Height="500"
+                      Margin="-90,0,0,0"
+                      DockPanel.Dock="Bottom"
                       CanUserAddRows="False">
                 <DataGrid.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick" 
                      Command="{Binding GoDistrictPageCommand , Mode=OneTime}" 
                      CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
                 </DataGrid.InputBindings>
-
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Id" 
                                     Binding="{Binding PrgId,Mode=OneWay}"

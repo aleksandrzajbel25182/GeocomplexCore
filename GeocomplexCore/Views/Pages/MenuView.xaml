@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeocomplexCore.Views.Pages"
               mc:Ignorable="d" 
-             d:DesignHeight="652" d:DesignWidth="1200">
+             d:DesignHeight="652" d:DesignWidth="1200" Background="#F2F8F1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
