@@ -4,21 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.AddPages"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400" Background="#DFE7DD">
     <StackPanel>
         <Label Content="Наименование проекта: "
-               FontSize="25"/>
-        <TextBox Text="name project"
-                 FontSize="20"/>
+               FontSize="20"
+               Margin="15"/>
+        <TextBox Text="{Binding ProjectName}"
+                 FontSize="18"
+                 Margin="15"
+                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"/>
+
         <Label Content="Организатор исполнитель"
-               FontSize="25"/>
+               FontSize="18"
+               Margin="15"/>
+
         <ComboBox  ItemsSource="{Binding OrgName}"
-                 FontSize="25"/>
+                   FontSize="16"
+                   Margin="15"
+                   SelectedItem="{Binding SelectedOrg}">
+
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"
+                               TextWrapping="Wrap"
+                               Width="300"/>                    
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Button 
+            Command="{Binding AddNewProjectCommand}"
             Content="Добавить"
             Style="{DynamicResource StyleButton}"
-            Height="40"/>
+            Height="40"
+            Margin="15"/>
+        
     </StackPanel>
 </UserControl>

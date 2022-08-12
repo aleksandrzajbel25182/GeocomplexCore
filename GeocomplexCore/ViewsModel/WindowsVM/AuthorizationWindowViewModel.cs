@@ -2,6 +2,7 @@
 using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
+using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
 using GeocomplexCore.Views.Pages;
 using GeocomplexCore.Views.Pages.Polevoi;
@@ -101,7 +102,10 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
                 var autoriz = db.UserData.Where(u => u.UserLogin == Login && u.UserPassword == Password).ToArray();
 
                 if (autoriz.Length > 0)
+                {
+                    GlobalSet.staticUserID = autoriz[0].UserId.ToString(); 
                     return true;
+                }                    
                 else
                     return false;
             }            

@@ -8,25 +8,6 @@
         mc:Ignorable="d"
         Height="450" Width="400" Background="#DFE7DD">
     
-    <!--<StackPanel>
-        <Label Content="Наименование проекта: "
-               FontSize="20"
-               Margin="15"/>
-        <TextBox Text=""
-                 FontSize="18"
-                  Margin="15"/>
-        <Label Content="Организатор исполнитель"
-               FontSize="18"
-                Margin="15"/>
-        <ComboBox ItemsSource="{Binding OrgName}"
-                  FontSize="18"
-                 Margin="15"/>
-        <Button 
-            Content="Добавить"
-            Style="{DynamicResource StyleButton}"
-            Height="40"/>
-    </StackPanel-->
-
     <ContentControl Content="{Binding Path=CurrentVM}"/>
     
 </Window>

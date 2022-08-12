@@ -135,7 +135,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
         /// <summary>
-        /// Команда открытия нового окна для добавления проекта 
+        /// Команда 
         /// </summary>
         public ICommand GoDistrictPageCommand { get; }
 

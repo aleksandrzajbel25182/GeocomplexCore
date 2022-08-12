@@ -12,6 +12,7 @@
     <None Remove="Resources\Icons\ActionIcons\Copy.ico" />
     <None Remove="Resources\Icons\ActionIcons\Edit.ico" />
     <None Remove="Resources\Icons\ActionIcons\Remove.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Search.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Архив.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Домой.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\ActionIcons\Search.ico" />
     <Resource Include="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
   </ItemGroup>
 
