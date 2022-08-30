@@ -28,7 +28,7 @@
     <Style x:Key="StyleLabel" TargetType="{x:Type Label}">
         <Setter Property="FontFamily" Value="Arvo"/>
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="25"/>
     </Style>
     
     <!--Общий стиль КНОПОК-->

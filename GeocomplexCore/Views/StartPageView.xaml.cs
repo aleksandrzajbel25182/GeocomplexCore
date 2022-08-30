@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GeocomplexCore.Views.Windows
+namespace GeocomplexCore.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationWindow.xaml
+    /// Логика взаимодействия для StartPageView.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class StartPageView : UserControl
     {
-        public AuthorizationWindow()
+        public StartPageView()
         {
             InitializeComponent();
         }

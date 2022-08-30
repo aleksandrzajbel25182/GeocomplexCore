@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="GeocomplexCore.Views.Autorization"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GeocomplexCore.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="768" Width="1400" Background="#F2F8F1">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="156*"/>
+        </Grid.RowDefinitions>
+
+        <Label  Grid.Row="0"
+                Content="ГЕОКОМПЛЕКС" 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="45"
+                FontFamily="Arvo"
+                Height="70"/>
+        
+        <Border VerticalAlignment="Bottom"
+                BorderBrush="Black"
+                BorderThickness="0.5"/>
+
+        <StackPanel  Grid.Row="1">
+            <StackPanel Margin="0,20,0,10">
+                <Label 
+               Content="Логин"
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top"
+               Style="{DynamicResource StyleLabel}" />
+
+                <TextBox Name="TextBoxLogin"
+                 Grid.Row="1"
+                 Width="300"
+                 TextAlignment="Center"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Center"
+                 FontSize="35"
+                 Text="{Binding Login}"
+                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"/>
+
+            </StackPanel>
+            <StackPanel>
+
+                <Label 
+               Content="Пароль"
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Bottom"
+               Style="{DynamicResource StyleLabel}"/>
+
+                <TextBox Name="TextBoxPassword"
+                 Grid.Row="1"
+                 Width="300"
+                 TextAlignment="Center"        
+                 VerticalAlignment="Bottom" 
+                 HorizontalAlignment="Center"
+                 FontSize="35"
+                 Margin="0,5"
+                 Text="{Binding Password}" Cursor="Arrow"
+                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"/>
+
+            </StackPanel>
+            <Button Content="Вход"
+                Grid.Row="2"
+                Height="40"
+                    Width="300"
+                Style="{DynamicResource StyleButton}" 
+                HorizontalAlignment="Center"
+                Margin="100"
+                Command="{Binding ConnectionCommand}"
+                />
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

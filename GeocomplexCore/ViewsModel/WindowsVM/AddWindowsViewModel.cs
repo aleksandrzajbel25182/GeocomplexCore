@@ -22,18 +22,14 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         }
 
 
-
-
         public AddWindowsViewModel()
         {
           
             _currentVM = new ContentControl();
-;
+
             var navigationManager = new NavigationManager(_currentVM);
 
             navigationManager.Register<AddProjectView>("Project", () => new AddProjectViewModel(navigationManager));
-
-
 
             //3. Отобразите стартовый UI
             navigationManager.Navigate("Project");

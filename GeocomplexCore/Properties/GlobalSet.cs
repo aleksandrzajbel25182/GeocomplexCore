@@ -9,5 +9,7 @@ namespace GeocomplexCore.Properties
     public static class GlobalSet
     {
         public static string staticUserID { get; set; }
+        public static string staticMenuValue { get; set; }
+
     }
 }

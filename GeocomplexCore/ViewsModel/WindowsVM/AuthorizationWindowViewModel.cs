@@ -4,6 +4,7 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
+using GeocomplexCore.Views;
 using GeocomplexCore.Views.Pages;
 using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.Base;
@@ -17,6 +18,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
     internal class AuthorizationWindowViewModel : ViewModel
     {
         #region Параметры / Parametrs
+        NavigationManager _navigationmaneger;
 
         #region Логин
         /// <summary>
@@ -32,6 +34,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         /// Пароль пользователя
         /// </summary>
         private string password;
+        private NavigationManager navigationManager;
 
         public string Password { get => password; set => Set(ref password, value); }
         #endregion
@@ -58,22 +61,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             {
                 if (Autrorization())
                 {
-                    var mainWindow = new MainWindow();
-                    
-                    var navigationManager = new NavigationManager(mainWindow.Cont);
-
-                    mainWindow.DataContext = new MainWindowViewModel(navigationManager);
-                    //2. Определите правила навигации: зарегистрируйте ключ (строку) с соответствующими View и ViewModel для него
-
-                    navigationManager.Register<MenuView>("Menu", () => new MenuViewModel(navigationManager));
-
-                    navigationManager.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(navigationManager));
-
-                    //3. Отобразите стартовый UI
-                    navigationManager.Navigate("Menu");
-                   
-                    mainWindow.Show();
-                 
+                    _navigationmaneger.Navigate("StartPage");
                 }
                 else
                 {
@@ -85,8 +73,6 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             {
                 MessageService.ShowMessage(e.Message);
             }
-           
-
 
         }
 
@@ -95,6 +81,10 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         #endregion
 
+        /// <summary>
+        /// Подлючение к базе, проверка в базе логина и пароля. Занесение в глабальную переменную его ID если логин и пароль верны.
+        /// </summary>
+        /// <returns></returns>
         public bool Autrorization()
         {
             using(GeocomplexContext db = new GeocomplexContext())
@@ -112,15 +102,13 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         } 
 
 
-
         /*-------------------------------------------------------------------------------------------------------------------------------------------*/
-        public AuthorizationWindowViewModel()
+        
+       
+        public AuthorizationWindowViewModel(NavigationManager navigationManager)
         {
+            _navigationmaneger = navigationManager;
             ConnectionCommand = new LamdaCommand(OnConnectionCommandExcuted, CanConnectionCommandExecute);
-
         }
-
-
-
     }
 }

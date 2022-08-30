@@ -1,5 +1,12 @@
-﻿using GeocomplexCore.Service;
+﻿using Egor92.MvvmNavigation;
+using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.Service;
+using GeocomplexCore.Views;
+using GeocomplexCore.Views.Pages;
+using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.Views.Windows;
+using GeocomplexCore.ViewsModel.PagesVM;
+using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
 using GeocomplexCore.ViewsModel.WindowsVM;
 using System;
 using System.Collections.Generic;
@@ -20,19 +27,27 @@ namespace GeocomplexCore
         //AuthorizationWindowViewModel _authorizationWindowViewModel;
         public App()
         {
-            displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
+            displayRootRegistry.RegisterWindowType<StartPageViewModel, MainWindow>();
             displayRootRegistry.RegisterWindowType<AddWindowsViewModel, AddWindows>();
 
         }
-        //protected override async void OnStartup(StartupEventArgs e)
-        //{
-        //    base.OnStartup(e);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            
+            var mainWindow = new MainWindow();
+            var navigationManager = new NavigationManager(mainWindow);
+            mainWindow.DataContext = new MainWindowViewModel();
+            //Регистрация ключа (строки) с соответствующими View и ViewModel для него
+            navigationManager.Register<Autorization>("Autorization", () => new AuthorizationWindowViewModel(navigationManager));
+            navigationManager.Register<StartPageView>("StartPage", () => new StartPageViewModel());
 
-        //    _authorizationWindowViewModel = new AuthorizationWindowViewModel();
+            //Отображение стартового UI
+            navigationManager.Navigate("Autorization");
 
-        //    await displayRootRegistry.ShowModalPresentation(_authorizationWindowViewModel);
+            mainWindow.Show();
 
-        //    Shutdown();
-        //}
+            
+        }
+
     }
 }
