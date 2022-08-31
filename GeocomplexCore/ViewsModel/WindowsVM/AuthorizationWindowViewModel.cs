@@ -87,18 +87,18 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         /// <returns></returns>
         public bool Autrorization()
         {
-            using(GeocomplexContext db = new GeocomplexContext())
+            using (GeocomplexContext db = new GeocomplexContext())
             {
                 var autoriz = db.UserData.Where(u => u.UserLogin == Login && u.UserPassword == Password).ToArray();
 
                 if (autoriz.Length > 0)
                 {
-                    GlobalSet.staticUserID = autoriz[0].UserId.ToString(); 
+                    GlobalSet.staticUserID = autoriz[0].UserId.ToString();
                     return true;
-                }                    
+                }
                 else
                     return false;
-            }            
+            }
         } 
 
 

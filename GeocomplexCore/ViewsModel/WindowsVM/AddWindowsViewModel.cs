@@ -1,11 +1,8 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
-using GeocomplexCore.BD.Context;
 using GeocomplexCore.Views.Pages.AddPages;
 using GeocomplexCore.ViewsModel.AddPagesVM;
 using GeocomplexCore.ViewsModel.Base;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace GeocomplexCore.ViewsModel.WindowsVM

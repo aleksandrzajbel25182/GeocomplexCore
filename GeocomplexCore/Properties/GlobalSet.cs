@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeocomplexCore.ViewsModel.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace GeocomplexCore.Properties
     {
         public static string staticUserID { get; set; }
         public static string staticMenuValue { get; set; }
+
+        
 
     }
 }

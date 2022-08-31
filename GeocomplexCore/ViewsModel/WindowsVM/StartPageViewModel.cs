@@ -11,6 +11,7 @@ using GeocomplexCore.Service;
 using GeocomplexCore.Views;
 using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
+using GeocomplexCore.Properties;
 
 namespace GeocomplexCore.ViewsModel.WindowsVM
 {
@@ -64,6 +65,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         public StartPageViewModel()
         {
+            
             MenuItem = new List<MenuModel>()
             {
                 new MenuModel("ДОМОЙ", $"/Resources/Icons/HamburgerMenuIcons/Домой.ico"),
@@ -81,6 +83,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             ////Регистрация ключа (строки) с соответствующими View и ViewModel для него
             _navigationmaneger.Register<MenuView>("Menu", () => new MenuViewModel(_navigationmaneger));
             _navigationmaneger.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(_navigationmaneger));
+            
 
             //Отображение стартового UI
             _navigationmaneger.Navigate("Menu");

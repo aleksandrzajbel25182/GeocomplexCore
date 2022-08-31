@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Icons\ActionIcons\Add.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Back.ico" />
     <None Remove="Resources\Icons\ActionIcons\Copy.ico" />
     <None Remove="Resources\Icons\ActionIcons\Edit.ico" />
     <None Remove="Resources\Icons\ActionIcons\Remove.ico" />
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\ActionIcons\Back.ico" />
     <Resource Include="Resources\Icons\ActionIcons\Search.ico" />
     <Resource Include="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
   </ItemGroup>

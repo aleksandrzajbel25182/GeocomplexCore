@@ -1,9 +1,11 @@
 ﻿using Egor92.MvvmNavigation;
+using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.WindowsVM;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -19,96 +21,72 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
     {
         #region Parametrs/ Параметры 
 
-       
+
         private NavigationManager navigationManager;
+        MainWindowViewModel mainWindowViewModel;
+
+        //Временная переменная для хранения выделенного "Проекта"
+        private int SelecetedID;
+
+        private int Peeremen = 0;
 
         /// <summary>
         /// Загрузка данных из базы в колекцию по модели ProjectModel
         /// </summary>
-        private ObservableCollection<ProjectModel> _projectdata = new ObservableCollection<ProjectModel>();
-        public ObservableCollection<ProjectModel> ProjectData
+        private ObservableCollection<ModelData> _datacol = new ObservableCollection<ModelData>();
+        public ObservableCollection<ModelData> DataCol
         {
 
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
-                {
-                    _projectdata = db.Projects.Join(db.Organizations,
-                                     p => p.PrgOrganization,
-                                     o => o.OrgId,
-                                     (p, o) => new ProjectModel // результат
-                                     {
-                                         PrgId = p.PrgId,
-                                         PrgName = p.PrgName,
-                                         PrgOrganization = o.OrgName,
-                                         PrgDate = p.PrgDate
-
-                                     }).ToObservableCollection();
-
-                    return _projectdata;
-
-                }
+                return _datacol;
             }
             set
             {
-                _projectdata = value;
-                OnPropertyChanged("ProjectData");
+                _datacol = value;
+                OnPropertyChanged("DataCol");
             }
         }
 
         /// <summary>
         /// Выделенный объект
         /// </summary>
-        private ProjectModel? _selectedProject;
-        public ProjectModel? SelectedProject
+        private ModelData? _selecteditem;
+        public ModelData? SelecetedItem
         {
-            get { return _selectedProject; }
+            get { return _selecteditem; }
             set
             {
-                _selectedProject = value;
-                OnPropertyChanged("SelectedProject");
+                _selecteditem = value;
+                OnPropertyChanged("SelecetedItem");
             }
 
         }
-
 
         /// <summary>
         /// Поле для ввода текста фильтрации 
         /// </summary>
         private string? _textToFilter;
-        public  string? TextToFilter { get => _textToFilter;
-            set 
+        public string? TextToFilter
+        {
+            get => _textToFilter;
+            set
             {
                 _textToFilter = value;
                 OnPropertyChanged("TextToFilter");
                 // Проводим фильтрацию
-                ProjectCollection.Filter = FilterByName;
+                CollectionData.Filter = FilterByName;
             }
         }
 
         /// <summary>
         /// Выводим в Datagrid для просмотра и фильтрации 
         /// </summary>
-        private ICollectionView? _projectCollection;
-        public ICollectionView? ProjectCollection { get => _projectCollection; set => Set(ref _projectCollection, value); }
+        private ICollectionView? _collectiondata;
+        public ICollectionView? CollectionData { get => _collectiondata; set => Set(ref _collectiondata, value); }
+
+
         #endregion
-        MainWindowViewModel mainWindowViewModel;
-
-
-        public ProjectViewModel(NavigationManager navigationManager)
-        {
-            this.navigationManager = navigationManager;
-
-            // Обворачиваем ObservableCollection в ICollectionView
-            ProjectCollection = CollectionViewSource.GetDefaultView(ProjectData);
-
-           
-            GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);
-
-
-        }
-
-
 
 
 
@@ -142,18 +120,95 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private bool CanGoDistrictPageCommandExecute(object p) => true;
 
         private void OnGoDistrictPageCommandExcuted(object p)
-        {            
-
+        {
+            SelecetedID = SelecetedItem.Id;
+            DataCol.Clear();
+            CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
         }
 
 
 
+        public ICommand BackCommand { get; }
+
+        private bool CanBackCommandExecute(object p) => true;
+
+        private void OnBackCommandExcuted(object p)
+        {
+            switch (Peeremen)
+            {
+                case 0:
+                    GoBackNavigate();
+                    break;
+                case 1:
+                    GoBackNavigate();
+                    break;
+                case 2:
+                    DataCol.Clear();
+                    CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
+                    break;
+                default:
+                    break;
+            }
+        }
 
         #endregion
 
 
-       
+        #region Function/Функции
 
+
+        /// <summary>
+        /// Загрузка "Участков" из базы данных по выбранному "Проекту"
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<ModelData> DisttrictData()
+        {
+            using (GeocomplexContext db = new GeocomplexContext())
+            {
+                var dat = db.Districts.Where(r => r.PrgId == SelecetedID).Include(us => us.IdUserNavigation).ToList();
+                foreach (var item in dat)
+                {
+                    _datacol.Add(new ModelData
+                    {
+                        Id = item.IdDistrict,
+                        Name = item.NameDistrict,
+                        UsName = item.IdUserNavigation.UserName,
+                        DateAdd = item.DateAddDistrict
+
+                    });
+                }
+                Peeremen = 2;
+                return _datacol;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Загрузка "Проектов" из базы данных
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<ModelData> ProjectData()
+        {
+            using (GeocomplexContext db = new GeocomplexContext())
+            {
+                Peeremen = 1;
+                return _datacol = db.Projects.Join(db.Organizations,
+                                 p => p.PrgOrganization,
+                                 o => o.OrgId,
+                                 (p, o) => new ModelData // результат
+                                 {
+                                     Id = p.PrgId,
+                                     Name = p.PrgName,
+                                     UsName = o.OrgName,
+                                     DateAdd = p.PrgDate
+
+                                 }).ToObservableCollection();
+
+
+
+            }
+        }
 
 
         /// <summary>
@@ -165,8 +220,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             if (!string.IsNullOrEmpty(TextToFilter))
             {
-                var objProject = obj as ProjectModel;
-                return objProject != null && objProject.PrgName.Contains(TextToFilter);
+                var objProject = obj as ModelData;
+                return objProject != null && objProject.Name.Contains(TextToFilter);
             }
             return true;
 
@@ -175,10 +230,35 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <summary>
         /// Функция для перехода на другую страницу
         /// </summary>
-        private void GoNext()
+        private void GoNextNavigate()
         {
-            //navigationManager.Navigate("UserControl2", SelectedProduct.PrgId);
+            //navigationManager.Navigate("DistrictPage", SelecetedItem.Id);
         }
+        private void GoBackNavigate()
+        {
+            navigationManager.Navigate("Menu");
+        }
+
+
+        #endregion
+
+
+
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="navigationManager"></param>
+        public ProjectViewModel(NavigationManager navigationManager)
+        {
+            this.navigationManager = navigationManager;
+
+            // Обворачиваем ObservableCollection в ICollectionView
+            CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
+            GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);
+            BackCommand = new LamdaCommand(OnBackCommandExcuted, CanBackCommandExecute);
+        }
+
 
     }
 }

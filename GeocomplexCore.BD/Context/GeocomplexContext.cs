@@ -42,17 +42,20 @@ namespace GeocomplexCore.BD.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var builder = new ConfigurationBuilder();
-                // установка пути к текущему каталогу
-                builder.SetBasePath(Directory.GetCurrentDirectory());
-                // получаем конфигурацию из файла appsettings.json
-                builder.AddJsonFile("appsetting.json");
-                // создаем конфигурацию
-                var config = builder.Build();
-                // получаем строку подключения
-                string connectionString = config.GetConnectionString("DefaultConnection");
+                if (!optionsBuilder.IsConfigured)
+                {
+                    var builder = new ConfigurationBuilder();
+                    // установка пути к текущему каталогу
+                    builder.SetBasePath(Directory.GetCurrentDirectory());
+                    // получаем конфигурацию из файла appsettings.json
+                    builder.AddJsonFile("appsetting.json");
+                    // создаем конфигурацию
+                    var config = builder.Build();
+                    // получаем строку подключения
+                    string connectionString = config.GetConnectionString("DefaultConnection");
 
-                optionsBuilder.UseNpgsql(connectionString);
+                    optionsBuilder.UseNpgsql(connectionString);
+                }
             }
         }
 
@@ -80,6 +83,11 @@ namespace GeocomplexCore.BD.Context
                     .HasColumnName("name_district");
 
                 entity.Property(e => e.PrgId).HasColumnName("prg_id");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.Districts)
+                    .HasForeignKey(d => d.IdUser)
+                    .HasConstraintName("fk_userId");
 
                 entity.HasOne(d => d.Prg)
                     .WithMany(p => p.Districts)

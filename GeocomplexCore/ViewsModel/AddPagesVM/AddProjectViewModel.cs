@@ -77,7 +77,7 @@ namespace GeocomplexCore.ViewsModel.AddPagesVM
 
                 project = new Project
                 {
-                    
+
                     PrgName = ProjectName,
                     PrgDate = DateOnly.FromDateTime(DateTime.Now),
                     PrgOrganization = SelectedOrg.Id
@@ -105,7 +105,7 @@ namespace GeocomplexCore.ViewsModel.AddPagesVM
                 foreach (var item in val)
                 {
                     _orgname.Add(new Org(item.OrgId, item.OrgName));
-                }               
+                }
             }
         }
 

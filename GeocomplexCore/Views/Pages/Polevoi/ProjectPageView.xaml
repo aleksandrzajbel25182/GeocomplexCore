@@ -34,9 +34,15 @@
 
             <StackPanel Orientation="Horizontal" 
                         DockPanel.Dock="Top">
-
                 <Button Style="{StaticResource StyleCircleButton}"
                         Margin="110,0,0,0" 
+                        Command="{Binding BackCommand}">
+                    <Image Source="/Resources/Icons/ActionIcons/Back.ico"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+                <Button Style="{StaticResource StyleCircleButton}"
+                        Margin="40,0,0,0" 
                         Command="{Binding OpenChildWindow}">
                     <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                            Width="25"
@@ -64,8 +70,8 @@
             
             <DataGrid Name="Datagrid"
                       Style="{DynamicResource DataGridStyle}" 
-                      ItemsSource="{Binding ProjectCollection}"
-                      SelectedItem="{Binding SelectedProject, Mode=TwoWay}"
+                      ItemsSource="{Binding CollectionData}"
+                      SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
                       AutoGenerateColumns="False" 
                       Width="1000"
                       Height="500"
@@ -79,19 +85,20 @@
                 </DataGrid.InputBindings>
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Id" 
-                                    Binding="{Binding PrgId,Mode=OneWay}"
+                                    Binding="{Binding Id,Mode=OneWay}"
                                     MinWidth="80"
                                     Width="20"/>
                     <DataGridTextColumn Header="Наименование" 
-                                    Binding="{Binding PrgName, Mode=OneWay}"
+                                    Binding="{Binding Name, Mode=OneWay}"
                                     MinWidth="120"
                                     Width="*"/>
-                    <DataGridTextColumn Header="Организация исполнитель"
-                                    Binding="{Binding PrgOrganization,Mode=OneWay}"
+                    <DataGridTextColumn Header="Исполнитель"
+                                    Binding="{Binding UsName,Mode=OneWay}"
                                     MinWidth="120"
                                     Width="*"/>
+
                     <DataGridTextColumn Header="Дата создания" 
-                                    Binding="{Binding PrgDate,Mode=OneWay}" 
+                                    Binding="{Binding DateAdd,Mode=OneWay}" 
                                     MinWidth="120"
                                     Width="*"/>
                 </DataGrid.Columns>

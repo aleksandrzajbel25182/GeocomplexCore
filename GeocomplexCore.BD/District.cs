@@ -19,6 +19,7 @@ namespace GeocomplexCore.BD
         public int? IdUser { get; set; }
         public DateOnly? DateAddDistrict { get; set; }
 
+        public virtual UserDatum? IdUserNavigation { get; set; }
         public virtual Project Prg { get; set; } = null!;
         public virtual ICollection<Route> Routes { get; set; }
     }
