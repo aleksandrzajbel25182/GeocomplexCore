@@ -40,6 +40,9 @@
                     <Image Source="/Resources/Icons/ActionIcons/Back.ico"
                            Width="25"
                            Height="25"/>
+                    <Button.ToolTip>
+                        Назад
+                    </Button.ToolTip>
                 </Button>
                 <Button Style="{StaticResource StyleCircleButton}"
                         Margin="40,0,0,0" 
@@ -47,24 +50,36 @@
                     <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                            Width="25"
                            Height="25"/>
+                    <Button.ToolTip>
+                        Добавить
+                    </Button.ToolTip>
                 </Button>
                 <Button Style="{StaticResource StyleCircleButton}"
                          Margin="40,0,0,0">
                     <Image Source="/Resources/Icons/ActionIcons/Edit.ico"
                            Width="25"
                            Height="25"/>
+                    <Button.ToolTip>
+                        Редактировать
+                    </Button.ToolTip>
                 </Button>
                 <Button Style="{StaticResource StyleCircleButton}"
                          Margin="40,0,0,0">
                     <Image Source="/Resources/Icons/ActionIcons/Copy.ico"
                            Width="25"
                            Height="25"/>
+                    <Button.ToolTip>
+                        Копировать
+                    </Button.ToolTip>
                 </Button>
                 <Button Style="{StaticResource StyleCircleButton}"
                          Margin="40,0,0,0">
                     <Image Source="/Resources/Icons/ActionIcons/Remove.ico"
                            Width="25"
                            Height="25"/>
+                    <Button.ToolTip>
+                        Удалить
+                    </Button.ToolTip>
                 </Button>
             </StackPanel>
             
