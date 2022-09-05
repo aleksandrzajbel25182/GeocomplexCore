@@ -1,22 +1,20 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
-using GeocomplexCore.Views.Pages;
 using GeocomplexCore.Model;
+using GeocomplexCore.Properties;
+using GeocomplexCore.Service;
+using GeocomplexCore.Views.Pages;
+using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.PagesVM;
+using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Input;
-using GeocomplexCore.Service;
-using GeocomplexCore.Views;
-using GeocomplexCore.Views.Pages.Polevoi;
-using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
-using GeocomplexCore.Properties;
 
 namespace GeocomplexCore.ViewsModel.WindowsVM
 {
-    
-    internal class StartPageViewModel: ViewModel
+
+    internal class StartPageViewModel : ViewModel
     {
         #region Parametrs/Параметры
         NavigationManager _navigationmaneger;
@@ -65,7 +63,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         public StartPageViewModel()
         {
-            
+
             MenuItem = new List<MenuModel>()
             {
                 new MenuModel("ДОМОЙ", $"/Resources/Icons/HamburgerMenuIcons/Домой.ico"),
@@ -83,7 +81,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             ////Регистрация ключа (строки) с соответствующими View и ViewModel для него
             _navigationmaneger.Register<MenuView>("Menu", () => new MenuViewModel(_navigationmaneger));
             _navigationmaneger.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(_navigationmaneger));
-            
+
 
             //Отображение стартового UI
             _navigationmaneger.Navigate("Menu");
@@ -98,15 +96,16 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             {
                 case "ДОМОЙ":
                     _navigationmaneger.Navigate("Menu");
-                   
+                    LocatorStatic.Data.TextMainHeader = "ГЛАВНОЕ МЕНЮ";
+                    LocatorStatic.Data.PageHeader = "";
                     break;
                 case "ПОЛЕВОЙ ДНЕВНИК":
-                    MessageService.ShowMessage("Данный пункт в разработке");
-                 
+                    _navigationmaneger.Navigate("ProjectPage");
+                    LocatorStatic.Data.TextMainHeader = "ПОЛЕВОЙ ДНЕВНИК";
+                    LocatorStatic.Data.PageHeader = "Проекты";
                     break;
                 case "КАТАЛОГ":
                     MessageService.ShowMessage("Данный пункт в разработке");
-                    
                     break;
                 case "ЛАБАРАТОРНЫЕ АНАЛИЗЫ":
                     MessageService.ShowMessage("Данный пункт в разработке");

@@ -27,7 +27,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         //Временная переменная для хранения выделенного "Проекта"
         private int SelecetedID;
-
+        //Данная переменная служит для того что бы знать какие данные загруженны на данный момент. 0- проекты 2 - участки
         private int Peeremen = 0;
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
         /// <summary>
-        /// Команда 
+        /// Команда замены таблицы проектов на учаcтки
         /// </summary>
         public ICommand GoDistrictPageCommand { get; }
 
@@ -121,6 +121,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private void OnGoDistrictPageCommandExcuted(object p)
         {
+            LocatorStatic.Data.PageHeader = $"Участки проекта: {SelecetedItem.Name}";
             SelecetedID = SelecetedItem.Id;
             DataCol.Clear();
             CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
@@ -138,13 +139,16 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             {
                 case 0:
                     GoBackNavigate();
+                    LocatorStatic.Data.PageHeader = "";
                     break;
                 case 1:
                     GoBackNavigate();
+                    LocatorStatic.Data.PageHeader = "";
                     break;
                 case 2:
                     DataCol.Clear();
                     CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
+                    LocatorStatic.Data.PageHeader = "Проекты";
                     break;
                 default:
                     break;

@@ -1,7 +1,9 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.Infrastructure.Commands;
+using GeocomplexCore.Model;
 using GeocomplexCore.Properties;
+using GeocomplexCore.Service;
 using GeocomplexCore.Views.Pages;
 using GeocomplexCore.ViewsModel.Base;
 using System;
@@ -46,7 +48,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM
         private void GoPages()
         {
             navigationManager.Navigate("ProjectPage");
-            GlobalSet.staticMenuValue = "ПОЛЕВОЙ ДНЕВНИК";
+
+            LocatorStatic.Data.TextMainHeader = "ПОЛЕВОЙ ДНЕВНИК";
+            LocatorStatic.Data.PageHeader = "Проекты";
         }
 
         #endregion

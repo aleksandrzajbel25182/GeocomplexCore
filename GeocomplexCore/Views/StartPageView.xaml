@@ -5,9 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeocomplexCore.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lctr="clr-namespace:GeocomplexCore.Model"
              mc:Ignorable="d"
              Height="768" Width="1400">
-    <Grid>
+    <UserControl.Resources>
+
+        <x:Static Member="lctr:LocatorStatic.Data" x:Key="Container"/>
+        
+    </UserControl.Resources>
+        <Grid>
       
         <Grid 
             Width="1335"
@@ -20,13 +26,22 @@
 
 
             <materialDesign:Card Background="#F2F8F1"
-                                 Grid.Row="0"
-                                 >
-                <Label VerticalAlignment="Center" 
+                                 Grid.Row="0">
+                <DockPanel>
+                    <Label VerticalAlignment="Center" 
                        HorizontalAlignment="Left"
-                       Content="ГЛАВНОЕ МЕНЮ"
+                       Content="{Binding TextMainHeader, Source={StaticResource Container}, UpdateSourceTrigger=PropertyChanged}"
                        FontSize="32" 
-                       FontFamily="Arvo"/>
+                       FontFamily="Arvo" DockPanel.Dock="Top"/>
+                    
+                    <Label VerticalAlignment="Center" 
+                       HorizontalAlignment="Left"
+                       Content="{Binding PageHeader, Source={StaticResource Container}, UpdateSourceTrigger=PropertyChanged}"
+                       FontSize="25" 
+                       FontFamily="Arvo"
+                       DockPanel.Dock="Bottom"/>
+                </DockPanel>
+                
 
             </materialDesign:Card>
             <ContentControl 
