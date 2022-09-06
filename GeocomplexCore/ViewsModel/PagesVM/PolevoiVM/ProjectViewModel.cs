@@ -3,6 +3,7 @@ using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
+using GeocomplexCore.Properties;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.WindowsVM;
 using Microsoft.EntityFrameworkCore;
@@ -125,6 +126,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             SelecetedID = SelecetedItem.Id;
             DataCol.Clear();
             CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
+            GlobalSet.FlagStatic = "District";
         }
 
 
@@ -149,6 +151,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     DataCol.Clear();
                     CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
                     LocatorStatic.Data.PageHeader = "Проекты";
+                    GlobalSet.FlagStatic = "Project";
                     break;
                 default:
                     break;
@@ -256,7 +259,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public ProjectViewModel(NavigationManager navigationManager)
         {
             this.navigationManager = navigationManager;
-
+            GlobalSet.FlagStatic = "Project";
             // Обворачиваем ObservableCollection в ICollectionView
             CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
             GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);

@@ -1,5 +1,6 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.Properties;
 using GeocomplexCore.Views.Pages.AddPages;
 using GeocomplexCore.ViewsModel.AddPagesVM;
 using GeocomplexCore.ViewsModel.Base;
@@ -27,9 +28,20 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             var navigationManager = new NavigationManager(_currentVM);
 
             navigationManager.Register<AddProjectView>("Project", () => new AddProjectViewModel(navigationManager));
+            navigationManager.Register<AddDistrictView>("District", () => new AddDistrictViewModel(navigationManager));
 
-            //3. Отобразите стартовый UI
-            navigationManager.Navigate("Project");
+            switch (GlobalSet.FlagStatic)
+            {
+                case "Project":
+                    navigationManager.Navigate("Project");
+                    break;
+                case "District":
+                    navigationManager.Navigate("District");
+                    break;
+                default:
+                    break;
+            }
+            
         }
        
 

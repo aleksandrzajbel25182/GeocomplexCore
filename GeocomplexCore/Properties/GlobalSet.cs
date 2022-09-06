@@ -12,7 +12,12 @@ namespace GeocomplexCore.Properties
         /// <summary>
         /// Переменная для Хранения какой юзер зашел
         /// </summary>
-        public static string staticUserID { get; set; }   
-        
+        public static string staticUserID { get; set; }
+
+        /// <summary>
+        /// Флаг для понятия какая страница открыта для добавления
+        /// </summary>
+        public static string FlagStatic { get; set; }
+
     }
 }
