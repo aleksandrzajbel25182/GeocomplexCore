@@ -44,17 +44,20 @@ namespace GeocomplexCore.BD.Context
             {
                 if (!optionsBuilder.IsConfigured)
                 {
-                    var builder = new ConfigurationBuilder();
-                    // установка пути к текущему каталогу
-                    builder.SetBasePath(Directory.GetCurrentDirectory());
-                    // получаем конфигурацию из файла appsettings.json
-                    builder.AddJsonFile("appsetting.json");
-                    // создаем конфигурацию
-                    var config = builder.Build();
-                    // получаем строку подключения
-                    string connectionString = config.GetConnectionString("DefaultConnection");
+                    if (!optionsBuilder.IsConfigured)
+                    {
+                        var builder = new ConfigurationBuilder();
+                        // установка пути к текущему каталогу
+                        builder.SetBasePath(Directory.GetCurrentDirectory());
+                        // получаем конфигурацию из файла appsettings.json
+                        builder.AddJsonFile("appsetting.json");
+                        // создаем конфигурацию
+                        var config = builder.Build();
+                        // получаем строку подключения
+                        string connectionString = config.GetConnectionString("DefaultConnection");
 
-                    optionsBuilder.UseNpgsql(connectionString);
+                        optionsBuilder.UseNpgsql(connectionString);
+                    }
                 }
             }
         }
@@ -71,8 +74,9 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Участки");
 
                 entity.Property(e => e.IdDistrict)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_district");
+                    .HasColumnName("Id_district")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(114L);
 
                 entity.Property(e => e.DateAddDistrict).HasColumnName("date__add_district");
 
@@ -106,8 +110,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Местоположение");
 
                 entity.Property(e => e.LocId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("loc_id");
+                    .HasColumnName("loc_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.LocDistrict)
                     .HasMaxLength(255)
@@ -132,8 +136,9 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Буровая организация");
 
                 entity.Property(e => e.OrgId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("org_id");
+                    .HasColumnName("org_id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(188L);
 
                 entity.Property(e => e.OrgName)
                     .HasMaxLength(300)
@@ -151,8 +156,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Фото водозабор");
 
                 entity.Property(e => e.PhotoWaterintakeId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("photo_waterintake_id");
+                    .HasColumnName("photo_waterintake_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.PhotoWaterintakePath)
                     .HasMaxLength(1000)
@@ -169,8 +174,9 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Проект");
 
                 entity.Property(e => e.PrgId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("prg_id");
+                    .HasColumnName("prg_id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(59L);
 
                 entity.Property(e => e.PrgDate).HasColumnName("prg_date");
 
@@ -194,8 +200,9 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Маршрут");
 
                 entity.Property(e => e.RouteId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("route_id");
+                    .HasColumnName("route_id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(346L);
 
                 entity.Property(e => e.IdDistrict).HasColumnName("Id_district");
 
@@ -239,7 +246,10 @@ namespace GeocomplexCore.BD.Context
                     .HasMaxLength(300)
                     .HasColumnName("st_wtrpipe_name");
 
-                entity.Property(e => e.StWtrpipeId).HasColumnName("st_wtrpipe_id");
+                entity.Property(e => e.StWtrpipeId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("st_wtrpipe_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WaterpipeWtrId).HasColumnName("waterpipe_wtr_id");
 
@@ -260,8 +270,9 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Пользователи");
 
                 entity.Property(e => e.UserId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("user_id");
+                    .HasColumnName("user_id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(48L);
 
                 entity.Property(e => e.UserLogin)
                     .HasMaxLength(10)
@@ -290,8 +301,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Точка наблюдения");
 
                 entity.Property(e => e.WpointId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("wpoint_id");
+                    .HasColumnName("wpoint_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.RouteId).HasColumnName("route_id");
 
@@ -345,7 +356,10 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.WtrObjDisDistance).HasColumnName("wtr_obj_dis_distance");
 
-                entity.Property(e => e.WtrObjDisId).HasColumnName("wtr_obj_dis_id");
+                entity.Property(e => e.WtrObjDisId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("wtr_obj_dis_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WtrObjDisLoc)
                     .HasMaxLength(255)
@@ -367,8 +381,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Водозабор");
 
                 entity.Property(e => e.WtrIntakeId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("wtr_intake_id");
+                    .HasColumnName("wtr_intake_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.PhotoWtrIntakeId).HasColumnName("photo_wtr_intake_id");
 
@@ -411,8 +425,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Водозабор ограждения");
 
                 entity.Property(e => e.WtrFenceId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("wtr_fence_id");
+                    .HasColumnName("wtr_fence_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WtrFAngeleId).HasColumnName("wtr_f_angele_id ");
 
@@ -444,8 +458,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Водовод на водозаборе");
 
                 entity.Property(e => e.WaterpipeWtrId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("waterpipe_wtr_id");
+                    .HasColumnName("waterpipe_wtr_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WaterpipeWtrDiametrpipe).HasColumnName("waterpipe_wtr_diametrpipe");
 
@@ -472,8 +486,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Водонапорная башня ");
 
                 entity.Property(e => e.WatertId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("watert_id");
+                    .HasColumnName("watert_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WatertDistwell).HasColumnName("watert_distwell");
 
@@ -501,7 +515,10 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.WellHydroId).HasColumnName("well_hydro_id");
 
-                entity.Property(e => e.WhydroCoordId).HasColumnName("whydro_coord_id");
+                entity.Property(e => e.WhydroCoordId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("whydro_coord_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WhydroCoordX).HasColumnName("whydro_coord_X");
 
@@ -523,8 +540,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Скважина гидрогеологическая");
 
                 entity.Property(e => e.WellHydroId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("well_hydro_id");
+                    .HasColumnName("well_hydro_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.DrilOrgId).HasColumnName("dril_org_id");
 
@@ -583,7 +600,10 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.WellOtherUsDepth).HasColumnName("well_other_us_depth");
 
-                entity.Property(e => e.WellOtherUsId).HasColumnName("well_other_us_id");
+                entity.Property(e => e.WellOtherUsId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("well_other_us_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WtrIntakeId).HasColumnName("wtr_intake_id");
 
@@ -609,7 +629,10 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.WpCoordinatesX).HasColumnName("wp_coordinates_X");
 
-                entity.Property(e => e.WpCoordinatesId).HasColumnName("wp_coordinates_id");
+                entity.Property(e => e.WpCoordinatesId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("wp_coordinates_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WpCoordinatesY).HasColumnName("wp_coordinates_Y");
 
@@ -634,8 +657,8 @@ namespace GeocomplexCore.BD.Context
                 entity.HasComment("Водозабор углы ограждения");
 
                 entity.Property(e => e.WtrFAngeleId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("wtr_f_angele_id");
+                    .HasColumnName("wtr_f_angele_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WtrFAngeleNumber).HasColumnName("wtr_f_angele_number");
 
@@ -673,7 +696,10 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.WtrNrstObjDist).HasColumnName("wtr_nrst_obj_dist");
 
-                entity.Property(e => e.WtrNrstObjId).HasColumnName("wtr_nrst_obj_id");
+                entity.Property(e => e.WtrNrstObjId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("wtr_nrst_obj_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.WtrNrstObjView)
                     .HasMaxLength(255)
