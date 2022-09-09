@@ -58,8 +58,16 @@ namespace GeocomplexCore.ViewsModel.AddPagesVM
         {
             try
             {
-                AddProject();
-                MessageService.ShowMessage("Новый проект занесен в базу");
+                if (!String.IsNullOrEmpty(ProjectName) && !SelectedOrg.IsNull())
+                {
+                    //AddProject();
+                    MessageService.ShowMessage("Новый проект занесен в базу");
+                }
+                else
+                {
+                    MessageService.ShowMessageValidation();
+                }
+              
             }
             catch (System.Exception ex )
             {

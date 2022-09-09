@@ -20,6 +20,46 @@ namespace GeocomplexCore.Service
 
         }
 
+        /// <summary>
+        /// Окно сообщения пользователю об ошибки сохранения
+        /// </summary>
+        /// <param name="message">текст сообщения</param>
+        public static void ShowMessageError(string message)
+        {
+            MessageBox.Show(message, "Error Save", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+        /// <summary>
+        /// Окно сообщения пользователю о сохранении
+        /// </summary>
+        public static bool ShowMessageSave()
+        {
+            var message = "Вы точно хотите сохранить?";
+            var result = MessageBox.Show(message, "Save file",
+                     MessageBoxButton.YesNo,
+                     MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes);
+            {
+                return true;
+            }           
+
+        }
+        /// <summary>
+        /// Окно сообщения пользователю о не введенных данных
+        /// </summary>
+        /// <returns></returns>
+        public static void ShowMessageValidation()
+        {
+            var message = "Не все данные введены";
+            MessageBox.Show(message, "Error Save", MessageBoxButton.OK, MessageBoxImage.Warning);
+            
+            
+
+        }
+
+
 
     }
 }
