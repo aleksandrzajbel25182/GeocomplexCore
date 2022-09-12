@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="652" d:DesignWidth="1200" Background="#F2F8F1">
+             d:DesignHeight="645" d:DesignWidth="1200" Background="#F2F8F1">
     <Grid>
         <DockPanel >
             <DockPanel DockPanel.Dock="Top"
@@ -89,7 +89,7 @@
                       SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
                       AutoGenerateColumns="False" 
                       Width="1000"
-                      Height="500"
+                      Height="400"
                       Margin="-90,0,0,0"
                       DockPanel.Dock="Bottom"
                       CanUserAddRows="False">

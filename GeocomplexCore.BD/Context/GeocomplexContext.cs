@@ -8,6 +8,8 @@ namespace GeocomplexCore.BD.Context
 {
     public partial class GeocomplexContext : DbContext
     {
+        private readonly StreamWriter logStream = new StreamWriter("mylog.txt", true);
+
         public GeocomplexContext()
         {
         }
@@ -57,9 +59,22 @@ namespace GeocomplexCore.BD.Context
                         string connectionString = config.GetConnectionString("DefaultConnection");
 
                         optionsBuilder.UseNpgsql(connectionString);
+
+                        optionsBuilder.LogTo(logStream.WriteLine);
                     }
                 }
             }
+        }
+        public override void Dispose()
+        {
+            base.Dispose();
+            logStream.Dispose();
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            await base.DisposeAsync();
+            await logStream.DisposeAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
