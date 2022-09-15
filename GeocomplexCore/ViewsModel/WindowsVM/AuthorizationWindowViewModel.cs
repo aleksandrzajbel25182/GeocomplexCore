@@ -10,6 +10,7 @@ using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.PagesVM;
 using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows.Input;
 
@@ -61,6 +62,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             {
                 if (Autrorization())
                 {
+                    //Autrorization();
                     _navigationmaneger.Navigate("StartPage");
                 }
                 else
@@ -85,26 +87,46 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         /// Подлючение к базе, проверка в базе логина и пароля. Занесение в глабальную переменную его ID если логин и пароль верны.
         /// </summary>
         /// <returns></returns>
+        /// 
         public bool Autrorization()
         {
             using (GeocomplexContext db = new GeocomplexContext())
             {
-                var autoriz = db.UserData.Where(u => u.UserLogin == Login && u.UserPassword == Password).ToArray();
+                var autoriz = db.UserData.FirstOrDefault(u => u.UserLogin == Login && u.UserPassword == Password);
 
-                if (autoriz.Length > 0)
+                if (autoriz!=null)
                 {
-                    GlobalSet.staticUserID = autoriz[0].UserId.ToString();
+                    GlobalSet.staticUserID = autoriz.UserId.ToString();
                     return true;
                 }
                 else
                     return false;
             }
-        } 
+        }
+
+        //public async void Autrorization()
+        //{
+        //    using (GeocomplexContext db = new GeocomplexContext())
+        //    {
+
+        //        var autoriz = await db.UserData.ToListAsync();
+        //        foreach (var item in autoriz)
+        //        {
+        //           if(item.UserLogin == Login && item.UserPassword == Password)
+        //            {
+        //                GlobalSet.staticUserID = item.UserId.ToString();
+
+        //            }
+        //        }
+        //        autoriz.Clear();
+
+        //    }
+        //}
 
 
         /*-------------------------------------------------------------------------------------------------------------------------------------------*/
-        
-       
+
+
         public AuthorizationWindowViewModel(NavigationManager navigationManager)
         {
             _navigationmaneger = navigationManager;

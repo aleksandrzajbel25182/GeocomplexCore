@@ -122,11 +122,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private void OnGoDistrictPageCommandExcuted(object p)
         {
-            LocatorStatic.Data.PageHeader = $"Участки проекта: {SelecetedItem.Name}";
-            SelecetedID = SelecetedItem.Id;
-            DataCol.Clear();
-            CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
-            GlobalSet.FlagStatic = "District";
+            if (GlobalSet.FlagStatic == "District")
+            {
+                SelecetedID = SelecetedItem.Id;
+                GoNextNavigate(SelecetedID);
+            }
+            else
+            {
+                LocatorStatic.Data.PageHeader = $"Участки проекта: {SelecetedItem.Name}";
+                SelecetedID = SelecetedItem.Id;
+                DataCol.Clear();
+                CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
+                GlobalSet.FlagStatic = "District";
+            }
+           
+            
+
         }
 
 
@@ -237,10 +248,14 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <summary>
         /// Функция для перехода на другую страницу
         /// </summary>
-        private void GoNextNavigate()
+        private void GoNextNavigate(int selectedId)
         {
-            //navigationManager.Navigate("DistrictPage", SelecetedItem.Id);
+            navigationManager.Navigate("InfoDistrict", selectedId);
         }
+
+       /// <summary>
+       /// Функция перехода на страницу назад
+       /// </summary>
         private void GoBackNavigate()
         {
             navigationManager.Navigate("Menu");

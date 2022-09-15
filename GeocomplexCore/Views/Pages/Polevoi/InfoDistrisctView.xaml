@@ -1,0 +1,468 @@
+﻿<UserControl x:Class="GeocomplexCore.Views.Pages.Polevoi.InfoDistrisctView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
+            
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             mc:Ignorable="d"
+             Height="1100"
+             d:DesignWidth="1335"
+             Background="#F2F8F1">
+   
+    <Grid>
+
+        <TabControl materialDesign:ColorZoneAssist.Mode="SecondaryLight"
+                    HorizontalContentAlignment="Left">
+            <TabItem Header="Основная информация">
+              
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <!-- КАРТОЧКА : Основная информация-->
+                        <materialDesign:Card Width="250"
+                                             Height="150"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,0"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="ОСНОВНАЯ ИНФОРМАЦИЯ"
+                                       Grid.Row="0"
+                                       Margin="5"
+                                       FontSize="18" />
+
+                                <StackPanel Grid.Row="1">
+                                    <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                              materialDesign:HintAssist.Hint="Наименование"
+                                              Text="{Binding NameDiscrict}"
+                                              IsEnabled="False"
+                                              Margin="20" />
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <!-- КАРТОЧКА : Коодинаты участка-->
+                        <materialDesign:Card Width="935"
+                                             Height="400"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,0"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="КООРДИНАТЫ УЧАСТКА"
+                                       Grid.Row="0"
+                                       FontSize="18"
+                                       Margin="5"/>
+
+                                <StackPanel Grid.Row="1">
+
+                                    <StackPanel Orientation="Horizontal"
+                                                DockPanel.Dock="Top"
+                                                Margin="0,20,0,0">
+                                        <Button Style="{StaticResource StyleCircleButton}"
+                                                Margin="40,0,0,0"
+                                                Command="{Binding OpenChildWindow}">
+                                            <Image Source="/Resources/Icons/ActionIcons/Add.ico"
+                                                   Width="25"
+                                                   Height="25" />
+                                            <Button.ToolTip>
+                                                Добавить
+                                            </Button.ToolTip>
+                                        </Button>
+                                        <Button Style="{StaticResource StyleCircleButton}"
+                                                Margin="40,0,0,0">
+                                            <Image Source="/Resources/Icons/ActionIcons/Edit.ico"
+                                                   Width="25"
+                                                   Height="25" />
+                                            <Button.ToolTip>
+                                                Редактировать
+                                            </Button.ToolTip>
+                                        </Button>
+                                        <Button Style="{StaticResource StyleCircleButton}"
+                                                Margin="40,0,0,0">
+                                            <Image Source="/Resources/Icons/ActionIcons/Copy.ico"
+                                                   Width="25"
+                                                   Height="25" />
+                                            <Button.ToolTip>
+                                                Копировать
+                                            </Button.ToolTip>
+                                        </Button>
+                                        <Button Style="{StaticResource StyleCircleButton}"
+                                                Margin="40,0,0,0">
+                                            <Image Source="/Resources/Icons/ActionIcons/Remove.ico"
+                                                   Width="25"
+                                                   Height="25" />
+                                            <Button.ToolTip>
+                                                Удалить
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </StackPanel>
+
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <DataGrid Style="{DynamicResource DataGridStyle}"
+                                                  ItemsSource="{Binding CollectionData}"
+                                                  SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
+                                                  AutoGenerateColumns="False"
+                                                  Width="400"
+                                                  Height="200"
+                                                  Margin="40,10,0,0"
+                                                  VerticalAlignment="Top"
+                                                  CanUserAddRows="False">
+                                            <DataGrid.InputBindings>
+                                                <MouseBinding Gesture="LeftDoubleClick"
+                                                              Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
+                                                              CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
+                                            </DataGrid.InputBindings>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="№"
+                                                                    Binding="{Binding Id,Mode=OneWay}"
+                                                                    MinWidth="80"
+                                                                    Width="20" />
+                                                <DataGridTextColumn Header="X"
+                                                                    Binding="{Binding Name, Mode=OneWay}"
+                                                                    MinWidth="120"
+                                                                    Width="*" />
+                                                <DataGridTextColumn Header="Y"
+                                                                    Binding="{Binding UsName,Mode=OneWay}"
+                                                                    MinWidth="120"
+                                                                    Width="*" />
+
+                                                <DataGridTextColumn Header="Z"
+                                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                                    MinWidth="120"
+                                                                    Width="*" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <Label Content="Система координат"
+                                                   Width="150"
+                                                   Height="30"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Top"
+                                                   Margin="10,10,0,0" />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Формат"
+                                                      Width="256"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      Margin="10,55,0,0">
+
+                                                <ComboBoxItem Content="Item 1" />
+                                                <ComboBoxItem Content="Item 2" />
+                                                <ComboBoxItem Content="Item 3" />
+                                            </ComboBox>
+                                        </Grid>
+
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                    </StackPanel>
+
+
+
+                    <!-- КАРТОЧКА : Маршруты-->
+                    <materialDesign:Card Width="1235"
+                                         Height="470"
+                                         HorizontalAlignment="Center"
+                                         Margin="0,50,0,0"
+                                         materialDesign:ShadowAssist.Darken="True"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                         materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Label Content="МАРШРУТЫ"
+                                   Grid.Row="0"
+                                   FontSize="18"
+                                   Margin="5"/>
+                            <StackPanel Grid.Row="1" Orientation="Vertical">
+                                
+                                <DockPanel DockPanel.Dock="Top"
+                                           Margin="100,20,0,20">
+
+
+                                    <Image Source="/Resources/Icons/ActionIcons/Search.ico"
+                                           Margin="0,0,10,0"
+                                           Width="24"
+                                           Height="24"
+                                           DockPanel.Dock="Left" />
+                                    <TextBox Width="500"
+                                             DockPanel.Dock="Top"
+                                             Text="{Binding TextToFilter , UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="20"
+                                             Cursor="Arrow"
+                                             materialDesign:TextFieldAssist.UnderlineBrush="#166051"
+                                             materialDesign:HintAssist.Hint="Пример: ГГ-1000"
+                                             HorizontalAlignment="Left" />
+                                </DockPanel>
+
+                                <!-- Строка кнопок-->
+                                <StackPanel Orientation="Horizontal"
+                                            DockPanel.Dock="Top">
+                                   
+                                    <Button Style="{StaticResource StyleCircleButton}"
+                                            Margin="110,0,0,0"
+                                            Command="{Binding LoadCommand}">
+                                        <Image Source="/Resources/Icons/ActionIcons/Add.ico"
+                                               Width="25"
+                                               Height="25" />
+                                        <Button.ToolTip>
+                                            Добавить
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button Style="{StaticResource StyleCircleButton}"
+                                            Margin="40,0,0,0">
+                                        <Image Source="/Resources/Icons/ActionIcons/Edit.ico"
+                                               Width="25"
+                                               Height="25" />
+                                        <Button.ToolTip>
+                                            Редактировать
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button Style="{StaticResource StyleCircleButton}"
+                                            Margin="40,0,0,0">
+                                        <Image Source="/Resources/Icons/ActionIcons/Copy.ico"
+                                               Width="25"
+                                               Height="25" />
+                                        <Button.ToolTip>
+                                            Копировать
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button Style="{StaticResource StyleCircleButton}"
+                                            Margin="40,0,0,0">
+                                        <Image Source="/Resources/Icons/ActionIcons/Remove.ico"
+                                               Width="25"
+                                               Height="25" />
+                                        <Button.ToolTip>
+                                            Удалить
+                                        </Button.ToolTip>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Таблица маршрутов-->
+                                <DataGrid Name="Datagrid"
+                                          Style="{DynamicResource DataGridStyle}"
+                                          ItemsSource="{Binding DatacolRouDistcrit ,UpdateSourceTrigger=PropertyChanged}"
+                                         
+                                          AutoGenerateColumns="False"
+                                          Width="1000"
+                                          Height="250"
+                                          Margin="0,20,0,0"
+                                          HorizontalAlignment="Center"
+                                          CanUserAddRows="False">
+                                    <DataGrid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick"
+                                                      Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
+                                                      CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
+                                    </DataGrid.InputBindings>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID"
+                                                            Binding="{Binding RouteId,Mode=OneWay}"
+                                                            MinWidth="80"
+                                                            Width="20" />
+                                        <DataGridTextColumn Header="Наименование"
+                                                            Binding="{Binding RouteName, Mode=OneWay}"
+                                                            MinWidth="120"
+                                                            Width="*" />
+                                        <DataGridTextColumn Header="Исполнитель"
+                                                            Binding="{Binding User,Mode=OneWay}"
+                                                            MinWidth="120"
+                                                            Width="*" />
+
+                                        <DataGridTextColumn Header="Дата создания"
+                                                            Binding="{Binding RouteData,Mode=OneWay}"
+                                                            MinWidth="120"
+                                                            Width="*" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                               
+
+                            </StackPanel>
+                        </Grid>
+
+
+                    </materialDesign:Card>
+                </StackPanel>
+
+
+
+
+            </TabItem>
+
+
+            <!--<TabItem Header="Координаты участка">
+
+              
+
+
+            </TabItem>-->
+            <TabItem Header="Точки наблюдения">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top"
+                               Margin="100,20,0,20">
+
+
+                        <Image Source="/Resources/Icons/ActionIcons/Search.ico"
+                               Margin="0,0,10,0"
+                               Width="24"
+                               Height="24"
+                               DockPanel.Dock="Left" />
+                        <TextBox Width="500"
+                                 DockPanel.Dock="Top"
+                                 Text="{Binding TextToFilter , UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="20"
+                                 Cursor="Arrow"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"
+                                 materialDesign:HintAssist.Hint="Пример: ГГ-1000"
+                                 HorizontalAlignment="Left" />
+                    </DockPanel>
+
+
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top">
+                        <Button Style="{StaticResource StyleCircleButton}"
+                                Margin="110,0,0,0"
+                                Command="{Binding BackCommand}">
+                            <Image Source="/Resources/Icons/ActionIcons/Back.ico"
+                                   Width="25"
+                                   Height="25" />
+                            <Button.ToolTip>
+                                Назад
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource StyleCircleButton}"
+                                Margin="40,0,0,0"
+                                Command="{Binding OpenChildWindow}">
+                            <Image Source="/Resources/Icons/ActionIcons/Add.ico"
+                                   Width="25"
+                                   Height="25" />
+                            <Button.ToolTip>
+                                Добавить
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource StyleCircleButton}"
+                                Margin="40,0,0,0">
+                            <Image Source="/Resources/Icons/ActionIcons/Edit.ico"
+                                   Width="25"
+                                   Height="25" />
+                            <Button.ToolTip>
+                                Редактировать
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource StyleCircleButton}"
+                                Margin="40,0,0,0">
+                            <Image Source="/Resources/Icons/ActionIcons/Copy.ico"
+                                   Width="25"
+                                   Height="25" />
+                            <Button.ToolTip>
+                                Копировать
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource StyleCircleButton}"
+                                Margin="40,0,0,0">
+                            <Image Source="/Resources/Icons/ActionIcons/Remove.ico"
+                                   Width="25"
+                                   Height="25" />
+                            <Button.ToolTip>
+                                Удалить
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top">
+                        <DataGrid Style="{DynamicResource DataGridStyle}"
+                                  ItemsSource="{Binding CollectionData}"
+                                  SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
+                                  AutoGenerateColumns="False"
+                                  Width="1200"
+                                  Height="300"
+                                  Margin="50,50,0,0"
+                                  VerticalAlignment="Top"
+                                  CanUserAddRows="False">
+                            <DataGrid.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick"
+                                              Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
+                                              CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
+                            </DataGrid.InputBindings>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="№"
+                                                    Binding="{Binding Id,Mode=OneWay}"
+                                                    MinWidth="80"
+                                                    Width="20" />
+                                <DataGridTextColumn Header="Дата создания"
+                                                    Binding="{Binding Name, Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Исполнитель"
+                                                    Binding="{Binding UsName,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+
+                                <DataGridTextColumn Header="Местоположение"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Форма рельефа"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Крутизна склона"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Долгота"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Широта"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Абс.отм"
+                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                    MinWidth="120"
+                                                    Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                       
+
+                    </StackPanel>
+
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>

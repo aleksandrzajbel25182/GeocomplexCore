@@ -60,7 +60,7 @@ namespace GeocomplexCore.ViewsModel.AddPagesVM
             {
                 if (!String.IsNullOrEmpty(ProjectName) && !SelectedOrg.IsNull())
                 {
-                    //AddProject();
+                    AddProject();
                     MessageService.ShowMessage("Новый проект занесен в базу");
                 }
                 else

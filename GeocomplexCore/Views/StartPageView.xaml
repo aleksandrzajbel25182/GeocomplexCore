@@ -44,10 +44,11 @@
                 
 
             </materialDesign:Card>
-            <ContentControl 
-                Content="{Binding ContentControl}"
-                Grid.Row="1"
-                Name="Cont" />
+            <ScrollViewer   Grid.Row="1">
+                <ContentControl Content="{Binding ContentControl}"
+                                Name="Cont" MaxHeight="1400" />
+            </ScrollViewer>
+                
         </Grid>
 
         <Grid   x:Name="GridMenuNavigation"
