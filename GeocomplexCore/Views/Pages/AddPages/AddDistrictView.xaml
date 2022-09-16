@@ -18,13 +18,13 @@
                FontSize="18"
                FontFamily="Arvo"
                Margin="15"/>
-        <TextBox Text=""
+        <TextBox Text="{Binding NameDist}"
                  FontSize="18"
                  Margin="15"
-                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"/>
+                 materialDesign:TextFieldAssist.UnderlineBrush="#166051"
+                 />
 
-        <Button 
-            Command="{Binding}"
+        <Button Command="{Binding AddDiscrictCommand}"
             Content="Добавить"
             Style="{DynamicResource StyleButton}"
             Height="40"

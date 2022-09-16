@@ -80,7 +80,7 @@
                                                 Margin="0,20,0,0">
                                         <Button Style="{StaticResource StyleCircleButton}"
                                                 Margin="40,0,0,0"
-                                                Command="{Binding OpenChildWindow}">
+                                                >
                                             <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                                                    Width="25"
                                                    Height="25" />
@@ -232,7 +232,7 @@
                                    
                                     <Button Style="{StaticResource StyleCircleButton}"
                                             Margin="110,0,0,0"
-                                            Command="{Binding LoadCommand}">
+                                            >
                                         <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                                                Width="25"
                                                Height="25" />

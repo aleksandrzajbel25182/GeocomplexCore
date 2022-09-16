@@ -59,6 +59,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set
             {
                 _selecteditem = value;
+                SelecetedID = SelecetedItem.Id;
+                GlobalSet.IdProjectStatic = SelecetedID;
                 OnPropertyChanged("SelecetedItem");
             }
 
@@ -94,6 +96,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         #region Commands/Команды
 
 
+        #region Открытие окна/Command open
         /// <summary>
         /// Команда открытия нового окна для добавления проекта 
         /// </summary>
@@ -111,6 +114,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 return _openChildWindow;
             }
         }
+
+        #endregion
 
 
         /// <summary>
@@ -135,8 +140,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
                 GlobalSet.FlagStatic = "District";
             }
-           
-            
+
+
 
         }
 
@@ -184,6 +189,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             using (GeocomplexContext db = new GeocomplexContext())
             {
                 var dat = db.Districts.Where(r => r.PrgId == SelecetedID).Include(us => us.IdUserNavigation).ToList();
+                
                 foreach (var item in dat)
                 {
                     _datacol.Add(new ModelData
@@ -253,9 +259,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             navigationManager.Navigate("InfoDistrict", selectedId);
         }
 
-       /// <summary>
-       /// Функция перехода на страницу назад
-       /// </summary>
+        /// <summary>
+        /// Функция перехода на страницу назад
+        /// </summary>
         private void GoBackNavigate()
         {
             navigationManager.Navigate("Menu");

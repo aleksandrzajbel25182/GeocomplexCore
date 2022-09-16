@@ -40,6 +40,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
             }
         }
+      
 
         /// <summary>
         /// Контрол для отображения страниц

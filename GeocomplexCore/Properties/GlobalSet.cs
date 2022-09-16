@@ -19,5 +19,7 @@ namespace GeocomplexCore.Properties
         /// </summary>
         public static string FlagStatic { get; set; }
 
+        public static int IdProjectStatic { get; set; }
+
     }
 }
