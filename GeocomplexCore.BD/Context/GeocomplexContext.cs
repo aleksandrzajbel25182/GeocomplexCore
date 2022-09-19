@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace GeocomplexCore.BD.Context
 {
@@ -42,8 +43,23 @@ namespace GeocomplexCore.BD.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Geocomplex;Username=postgres;Password=admin");
+                if (!optionsBuilder.IsConfigured)
+                {
+                    if (!optionsBuilder.IsConfigured)
+                    {
+                        var builder = new ConfigurationBuilder();
+                        // установка пути к текущему каталогу
+                        builder.SetBasePath(Directory.GetCurrentDirectory());
+                        // получаем конфигурацию из файла appsettings.json
+                        builder.AddJsonFile("appsetting.json");
+                        // создаем конфигурацию
+                        var config = builder.Build();
+                        // получаем строку подключения
+                        string connectionString = config.GetConnectionString("DefaultConnection");
+
+                        optionsBuilder.UseNpgsql(connectionString);
+                    }
+                }
             }
         }
 

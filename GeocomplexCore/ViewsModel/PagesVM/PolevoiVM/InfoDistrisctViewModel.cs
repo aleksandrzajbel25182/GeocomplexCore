@@ -16,13 +16,13 @@ using System.Windows.Input;
 
 namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 {
-    internal class InfoDistrisctViewModel:ViewModel , INavigatedToAware
+    internal class InfoDistrisctViewModel : ViewModel, INavigatedToAware
     {
-        private  readonly NavigationManager _navigationmaneger;
+        private readonly NavigationManager _navigationmaneger;
 
         #region Параметры
 
-        
+
 
         /// <summary>
         /// Наименование участка
@@ -33,17 +33,17 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using(GeocomplexContext db = new GeocomplexContext())
+                using (GeocomplexContext db = new GeocomplexContext())
                 {
-                     _namedistrict = db.Districts
-                        .FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict.ToString();
-                     
+                    _namedistrict = db.Districts
+                       .FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict.ToString();
+
                     return _namedistrict;
 
 
                 }
             }
-            set =>Set(ref _namedistrict,value); 
+            set => Set(ref _namedistrict, value);
         }
 
 
@@ -64,14 +64,14 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     {
                         _datacolRouDistcrit.Add(new Route
                         {
-                            RouteId = item.IdDistrict,
+                            RouteId = item.RouteId,
                             RouteName = item.RouteName,
                             User = item.User,
                             RouteData = item.RouteData
 
                         });
                     }
-                    return _datacolRouDistcrit; 
+                    return _datacolRouDistcrit;
 
 
                 }
@@ -83,19 +83,52 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
         }
 
-        
+        /// <summary>
+        /// Координаты участка
+        /// </summary>
+        private ObservableCollection<DistrictPoint> _dataDistrictPoint = new();
 
-       /// <summary>
-       /// Переменная хранимая данные переданные из другой страницы
-       /// </summary>
+        public ObservableCollection<DistrictPoint> DataDistrictPoint
+        {
+            get
+            {
+                using (GeocomplexContext db = new())
+                {
+                    var data = db.DistrictPoints.Where(r => r.IdDistrict == PassedParameter).ToList();
+
+                    foreach (var item in data)
+                    {
+                        _dataDistrictPoint.Add(new DistrictPoint
+                        {
+                            IdDisctrictPoint = item.IdDisctrictPoint,
+                            DisctrictPointX = item.DisctrictPointX,
+                            DisctrictPointY = item.DisctrictPointY,
+                            DisctrictPointZ = item.DisctrictPointZ
+
+                        });
+                    }
+
+                    return _dataDistrictPoint;
+                }
+            }
+            set
+            {
+                _dataDistrictPoint = value;
+                OnPropertyChanged("DataDistrictPoint");
+            }
+        }
+
+        /// <summary>
+        /// Переменная хранимая данные переданные из другой страницы
+        /// </summary>
         private int _passedParameter;
 
         public int PassedParameter
         {
-            get =>_passedParameter; 
-            set => Set(ref _passedParameter, value); 
+            get => _passedParameter;
+            set => Set(ref _passedParameter, value);
         }
-    
+
 
         /// <summary>
         /// Принимаем переменную переданную из другой страницы
@@ -107,7 +140,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 return;
 
             PassedParameter = (int)arg;
-            
+
         }
 
         //private ICollectionView? _collectiondata;
@@ -131,9 +164,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             {
 
                 //_datacolRouDistcrit = db.Routes.Where(u => u.IdDistrictNavigation.IdDistrict == PassedParameter).ToObservableCollection();
-               
-                    DatacolRouDistcrit = db.Routes.Where(u => u.IdDistrictNavigation.IdDistrict == Convert.ToInt32(PassedParameter)).ToObservableCollection();
-              
+
+                DatacolRouDistcrit = db.Routes.Where(u => u.IdDistrictNavigation.IdDistrict == Convert.ToInt32(PassedParameter)).ToObservableCollection();
+
 
 
             }
@@ -143,7 +176,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public InfoDistrisctViewModel(NavigationManager navigationmaneger)
         {
             _navigationmaneger = navigationmaneger;
-           
+
             LoadCommand = new LamdaCommand(OnLoadCommandExcuted, CanLoadCommandExecute);
             LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
 

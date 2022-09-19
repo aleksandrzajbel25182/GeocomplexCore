@@ -59,7 +59,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set
             {
                 _selecteditem = value;
-                SelecetedID = SelecetedItem.Id;
                 GlobalSet.IdProjectStatic = SelecetedID;
                 OnPropertyChanged("SelecetedItem");
             }

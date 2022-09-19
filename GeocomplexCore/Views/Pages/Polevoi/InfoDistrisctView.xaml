@@ -121,10 +121,10 @@
                                     <StackPanel Orientation="Horizontal">
 
                                         <DataGrid Style="{DynamicResource DataGridStyle}"
-                                                  ItemsSource="{Binding CollectionData}"
+                                                  ItemsSource="{Binding DataDistrictPoint, UpdateSourceTrigger=PropertyChanged}"
                                                   SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
                                                   AutoGenerateColumns="False"
-                                                  Width="400"
+                                                  Width="418"
                                                   Height="200"
                                                   Margin="40,10,0,0"
                                                   VerticalAlignment="Top"
@@ -136,20 +136,20 @@
                                             </DataGrid.InputBindings>
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="№"
-                                                                    Binding="{Binding Id,Mode=OneWay}"
+                                                                    Binding="{Binding IdDisctrictPoint,Mode=OneWay}"
                                                                     MinWidth="80"
                                                                     Width="20" />
                                                 <DataGridTextColumn Header="X"
-                                                                    Binding="{Binding Name, Mode=OneWay}"
+                                                                    Binding="{Binding DisctrictPointX, Mode=OneWay}"
                                                                     MinWidth="120"
                                                                     Width="*" />
                                                 <DataGridTextColumn Header="Y"
-                                                                    Binding="{Binding UsName,Mode=OneWay}"
+                                                                    Binding="{Binding DisctrictPointY,Mode=OneWay}"
                                                                     MinWidth="120"
                                                                     Width="*" />
 
                                                 <DataGridTextColumn Header="Z"
-                                                                    Binding="{Binding DateAdd,Mode=OneWay}"
+                                                                    Binding="{Binding DisctrictPointZ,Mode=OneWay}"
                                                                     MinWidth="120"
                                                                     Width="*" />
                                             </DataGrid.Columns>
