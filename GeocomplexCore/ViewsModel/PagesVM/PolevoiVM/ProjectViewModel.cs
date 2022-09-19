@@ -4,6 +4,7 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.Properties;
+using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
 using GeocomplexCore.ViewsModel.WindowsVM;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -26,8 +26,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private NavigationManager navigationManager;
         MainWindowViewModel mainWindowViewModel;
 
+        //Временная переменная для хранения выделенного ID "Проекта" 
+        private int _selectIDproject;
         //Временная переменная для хранения выделенного "Проекта"
-        private int SelecetedID;
+        private string _selectNameproject;
+
         //Данная переменная служит для того что бы знать какие данные загруженны на данный момент. 0- проекты 2 - участки
         private int Peeremen = 0;
 
@@ -59,7 +62,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set
             {
                 _selecteditem = value;
-                GlobalSet.IdProjectStatic = SelecetedID;
+                GlobalSet.IdProjectStatic = _selectIDproject;
                 OnPropertyChanged("SelecetedItem");
             }
 
@@ -128,19 +131,20 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             if (GlobalSet.FlagStatic == "District")
             {
-                SelecetedID = SelecetedItem.Id;
-                GoNextNavigate(SelecetedID);
+                _selectIDproject = SelecetedItem.Id;
+                GoNextNavigate(_selectIDproject);
             }
             else
             {
                 LocatorStatic.Data.PageHeader = $"Участки проекта: {SelecetedItem.Name}";
-                SelecetedID = SelecetedItem.Id;
+                _selectIDproject = SelecetedItem.Id;
+                _selectNameproject = SelecetedItem.Name;
                 DataCol.Clear();
                 CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
                 GlobalSet.FlagStatic = "District";
+                if(DisttrictData().Count==0)
+                    MessageService.ShowMessageInformation($"Участков по проекту {_selectNameproject} в базе данных нету!");
             }
-
-
 
         }
 
@@ -187,8 +191,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             using (GeocomplexContext db = new GeocomplexContext())
             {
-                var dat = db.Districts.Where(r => r.PrgId == SelecetedID).Include(us => us.IdUserNavigation).ToList();
-                
+                var dat = db.Districts.Where(r => r.PrgId == _selectIDproject).Include(us => us.IdUserNavigation).ToList();
                 foreach (var item in dat)
                 {
                     _datacol.Add(new ModelData
@@ -199,7 +202,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                         DateAdd = item.DateAddDistrict
 
                     });
-                }
+                }                        
+               
                 Peeremen = 2;
                 return _datacol;
 

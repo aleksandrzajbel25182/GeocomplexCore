@@ -58,6 +58,14 @@ namespace GeocomplexCore.Service
             
 
         }
+        /// <summary>
+        /// Окно сообщения информирования
+        /// </summary>
+        /// <param name="message"></param>
+        public static void ShowMessageInformation(string message)
+        {
+            MessageBox.Show(message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
 
 
