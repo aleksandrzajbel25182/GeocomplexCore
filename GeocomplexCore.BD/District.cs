@@ -10,6 +10,7 @@ namespace GeocomplexCore.BD
     {
         public District()
         {
+            DistrictPoints = new HashSet<DistrictPoint>();
             Routes = new HashSet<Route>();
         }
 
@@ -21,6 +22,7 @@ namespace GeocomplexCore.BD
 
         public virtual UserDatum? IdUserNavigation { get; set; }
         public virtual Project Prg { get; set; } = null!;
+        public virtual ICollection<DistrictPoint> DistrictPoints { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
     }
 }

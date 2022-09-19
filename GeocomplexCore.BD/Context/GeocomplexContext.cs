@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace GeocomplexCore.BD.Context
 {
     public partial class GeocomplexContext : DbContext
     {
-        private readonly StreamWriter logStream = new StreamWriter("mylog.txt", true);
-
         public GeocomplexContext()
         {
         }
@@ -20,6 +17,7 @@ namespace GeocomplexCore.BD.Context
         }
 
         public virtual DbSet<District> Districts { get; set; } = null!;
+        public virtual DbSet<DistrictPoint> DistrictPoints { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
         public virtual DbSet<PhotoWaterintake> PhotoWaterintakes { get; set; } = null!;
@@ -44,37 +42,9 @@ namespace GeocomplexCore.BD.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                if (!optionsBuilder.IsConfigured)
-                {
-                    if (!optionsBuilder.IsConfigured)
-                    {
-                        var builder = new ConfigurationBuilder();
-                        // установка пути к текущему каталогу
-                        builder.SetBasePath(Directory.GetCurrentDirectory());
-                        // получаем конфигурацию из файла appsettings.json
-                        builder.AddJsonFile("appsetting.json");
-                        // создаем конфигурацию
-                        var config = builder.Build();
-                        // получаем строку подключения
-                        string connectionString = config.GetConnectionString("DefaultConnection");
-
-                        optionsBuilder.UseNpgsql(connectionString);
-
-                        optionsBuilder.LogTo(logStream.WriteLine);
-                    }
-                }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Geocomplex;Username=postgres;Password=admin");
             }
-        }
-        public override void Dispose()
-        {
-            base.Dispose();
-            logStream.Dispose();
-        }
-
-        public override async ValueTask DisposeAsync()
-        {
-            await base.DisposeAsync();
-            await logStream.DisposeAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -113,6 +83,35 @@ namespace GeocomplexCore.BD.Context
                     .HasForeignKey(d => d.PrgId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_project_id_dis");
+            });
+
+            modelBuilder.Entity<DistrictPoint>(entity =>
+            {
+                entity.HasKey(e => e.IdDisctrictPoint)
+                    .HasName("district_points_pkey");
+
+                entity.ToTable("district_points");
+
+                entity.HasComment("Точки участка/координаты");
+
+                entity.Property(e => e.IdDisctrictPoint)
+                    .HasColumnName("id_disctrict_point")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(80L);
+
+                entity.Property(e => e.DisctrictPointX).HasColumnName("disctrict_point_X");
+
+                entity.Property(e => e.DisctrictPointY).HasColumnName("disctrict_point_Y");
+
+                entity.Property(e => e.DisctrictPointZ).HasColumnName("disctrict_point_Z");
+
+                entity.Property(e => e.IdDistrict).HasColumnName("Id_district");
+
+                entity.HasOne(d => d.IdDistrictNavigation)
+                    .WithMany(p => p.DistrictPoints)
+                    .HasForeignKey(d => d.IdDistrict)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_id_distcrit_point");
             });
 
             modelBuilder.Entity<Location>(entity =>
