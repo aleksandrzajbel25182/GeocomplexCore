@@ -142,7 +142,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 DataCol.Clear();
                 CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
                 GlobalSet.FlagStatic = "District";
-                if(DisttrictData().Count==0)
+                if(CollectionData.Cast<object>().Count() == 0)
                     MessageService.ShowMessageInformation($"Участков по проекту {_selectNameproject} в базе данных нету!");
             }
 
