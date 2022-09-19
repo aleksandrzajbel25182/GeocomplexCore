@@ -153,23 +153,13 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
 
-        public ICommand LoadCommand { get; }
+        public ICommand BackNavigateCommand { get; }
 
-        private bool CanLoadCommandExecute(object p) => true;
+        private bool BackNavigateCommandExecute(object p) => true;
 
-        private void OnLoadCommandExcuted(object p)
+        private void OnBackNavigateCommandExcuted(object p)
         {
-
-            using (GeocomplexContext db = new GeocomplexContext())
-            {
-
-                //_datacolRouDistcrit = db.Routes.Where(u => u.IdDistrictNavigation.IdDistrict == PassedParameter).ToObservableCollection();
-
-                DatacolRouDistcrit = db.Routes.Where(u => u.IdDistrictNavigation.IdDistrict == Convert.ToInt32(PassedParameter)).ToObservableCollection();
-
-
-
-            }
+            _navigationmaneger.Navigate("ProjectPage"); 
         }
 
 
@@ -177,7 +167,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             _navigationmaneger = navigationmaneger;
 
-            LoadCommand = new LamdaCommand(OnLoadCommandExcuted, CanLoadCommandExecute);
+            BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
             LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
 
         }
