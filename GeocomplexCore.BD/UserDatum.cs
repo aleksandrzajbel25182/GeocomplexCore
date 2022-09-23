@@ -12,6 +12,7 @@ namespace GeocomplexCore.BD
         {
             Districts = new HashSet<District>();
             Routes = new HashSet<Route>();
+            Watchpoints = new HashSet<Watchpoint>();
         }
 
         public int UserId { get; set; }
@@ -22,5 +23,6 @@ namespace GeocomplexCore.BD
 
         public virtual ICollection<District> Districts { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Watchpoint> Watchpoints { get; set; }
     }
 }

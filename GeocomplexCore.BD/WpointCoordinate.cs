@@ -10,7 +10,7 @@ namespace GeocomplexCore.BD
     {
         public int WpCoordinatesId { get; set; }
         public int WpointId { get; set; }
-        public double WpCoordinatesX { get; set; }
+        public double? WpCoordinatesX { get; set; }
         public double? WpCoordinatesY { get; set; }
         public double? WpCoordinatesZ { get; set; }
 

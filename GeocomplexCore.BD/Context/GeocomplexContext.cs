@@ -45,20 +45,17 @@ namespace GeocomplexCore.BD.Context
             {
                 if (!optionsBuilder.IsConfigured)
                 {
-                    if (!optionsBuilder.IsConfigured)
-                    {
-                        var builder = new ConfigurationBuilder();
-                        // установка пути к текущему каталогу
-                        builder.SetBasePath(Directory.GetCurrentDirectory());
-                        // получаем конфигурацию из файла appsettings.json
-                        builder.AddJsonFile("appsetting.json");
-                        // создаем конфигурацию
-                        var config = builder.Build();
-                        // получаем строку подключения
-                        string connectionString = config.GetConnectionString("DefaultConnection");
+                    var builder = new ConfigurationBuilder();
+                    // установка пути к текущему каталогу
+                    builder.SetBasePath(Directory.GetCurrentDirectory());
+                    // получаем конфигурацию из файла appsettings.json
+                    builder.AddJsonFile("appsetting.json");
+                    // создаем конфигурацию
+                    var config = builder.Build();
+                    // получаем строку подключения
+                    string connectionString = config.GetConnectionString("DefaultConnection");
 
-                        optionsBuilder.UseNpgsql(connectionString);
-                    }
+                    optionsBuilder.UseNpgsql(connectionString);
                 }
             }
         }
@@ -334,33 +331,39 @@ namespace GeocomplexCore.BD.Context
                     .HasColumnName("wpoint_id")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.FUserId).HasColumnName("f_user_id");
+
+                entity.Property(e => e.FWpointCoord).HasColumnName("f_wpoint_coord");
+
                 entity.Property(e => e.RouteId).HasColumnName("route_id");
 
                 entity.Property(e => e.WpointDateAdd).HasColumnName("wpoint_date_add");
 
-                entity.Property(e => e.WpointHeight).HasColumnName("wpoint_height");
-
-                entity.Property(e => e.WpointIndLandscape).HasColumnName("wpoint_ind_landscape");
+                entity.Property(e => e.WpointIndLandscape)
+                    .HasMaxLength(300)
+                    .HasColumnName("wpoint_ind_landscape");
 
                 entity.Property(e => e.WpointLocation)
                     .HasMaxLength(200)
                     .HasColumnName("wpoint_location");
 
                 entity.Property(e => e.WpointNote)
-                    .HasMaxLength(500)
+                    .HasMaxLength(4000)
                     .HasColumnName("wpoint_note");
 
                 entity.Property(e => e.WpointNumber)
                     .HasMaxLength(20)
                     .HasColumnName("wpoint_number");
 
-                entity.Property(e => e.WpointShrDesck)
-                    .HasMaxLength(350)
-                    .HasColumnName("wpoint_shr_desck");
-
                 entity.Property(e => e.WpointType)
                     .HasMaxLength(255)
                     .HasColumnName("wpoint_type");
+
+                entity.HasOne(d => d.FUser)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.FUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_wpoint_user_id");
 
                 entity.HasOne(d => d.Route)
                     .WithMany(p => p.Watchpoints)
@@ -650,19 +653,18 @@ namespace GeocomplexCore.BD.Context
 
             modelBuilder.Entity<WpointCoordinate>(entity =>
             {
-                entity.HasKey(e => e.WpCoordinatesX)
+                entity.HasKey(e => e.WpCoordinatesId)
                     .HasName("wpoint_coordinates_pkey");
 
                 entity.ToTable("wpoint_coordinates");
 
                 entity.HasComment("Координаты точки наблюдения");
 
-                entity.Property(e => e.WpCoordinatesX).HasColumnName("wp_coordinates_X");
-
                 entity.Property(e => e.WpCoordinatesId)
-                    .ValueGeneratedOnAdd()
                     .HasColumnName("wp_coordinates_id")
                     .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.WpCoordinatesX).HasColumnName("wp_coordinates_X");
 
                 entity.Property(e => e.WpCoordinatesY).HasColumnName("wp_coordinates_Y");
 

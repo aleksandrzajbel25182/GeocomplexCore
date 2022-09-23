@@ -413,7 +413,7 @@
                         <StackPanel Orientation="Horizontal"
                                     DockPanel.Dock="Top">
                             <DataGrid Style="{DynamicResource DataGridStyle}"
-                                      ItemsSource="{Binding CollectionData}"
+                                      ItemsSource="{Binding DataWatchpoint}"
                                       SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
                                       AutoGenerateColumns="False"
                                       Width="1200"
@@ -432,27 +432,27 @@
                                                         MinWidth="80"
                                                         Width="20" />
                                     <DataGridTextColumn Header="Дата создания"
-                                                        Binding="{Binding Name, Mode=OneWay}"
+                                                        Binding="{Binding WpointId, Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
                                     <DataGridTextColumn Header="Исполнитель"
-                                                        Binding="{Binding UsName,Mode=OneWay}"
+                                                        Binding="{Binding FUserId,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
 
                                     <DataGridTextColumn Header="Местоположение"
-                                                        Binding="{Binding DateAdd,Mode=OneWay}"
+                                                        Binding="{Binding WpointLocation,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Форма рельефа"
-                                                        Binding="{Binding DateAdd,Mode=OneWay}"
+                                    <DataGridTextColumn Header="Маршрут"
+                                                        Binding="{Binding Route,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Крутизна склона"
-                                                        Binding="{Binding DateAdd,Mode=OneWay}"
+                                    <DataGridTextColumn Header="Тип точки"
+                                                        Binding="{Binding WpointType,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Долгота"
+                                    <!--<DataGridTextColumn Header="Долгота"
                                                         Binding="{Binding DateAdd,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
@@ -463,13 +463,21 @@
                                     <DataGridTextColumn Header="Абс.отм"
                                                         Binding="{Binding DateAdd,Mode=OneWay}"
                                                         MinWidth="120"
-                                                        Width="*" />
+                                                        Width="*" />-->
                                 </DataGrid.Columns>
-                            </DataGrid>
-
+                            </DataGrid>                         
 
                         </StackPanel>
-
+                        
+                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                  materialDesign:HintAssist.Hint="ПРИМЕЧАНИЕ"
+                                  Width="900"
+                                  HorizontalAlignment="Left"
+                                  Margin="50"
+                                  TextWrapping="Wrap"
+                                  Text="{Binding SelecetedItem.WpointNote}"
+                                  IsEnabled="False"
+                                  Cursor="Arrow" />
                     </DockPanel>
                 </TabItem>
             </TabControl>

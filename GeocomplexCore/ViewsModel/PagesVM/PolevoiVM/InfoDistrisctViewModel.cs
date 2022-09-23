@@ -20,7 +20,56 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
     {
         private readonly NavigationManager _navigationmaneger;
 
+
         #region Параметры
+
+        private ObservableCollection<Watchpoint> _dataWatchpoint = new ObservableCollection<Watchpoint>();
+
+        public ObservableCollection<Watchpoint> DataWatchpoint
+        {
+            get
+            {
+
+                using (GeocomplexContext db = new GeocomplexContext())
+                {
+                    var data = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter).ToList();
+
+                    foreach (var item in data)
+                    {
+                        _dataWatchpoint.Add(new Watchpoint
+                        {
+                            WpointId = item.WpointId,
+                            Route = item.Route,
+                            WpointType = item.WpointType,
+                            WpointNumber = item.WpointNumber,
+                            WpointLocation = item.WpointLocation,
+                            WpointDateAdd = item.WpointDateAdd,
+                            WpointNote = item.WpointNote,
+                            FUserId = item.FUserId,
+                            WpointIndLandscape = item.WpointIndLandscape
+                        });
+                    }
+                    return _dataWatchpoint;
+
+                }
+            }
+            set { _dataWatchpoint = value; }
+        }
+        
+        private Watchpoint? _selecteditem;
+        public Watchpoint? SelecetedItem
+        {
+            get { return _selecteditem; }
+            set
+            {
+                _selecteditem = value;
+                OnPropertyChanged("SelecetedItem");
+            }
+
+        }
+
+        
+
 
 
 
@@ -45,6 +94,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             set => Set(ref _namedistrict, value);
         }
+
+
 
 
         /// <summary>
@@ -159,7 +210,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private void OnBackNavigateCommandExcuted(object p)
         {
-            _navigationmaneger.Navigate("ProjectPage"); 
+            _navigationmaneger.Navigate("ProjectPage");
         }
 
 
@@ -169,7 +220,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
             LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
-
+           
         }
     }
 }
