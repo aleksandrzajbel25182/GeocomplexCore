@@ -15,13 +15,13 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                 <Button Content="Назад"
                         Height="40"
-                        Width="300"
+                        Width="250"
                         Style="{DynamicResource StyleButton}"
                         HorizontalAlignment="Center" Margin="50,0,50,0"
                         Command="{Binding BackNavigateCommand}"/>
                 <Button Content="Редактировать"
                         Height="40"
-                        Width="300"
+                        Width="250"
                         Style="{DynamicResource StyleButton}"
                         HorizontalAlignment="Center" />
             </StackPanel>
@@ -54,6 +54,10 @@
                                            Grid.Row="0"
                                            Margin="5"
                                            FontSize="18" />
+                                    <Border Background="Black"
+                                            Height="0.5"
+                                            VerticalAlignment="Bottom" />
+
 
                                     <StackPanel Grid.Row="1">
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
@@ -66,8 +70,8 @@
                             </materialDesign:Card>
 
                             <!-- КАРТОЧКА : Коодинаты участка-->
-                            <materialDesign:Card Width="935"
-                                                 Height="400"
+                            <materialDesign:Card Width="900"
+                                                 Height="325"
                                                  HorizontalAlignment="Right"
                                                  VerticalAlignment="Top"
                                                  Margin="50,50,0,0"
@@ -84,6 +88,7 @@
                                            Grid.Row="0"
                                            FontSize="18"
                                            Margin="5" />
+                                    <Border Background="Black" Height="0.5" VerticalAlignment="Bottom"/>
 
                                     <StackPanel Grid.Row="1">
 
@@ -216,6 +221,10 @@
                                        Grid.Row="0"
                                        FontSize="18"
                                        Margin="5" />
+                                <Border Background="Black"
+                                        Height="0.5"
+                                        VerticalAlignment="Bottom" />
+
                                 <StackPanel Grid.Row="1"
                                             Orientation="Vertical">
 
