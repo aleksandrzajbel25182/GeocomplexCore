@@ -305,7 +305,7 @@
                                                                 MinWidth="120"
                                                                 Width="*" />
                                             <DataGridTextColumn Header="Исполнитель"
-                                                                Binding="{Binding User,Mode=OneWay}"
+                                                                Binding="{Binding User.UserName,Mode=OneWay}"
                                                                 MinWidth="120"
                                                                 Width="*" />
 
@@ -428,15 +428,15 @@
                                 </DataGrid.InputBindings>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="№"
-                                                        Binding="{Binding Id,Mode=OneWay}"
+                                                        Binding="{Binding WpointId,Mode=OneWay}"
                                                         MinWidth="80"
                                                         Width="20" />
                                     <DataGridTextColumn Header="Дата создания"
-                                                        Binding="{Binding WpointId, Mode=OneWay}"
+                                                        Binding="{Binding WpointDateAdd, Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
                                     <DataGridTextColumn Header="Исполнитель"
-                                                        Binding="{Binding FUserId,Mode=OneWay}"
+                                                        Binding="{Binding FUser.UserName,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
 
@@ -445,7 +445,7 @@
                                                         MinWidth="120"
                                                         Width="*" />
                                     <DataGridTextColumn Header="Маршрут"
-                                                        Binding="{Binding Route,Mode=OneWay}"
+                                                        Binding="{Binding Route.RouteName,Mode=OneWay}"
                                                         MinWidth="120"
                                                         Width="*" />
                                     <DataGridTextColumn Header="Тип точки"

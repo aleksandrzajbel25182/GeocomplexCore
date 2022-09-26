@@ -21,18 +21,20 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private readonly NavigationManager _navigationmaneger;
 
 
-        #region Параметры
-
+        #region Parametrs/Параметры
+        /// <summary>
+        /// Коллеция "ТОЧКИ НАБЛЮДЕНИЯ"
+        /// </summary>
         private ObservableCollection<Watchpoint> _dataWatchpoint = new ObservableCollection<Watchpoint>();
-
         public ObservableCollection<Watchpoint> DataWatchpoint
         {
             get
             {
-
                 using (GeocomplexContext db = new GeocomplexContext())
                 {
-                    var data = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter).ToList();
+                    var data = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter)
+                        .Include(us=> us.FUser)
+                        .ThenInclude(rout=>rout.Routes).ToList();
 
                     foreach (var item in data)
                     {
@@ -45,17 +47,19 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                             WpointLocation = item.WpointLocation,
                             WpointDateAdd = item.WpointDateAdd,
                             WpointNote = item.WpointNote,
-                            FUserId = item.FUserId,
+                            FUser = item.FUser,
                             WpointIndLandscape = item.WpointIndLandscape
                         });
                     }
                     return _dataWatchpoint;
-
                 }
             }
             set { _dataWatchpoint = value; }
         }
         
+        /// <summary>
+        /// Выбранный элемент в коллекиции "ТОЧКИ НАБЛЮДЕНИЯ"
+        /// </summary>
         private Watchpoint? _selecteditem;
         public Watchpoint? SelecetedItem
         {
@@ -67,9 +71,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
 
         }
-
-        
-
 
 
 
@@ -124,7 +125,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     }
                     return _datacolRouDistcrit;
 
-
                 }
             }
             set
@@ -138,7 +138,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// Координаты участка
         /// </summary>
         private ObservableCollection<DistrictPoint> _dataDistrictPoint = new();
-
         public ObservableCollection<DistrictPoint> DataDistrictPoint
         {
             get
@@ -173,7 +172,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// Переменная хранимая данные переданные из другой страницы
         /// </summary>
         private int _passedParameter;
-
         public int PassedParameter
         {
             get => _passedParameter;
@@ -203,15 +201,23 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
 
+        #region Commands/Команды
 
+        #region Команда НАЗАД
+        /// <summary>
+        /// Команда НАЗАД
+        /// </summary>
         public ICommand BackNavigateCommand { get; }
-
         private bool BackNavigateCommandExecute(object p) => true;
-
         private void OnBackNavigateCommandExcuted(object p)
         {
             _navigationmaneger.Navigate("ProjectPage");
         }
+        #endregion
+
+
+        #endregion
+
 
 
         public InfoDistrisctViewModel(NavigationManager navigationmaneger)
