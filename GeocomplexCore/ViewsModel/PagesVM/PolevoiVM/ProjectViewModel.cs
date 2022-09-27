@@ -220,19 +220,21 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             using (GeocomplexContext db = new GeocomplexContext())
             {
                 Peeremen = 1;
-                return _datacol = db.Projects.Join(db.Organizations,
-                                 p => p.PrgOrganization,
-                                 o => o.OrgId,
-                                 (p, o) => new ModelData // результат
-                                 {
-                                     Id = p.PrgId,
-                                     Name = p.PrgName,
-                                     UsName = o.OrgName,
-                                     DateAdd = p.PrgDate
 
-                                 }).ToObservableCollection();
+                var dat = db.Projects.Include(us => us.PrgOrganizationNavigation).ToList();
+                foreach (var item in dat)
+                {
+                    _datacol.Add(new ModelData
+                    {
+                        Id = item.PrgId,
+                        Name = item.PrgName,
+                        UsName = item.PrgOrganizationNavigation.OrgName,
+                        DateAdd = item.PrgDate
 
+                    });
+                }
 
+                return _datacol;
 
             }
         }
