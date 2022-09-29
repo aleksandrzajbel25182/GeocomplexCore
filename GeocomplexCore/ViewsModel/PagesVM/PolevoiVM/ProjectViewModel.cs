@@ -244,7 +244,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 var dat = db.Projects.Include(us => us.PrgOrganizationNavigation).ToList();
                 foreach (var item in dat)
                 {
-                    _datacol.Add(new ModelData
+                    _datacol.Add(
+                        new ModelData
                     {
                         Id = item.PrgId,
                         Name = item.PrgName,
@@ -252,7 +253,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                         DateAdd = item.PrgDate
 
                     });
-                }
+                }               
 
                 return _datacol;
 
@@ -308,6 +309,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             GlobalSet.FlagStatic = "Project";
             // Обворачиваем ObservableCollection в ICollectionView
             CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
+            //Сортируем по возврастанию id
+            CollectionData.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+
             GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);
             BackCommand = new LamdaCommand(OnBackCommandExcuted, CanBackCommandExecute);
             UpdateCollectionCommand = new LamdaCommand(OnUpdateCollectionCommandExcuted, CanUpdateCollectionCommandExecute);
