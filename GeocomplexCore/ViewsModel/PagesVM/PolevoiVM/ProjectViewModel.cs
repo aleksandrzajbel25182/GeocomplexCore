@@ -149,6 +149,26 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
 
 
+        public ICommand UpdateCollectionCommand { get; }
+
+        private bool CanUpdateCollectionCommandExecute(object p) => true;
+
+        private void OnUpdateCollectionCommandExcuted(object p)
+        {
+            if (GlobalSet.FlagStatic == "District")
+            {
+                DataCol.Clear();
+                CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
+            }
+            else
+            {
+                DataCol.Clear();
+                CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
+            }
+        }
+        
+
+
 
         public ICommand BackCommand { get; }
 
@@ -290,6 +310,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
             GoDistrictPageCommand = new LamdaCommand(OnGoDistrictPageCommandExcuted, CanGoDistrictPageCommandExecute);
             BackCommand = new LamdaCommand(OnBackCommandExcuted, CanBackCommandExecute);
+            UpdateCollectionCommand = new LamdaCommand(OnUpdateCollectionCommandExcuted, CanUpdateCollectionCommandExecute);
+
         }
 
 

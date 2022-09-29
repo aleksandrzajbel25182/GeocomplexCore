@@ -14,6 +14,7 @@
     <None Remove="Resources\Icons\ActionIcons\Edit.ico" />
     <None Remove="Resources\Icons\ActionIcons\Remove.ico" />
     <None Remove="Resources\Icons\ActionIcons\Search.ico" />
+    <None Remove="Resources\Icons\ActionIcons\Update.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Архив.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Домой.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Карта.ico" />
@@ -21,6 +22,10 @@
     <None Remove="Resources\Icons\HamburgerMenuIcons\Лабараторные-анализы.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Полевой-дневник.ico" />
     <None Remove="Resources\Icons\HamburgerMenuIcons\Фондовые.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\ActionIcons\Update.ico" />
   </ItemGroup>
 
   <ItemGroup>

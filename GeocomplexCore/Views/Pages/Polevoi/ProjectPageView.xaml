@@ -81,6 +81,16 @@
                         Удалить
                     </Button.ToolTip>
                 </Button>
+                <Button Style="{StaticResource StyleCircleButton}"
+                        Margin="40,0,0,0"
+                        Command="{Binding UpdateCollectionCommand}">
+                    <Image Source="/Resources/Icons/ActionIcons/Update.ico"
+                           Width="25"
+                           Height="25" />
+                    <Button.ToolTip>
+                        Обновить
+                    </Button.ToolTip>
+                </Button>
             </StackPanel>
             
             <DataGrid Name="Datagrid"

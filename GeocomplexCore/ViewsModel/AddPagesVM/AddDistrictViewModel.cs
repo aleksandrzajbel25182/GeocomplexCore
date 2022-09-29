@@ -4,12 +4,14 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
+using GeocomplexCore.Views.Windows;
 using GeocomplexCore.ViewsModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GeocomplexCore.ViewsModel.AddPagesVM
@@ -40,13 +42,13 @@ namespace GeocomplexCore.ViewsModel.AddPagesVM
                 {
                     AddDiscrict();
                     MessageService.ShowMessage("Новый участок занесен в базу");
+
                 }
                 else
                 {
                     MessageService.ShowMessageValidation();
                 }
-                AddDiscrict();
-                MessageService.ShowMessage("");
+                
             }
             catch (System.Exception ex)
             {
