@@ -88,6 +88,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     _namedistrict = db.Districts
                        .FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict.ToString();
 
+                    LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
                     return _namedistrict;
 
 
@@ -211,6 +212,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private bool BackNavigateCommandExecute(object p) => true;
         private void OnBackNavigateCommandExcuted(object p)
         {
+            LocatorStatic.Data.PageHeader = $"Проекты";
             _navigationmaneger.Navigate("ProjectPage");
         }
         #endregion
@@ -225,7 +227,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             _navigationmaneger = navigationmaneger;
 
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
-            LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
+;
+
+            
            
         }
     }
