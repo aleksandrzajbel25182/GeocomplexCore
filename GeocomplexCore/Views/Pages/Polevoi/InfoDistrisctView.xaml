@@ -12,19 +12,7 @@
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <Button Content="Назад"
-                        Height="40"
-                        Width="250"
-                        Style="{DynamicResource StyleButton}"
-                        HorizontalAlignment="Center" Margin="50,0,50,0"
-                        Command="{Binding BackNavigateCommand}"/>
-                <Button Content="Редактировать"
-                        Height="40"
-                        Width="250"
-                        Style="{DynamicResource StyleButton}"
-                        HorizontalAlignment="Center" />
-            </StackPanel>
+            
            
             <TabControl materialDesign:ColorZoneAssist.Mode="SecondaryLight"
                         HorizontalContentAlignment="Left">
@@ -331,7 +319,26 @@
 
 
                         </materialDesign:Card>
+
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,30,20,20">
+                            <Button Content="Назад"
+                                    Height="40"
+                                    Width="250"
+                                    Style="{DynamicResource StyleButton}"
+                                    HorizontalAlignment="Center"
+                                    Margin="50,0,50,0"
+                                    Command="{Binding BackNavigateCommand}" />
+                            <Button Content="Редактировать"
+                                    Height="40"
+                                    Width="250"
+                                    Style="{DynamicResource StyleButton}"
+                                    HorizontalAlignment="Center" />
+                        </StackPanel>
+                        
                     </StackPanel>
+                    
 
 
 
