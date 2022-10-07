@@ -5,26 +5,239 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
       mc:Ignorable="d"
       Height="1100"
       d:DesignWidth="1335"
       Background="#F2F8F1">
 
     <Grid>
-        <TabControl materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-                    HorizontalContentAlignment="Left">
+        <TabControl Style="{StaticResource MaterialDesignTabControl}"
+                    mde:TabControlAssist.TabHeaderInactiveBrush="Black"
+                    mde:TabControlAssist.TabHeaderHighlightBrush="#166051">
             <TabItem Header="Основная информация"
-                      />
+                     FontFamily="ARVO">
+                <StackPanel>
+                    <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                              materialDesign:HintAssist.Hint="Наименование"
+                              Height="50"
+                              IsEnabled="False"
+                              Margin="20" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                  materialDesign:HintAssist.Hint="Тип точки наблюдения"
+                                  Height="50"
+                                  Width="288"
+                                  IsEnabled="False"
+                                  Margin="20" />
+
+                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                  materialDesign:HintAssist.Hint="Номер"
+                                  Height="50"
+                                  IsEnabled="False"
+                                  Width="250"
+                                  Margin="20" />
+                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                  materialDesign:HintAssist.Hint="Населенный пункт"
+                                  Height="50"
+                                  IsEnabled="False"
+                                  Width="330"
+                                  Margin="20" />
+
+                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                    materialDesign:HintAssist.Hint="Дата создания"
+                                    Height="50"
+                                    Width="220"
+                                    IsEnabled="False"
+                                    Margin="20" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- КАРТОЧКА : Геоморфологическая характеристика-->
+                        <materialDesign:Card Width="350"
+                                             Height="510"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,0"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Геоморфологическая характеристика"
+                                       Grid.Row="0"
+                                       Margin="5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0.5"
+                                        VerticalAlignment="Bottom" />
+
+
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Vertical">
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Форма рельефа"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,15,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Тип рельефа"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Подтип рельефа"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Высотность"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Экспозиция"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Крутизна склона"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Форма речной долины"
+                                              Height="50"
+                                              Width="288"
+                                              IsEnabled="False"
+                                              Margin="0,0,0,15" />
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                        <!-- .............................................-->
+
+                        <!-- КАРТОЧКА : Координаты-->
+                        <materialDesign:Card Width="422"
+                                             Height="510"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,0"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="КООРДИНАТЫ"
+                                       Grid.Row="0"
+                                       Margin="5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0.5"
+                                        VerticalAlignment="Bottom" />
+
+
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Vertical">
+                                    <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Тип координат"
+                                              Height="50"
+                                              Width="375"
+                                              IsEnabled="False"
+                                              Margin="0,15,0,15" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Долгота °"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Широта °"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Долгота &apos;"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Широта &apos;"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Долгота &quot;"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Широта &quot;"
+                                                  Height="50"
+                                                  IsEnabled="False"
+                                                  Width="174"
+                                                  Margin="20" />
+                                    </StackPanel>
+                                    <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                              materialDesign:HintAssist.Hint="Населенный пункт"
+                                              Height="50"
+                                              IsEnabled="False"
+                                              Width="375"
+                                              Margin="20" />
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                        <!-- .............................................-->
+                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                  materialDesign:HintAssist.Hint="Описание точки"
+                                  IsEnabled="False"
+                                  Width="380"
+                                  Height="510"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Margin="50,50,0,0" />
+
+                    </StackPanel>
+
+
+
+                </StackPanel>
+
+            </TabItem>
             <TabItem Header="Объекты наблюдения"
-                     />
+                     FontFamily="ARVO" />
             <TabItem Header="Фотографии"
-                      />
+                     FontFamily="ARVO" />
             <TabItem Header="Схемы"
-                     />
+                     FontFamily="ARVO" />
             <TabItem Header="Гидроструктура"
-                      />
+                     FontFamily="ARVO" />
             <TabItem Header="Гидроструктура"
-                     />
+                     FontFamily="ARVO" />
         </TabControl>
     </Grid>
 </Page>
