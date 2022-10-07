@@ -83,6 +83,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             _navigationmaneger.Register<MenuView>("Menu", () => new MenuViewModel(_navigationmaneger));
             _navigationmaneger.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(_navigationmaneger));
             _navigationmaneger.Register<InfoDistrisctView>("InfoDistrict", () => new InfoDistrisctViewModel(_navigationmaneger));
+            _navigationmaneger.Register<InfoPointObservationView>("InfoPointObservation", () => new InfoPointObservationViewModel(_navigationmaneger));
 
 
             //Отображение стартового UI

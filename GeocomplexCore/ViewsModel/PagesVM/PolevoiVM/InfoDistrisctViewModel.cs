@@ -33,8 +33,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 using (GeocomplexContext db = new GeocomplexContext())
                 {
                     var data = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter)
-                        .Include(us=> us.FUser)
-                        .ThenInclude(rout=>rout.Routes).ToList();
+                        .Include(us => us.FUser)
+                        .ThenInclude(rout => rout.Routes).ToList();
 
                     foreach (var item in data)
                     {
@@ -56,7 +56,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             set { _dataWatchpoint = value; }
         }
-        
+
         /// <summary>
         /// Выбранный элемент в коллекиции "ТОЧКИ НАБЛЮДЕНИЯ"
         /// </summary>
@@ -204,6 +204,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #region Commands/Команды
 
+
+
         #region Команда НАЗАД
         /// <summary>
         /// Команда НАЗАД
@@ -217,6 +219,17 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
         #endregion
 
+        public ICommand GoInfoPointOBCommand { get; }
+
+        private bool CanGoInfoPointOBCommandExecute(object p) => true;
+
+        private void OnGoInfoPointOBCommandExcuted(object p)
+        {
+            _navigationmaneger.Navigate("InfoPointObservation", SelecetedItem.WpointId);
+
+        }
+
+
 
         #endregion
 
@@ -227,10 +240,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             _navigationmaneger = navigationmaneger;
 
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
-;
+            GoInfoPointOBCommand = new LamdaCommand(OnGoInfoPointOBCommandExcuted, CanGoInfoPointOBCommandExecute);
 
-            
-           
+
+
         }
     }
 }

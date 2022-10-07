@@ -441,8 +441,8 @@
                                       CanUserAddRows="False">
                                 <DataGrid.InputBindings>
                                     <MouseBinding Gesture="LeftDoubleClick"
-                                                  Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
-                                                  CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
+                                                  Command="{Binding GoInfoPointOBCommand , Mode=OneTime}"
+                                                  CommandParameter="{Binding ElementName=WpointId, Path=SelectedItem}" />
                                 </DataGrid.InputBindings>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="№"
