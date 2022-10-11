@@ -7,6 +7,7 @@ using GeocomplexCore.Model;
 using GeocomplexCore.ViewsModel.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
     {
         private readonly NavigationManager _navigationmaneger;
 
+        private ObservableCollection<FormatCoordinatModel> _formatCoordinat;
+        public ObservableCollection<FormatCoordinatModel> FormatCoordinat { get => _formatCoordinat; set => Set(ref _formatCoordinat, value); }
 
         #region Parametrs/Параметры
         /// <summary>
@@ -241,6 +244,13 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
             GoInfoPointOBCommand = new LamdaCommand(OnGoInfoPointOBCommandExcuted, CanGoInfoPointOBCommandExecute);
+
+            FormatCoordinat = new ObservableCollection<FormatCoordinatModel>()
+            {
+                new FormatCoordinatModel() { Name = "Десятичная" },
+                new FormatCoordinatModel() { Name = "Градусы,минуты,секнды" }
+            };
+
 
 
 

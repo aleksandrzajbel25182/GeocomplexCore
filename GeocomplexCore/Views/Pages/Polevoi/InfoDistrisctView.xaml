@@ -177,11 +177,11 @@
                                                           Width="256"
                                                           HorizontalAlignment="Left"
                                                           VerticalAlignment="Top"
-                                                          Margin="10,55,0,0">
+                                                          Margin="10,55,0,0"
+                                                          ItemsSource="{Binding FormatCoordinat}"
+                                                          DisplayMemberPath="Name">
 
-                                                    <ComboBoxItem Content="Item 1" />
-                                                    <ComboBoxItem Content="Item 2" />
-                                                    <ComboBoxItem Content="Item 3" />
+                                                    
                                                 </ComboBox>
                                             </Grid>
 
