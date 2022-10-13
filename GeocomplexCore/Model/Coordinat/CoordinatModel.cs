@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace GeocomplexCore.Model.Coordinat
 {
+
+    /// <summary>
+    /// Промежуточный класс хранящий координты X,Y в десятичной системе
+    /// </summary>
     internal class CoordinatModel : INotifyPropertyChanged
     {
         private double? _pointX;
-
+        /// <summary>
+        /// Координат X
+        /// </summary>
         public double? PointX
         {
             get { return _pointX; }
@@ -19,6 +25,9 @@ namespace GeocomplexCore.Model.Coordinat
         }
         private double? _pointY;
 
+        /// <summary>
+        /// Координат Y
+        /// </summary>
         public double? PointY
         {
             get { return _pointY; }
