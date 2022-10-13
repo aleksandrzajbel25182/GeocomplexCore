@@ -14,6 +14,16 @@ namespace GeocomplexCore.Model.Coordinat
     /// </summary>
     internal class CoordinatModel : INotifyPropertyChanged
     {
+        private int _id;
+        /// <summary>
+        /// Координат X
+        /// </summary>
+        public int ID
+        {
+            get { return _id; }
+            set => Set(ref _id, value);
+        }
+
         private double? _pointX;
         /// <summary>
         /// Координат X
@@ -32,6 +42,16 @@ namespace GeocomplexCore.Model.Coordinat
         {
             get { return _pointY; }
             set => Set(ref _pointY, value);
+
+        }
+        private double? _pointZ;
+        /// <summary>
+        /// Координат Z
+        /// </summary>
+        public double? PointZ
+        {
+            get { return _pointZ; }
+            set => Set(ref _pointZ, value);
 
         }
 

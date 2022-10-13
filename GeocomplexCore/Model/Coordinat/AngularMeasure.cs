@@ -11,36 +11,47 @@ namespace GeocomplexCore.Model.Coordinat
     /// </summary>
     internal class AngularMeasure
     {
-
-        private int _degrees;
+        private int _id;
         /// <summary>
-        /// Градусы
+        /// ID
         /// </summary>
-        public int Degrees
+        public int ID
         {
-            get { return _degrees; }
-            set { _degrees = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
-       
-        private int _minutes;
+
+
+        private string _longitude;
         /// <summary>
-        /// Минуты
+        /// Долгота
         /// </summary>
-        public int Minutes
+        public string Longitude
         {
-            get { return _minutes; }
-            set { _minutes = value; }
+            get { return _longitude; }
+            set { _longitude = value; }
         }
 
-        private double _seconds;
+        private string _width;
         /// <summary>
-        /// Секунды
+        /// Долгота
         /// </summary>
-        public double Seconds
+        public string Width
         {
-            get { return _seconds; }
-            set { _seconds = value; }
+            get { return _width; }
+            set { _width = value; }
+        }
+
+        private double? _pointZ;
+        /// <summary>
+        /// Координат Z
+        /// </summary>
+        public double? PointZ
+        {
+            get { return _pointZ; }
+            set { _pointZ = value; }
+
         }
     }
 }
