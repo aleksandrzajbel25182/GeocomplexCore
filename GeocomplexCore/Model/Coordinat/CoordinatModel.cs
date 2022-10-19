@@ -24,24 +24,24 @@ namespace GeocomplexCore.Model.Coordinat
             set => Set(ref _id, value);
         }
 
-        private double? _pointX;
+        private string? _pointX_longitude;
         /// <summary>
         /// Координат X
         /// </summary>
-        public double? PointX
+        public string? PointX_Longitude
         {
-            get { return _pointX; }
-            set => Set(ref _pointX, value);
+            get { return _pointX_longitude; }
+            set => Set(ref _pointX_longitude, value);
         }
-        private double? _pointY;
+        private string? _pointY_width;
 
         /// <summary>
         /// Координат Y
         /// </summary>
-        public double? PointY
+        public string? PointY_Width
         {
-            get { return _pointY; }
-            set => Set(ref _pointY, value);
+            get { return _pointY_width; }
+            set => Set(ref _pointY_width, value);
 
         }
         private double? _pointZ;
