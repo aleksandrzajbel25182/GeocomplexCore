@@ -78,7 +78,9 @@
                                            Grid.Row="0"
                                            FontSize="18"
                                            Margin="5" />
-                                    <Border Background="Black" Height="0.5" VerticalAlignment="Bottom"/>
+                                    <Border Background="Black"
+                                            Height="0.5"
+                                            VerticalAlignment="Bottom" />
 
                                     <StackPanel Grid.Row="1">
 
@@ -127,14 +129,15 @@
                                         <StackPanel Orientation="Horizontal">
 
                                             <DataGrid Style="{DynamicResource DataGridStyle}"
-                                                      ItemsSource="{Binding DataDistrictPoint, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding CollectionData, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedItem="{Binding SelecetedItem, Mode=TwoWay}"
                                                       AutoGenerateColumns="False"
                                                       Width="418"
                                                       Height="200"
                                                       Margin="40,10,0,0"
                                                       VerticalAlignment="Top"
-                                                      CanUserAddRows="False">
+                                                      CanUserAddRows="False"
+                                                      Name="DATAGRID">
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding Gesture="LeftDoubleClick"
                                                                   Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
@@ -142,22 +145,34 @@
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="№"
-                                                                        Binding="{Binding IdDisctrictPoint,Mode=OneWay}"
+                                                                        Binding="{Binding ID,Mode=OneWay}"
                                                                         MinWidth="80"
                                                                         Width="20" />
-                                                    <DataGridTextColumn Header="X"
-                                                                        Binding="{Binding DisctrictPointX, Mode=OneWay}"
+                                                    <DataGridTextColumn Binding="{Binding PointX_Longitude, Mode=OneWay}"                                   
                                                                         MinWidth="120"
-                                                                        Width="*" />
-                                                    <DataGridTextColumn Header="Y"
-                                                                        Binding="{Binding DisctrictPointY,Mode=OneWay}"
+                                                                        x:Name="column1"
+                                                                        Width="*">                                                      
+                                                        <DataGridTextColumn.Header>
+                                                            <TextBlock Text="{Binding DataContext.DPointX,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                        </DataGridTextColumn.Header>
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Binding="{Binding PointY_Width,Mode=OneWay}"
                                                                         MinWidth="120"
-                                                                        Width="*" />
-
-                                                    <DataGridTextColumn Header="Z"
-                                                                        Binding="{Binding DisctrictPointZ,Mode=OneWay}"
+                                                                        Width="*">
+                                                        <DataGridTextColumn.Header>
+                                                            <TextBlock Text="{Binding DataContext.DPointY,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                        </DataGridTextColumn.Header>
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Binding="{Binding PointZ,Mode=OneWay}"
                                                                         MinWidth="120"
-                                                                        Width="*" />
+                                                                        Width="*">
+                                                        <DataGridTextColumn.Header>
+                                                            <TextBlock Text="{Binding DataContext.DPointZ,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                        </DataGridTextColumn.Header>
+                                                    </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
 
@@ -172,16 +187,16 @@
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        Margin="10,10,0,0" />
-                                                <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                <ComboBox 
                                                           materialDesign:HintAssist.Hint="Формат"
                                                           Width="256"
                                                           HorizontalAlignment="Left"
                                                           VerticalAlignment="Top"
                                                           Margin="10,55,0,0"
                                                           ItemsSource="{Binding FormatCoordinat}"
-                                                          DisplayMemberPath="Name">
+                                                          SelectedItem="{Binding FormatordSelected}"
+                                                          DisplayMemberPath="Name">                                                    
 
-                                                    
                                                 </ComboBox>
                                             </Grid>
 
@@ -338,9 +353,9 @@
                                     Style="{DynamicResource StyleButton}"
                                     HorizontalAlignment="Center" />
                         </StackPanel>
-                        
+
                     </StackPanel>
-                    
+
 
 
 
@@ -468,16 +483,16 @@
                                     <DataGridTextColumn Header="Местоположение"
                                                         Binding="{Binding WpointLocation,Mode=OneWay}"
                                                         MinWidth="120"
-                                                        Width="*" />                                   
+                                                        Width="*" />
                                     <DataGridTextColumn Header="Тип точки"
                                                         Binding="{Binding WpointType,Mode=OneWay}"
                                                         MinWidth="120"
-                                                        Width="*" />                                   
+                                                        Width="*" />
                                 </DataGrid.Columns>
-                            </DataGrid>                         
+                            </DataGrid>
 
                         </StackPanel>
-                        
+
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="ПРИМЕЧАНИЕ"
                                   Width="900"

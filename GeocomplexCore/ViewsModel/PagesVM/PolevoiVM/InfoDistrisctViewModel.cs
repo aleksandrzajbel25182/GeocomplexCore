@@ -4,6 +4,8 @@ using GeocomplexCore.BD;
 using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
+using GeocomplexCore.Model.Coordinat;
+using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,12 +21,134 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 {
     internal class InfoDistrisctViewModel : ViewModel, INavigatedToAware
     {
-        private readonly NavigationManager _navigationmaneger;
 
+        #region Функции/Fuction
+
+        /// <summary>
+        /// Форматирование координат
+        /// </summary>
+        private void FormatingCoord()
+        {
+            switch (FormatordSelected.Name)
+            {
+                case "Десятичная":
+                    DPointX = "X";
+                    DPointY = "Y";
+                    DPointZ = "Z";
+                    CollectionData = CollectionViewSource.GetDefaultView(LoadDistrcit());
+                    break;
+
+                case "Градусы,минуты,секунды":
+                    converter = new ConverterCordinatsService(LoadDistrcit());
+                    converter.ConverterDecimal();
+                    _coordinatModels = new ObservableCollection<CoordinatModel>(converter.dataCoordinats);
+                    CollectionData = CollectionViewSource.GetDefaultView(CooordinatModels);
+                    DPointX = "Долгота";
+                    DPointY = "Широта";
+                    DPointZ = "Абс. отм";
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Загрузка с база данных коориднаты участка
+        /// </summary>
+        /// <returns></returns>
+        private ObservableCollection<CoordinatModel> LoadDistrcit()
+        {
+            using (GeocomplexContext db = new())
+            {
+                var data = db.DistrictPoints.Where(r => r.IdDistrict == PassedParameter).ToList();
+                _coordinatModels = new ObservableCollection<CoordinatModel>();
+                foreach (var item in data)
+                {
+                    _coordinatModels.Add(new CoordinatModel
+                    {
+                        ID = item.IdDisctrictPoint,
+                        PointX_Longitude = item.DisctrictPointX.ToString(),
+                        PointY_Width = item.DisctrictPointY.ToString(),
+                        PointZ = item.DisctrictPointZ
+                    });
+                }
+                return _coordinatModels;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region Parametrs/Параметры
+
+        private readonly NavigationManager _navigationmaneger;
+        // Созадние экземлпяра класса сервиса-конвертера
+        ConverterCordinatsService converter;
+
+
+        /// <summary>
+        /// Заголовок для таблицы, X
+        /// </summary>
+        private string _dPointX;
+        public string DPointX
+        {
+            get { return _dPointX; }
+            set => Set(ref _dPointX, value);
+        }
+        /// <summary>
+        /// Заголовок для таблицы, Y
+        /// </summary>
+        private string _dPointY;
+        public string DPointY
+        {
+            get { return _dPointY; }
+            set => Set(ref _dPointY, value);
+        }
+        /// <summary>
+        /// Заголовок для таблицы, Z
+        /// </summary>
+        private string _dPointZ;
+        public string DPointZ
+        {
+            get { return _dPointZ; }
+            set => Set(ref _dPointZ, value);
+        }
+
+
+        /// <summary>
+        /// Выводим в Datagrid для просмотра и фильтрации 
+        /// </summary>
+        private ICollectionView? _collectiondata;
+        public ICollectionView? CollectionData { get => _collectiondata; set => Set(ref _collectiondata, value); }
+
+        /// <summary>
+        /// Коллекция координат
+        /// </summary>
+        private ObservableCollection<CoordinatModel> _coordinatModels;
+        public ObservableCollection<CoordinatModel> CooordinatModels { get => _coordinatModels; set => Set(ref _coordinatModels, value); }
+
+        /// <summary>
+        /// Выбранный формат
+        /// </summary>
+        private FormatCoordinatModel _formatordSelected;
+        public FormatCoordinatModel FormatordSelected
+        {
+            get { return _formatordSelected; }
+            set
+            {
+                _formatordSelected = value;
+                OnPropertyChanged("FormatordSelected");
+                FormatingCoord();
+            }
+        }
+
+        /// <summary>
+        /// Формат координат десячитный формат/ градусы, минуты, секунды
+        /// </summary>
         private ObservableCollection<FormatCoordinatModel> _formatCoordinat;
         public ObservableCollection<FormatCoordinatModel> FormatCoordinat { get => _formatCoordinat; set => Set(ref _formatCoordinat, value); }
 
-        #region Parametrs/Параметры
+
         /// <summary>
         /// Коллеция "ТОЧКИ НАБЛЮДЕНИЯ"
         /// </summary>
@@ -81,7 +205,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// Наименование участка
         /// </summary>
         private string _namedistrict;
-
         public string NameDiscrict
         {
             get
@@ -99,9 +222,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             set => Set(ref _namedistrict, value);
         }
-
-
-
 
         /// <summary>
         /// Колекция маршрутов
@@ -138,40 +258,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
         }
 
-        /// <summary>
-        /// Координаты участка
-        /// </summary>
-        private ObservableCollection<DistrictPoint> _dataDistrictPoint = new();
-        public ObservableCollection<DistrictPoint> DataDistrictPoint
-        {
-            get
-            {
-                using (GeocomplexContext db = new())
-                {
-                    var data = db.DistrictPoints.Where(r => r.IdDistrict == PassedParameter).ToList();
-
-                    foreach (var item in data)
-                    {
-                        _dataDistrictPoint.Add(new DistrictPoint
-                        {
-                            IdDisctrictPoint = item.IdDisctrictPoint,
-                            DisctrictPointX = item.DisctrictPointX,
-                            DisctrictPointY = item.DisctrictPointY,
-                            DisctrictPointZ = item.DisctrictPointZ
-
-                        });
-                    }
-
-                    return _dataDistrictPoint;
-                }
-            }
-            set
-            {
-                _dataDistrictPoint = value;
-                OnPropertyChanged("DataDistrictPoint");
-            }
-        }
-
+      
         /// <summary>
         /// Переменная хранимая данные переданные из другой страницы
         /// </summary>
@@ -203,11 +290,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         #endregion
 
 
-
-
         #region Commands/Команды
-
-
 
         #region Команда НАЗАД
         /// <summary>
@@ -248,11 +331,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             FormatCoordinat = new ObservableCollection<FormatCoordinatModel>()
             {
                 new FormatCoordinatModel() { Name = "Десятичная" },
-                new FormatCoordinatModel() { Name = "Градусы,минуты,секнды" }
+                new FormatCoordinatModel() { Name = "Градусы,минуты,секунды" }
             };
 
-
-
+            DPointX = "Х";
+            DPointY = "Y";
+            DPointZ = "Z";
 
         }
     }
