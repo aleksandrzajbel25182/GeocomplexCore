@@ -1,6 +1,7 @@
 ﻿using GeocomplexCore.Model.Coordinat;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,21 +26,15 @@ namespace GeocomplexCore.Service
         /// </summary>
         private double seconds;
 
-        /// <summary>
-        /// Список Угловой меры в градусы минуты секунды
-        /// </summary>
-        public List<AngularMeasure> angulars;
-
 
         /// <summary>
         /// Список координит X,Y в десятичной системе 
         /// </summary>
-        private List<CoordinatModel> dataCoordinats;
+        public ObservableCollection<CoordinatModel> dataCoordinats;
 
-        public ConverterCordinatsService(List<CoordinatModel> dataCoord)
+        public ConverterCordinatsService(ObservableCollection<CoordinatModel> dataCoord)
         {
             dataCoordinats = dataCoord;
-            angulars = new List<AngularMeasure>();
         }
 
 
@@ -47,19 +42,14 @@ namespace GeocomplexCore.Service
         /// Создание списка с форматированным данными
         /// </summary>
         /// <returns> Возвращает готовый список конвертированный в градусы минуты секунды
-        public List<AngularMeasure> ConverterDecimal()
+        public ObservableCollection<CoordinatModel> ConverterDecimal()
         {
             for (int i = 0; i < dataCoordinats.Count; i++)
             {
-                angulars.Add(new AngularMeasure
-                {
-                    ID = dataCoordinats[i].ID,
-                    PointZ = dataCoordinats[i].PointZ,
-                    Longitude = FormatingDecimal(dataCoordinats[i].PointX),
-                    Width = FormatingDecimal(dataCoordinats[i].PointY)
-                });
+                dataCoordinats[i].PointX_Longitude = FormatingDecimal(Convert.ToDouble(dataCoordinats[i].PointX_Longitude));
+                dataCoordinats[i].PointY_Width = FormatingDecimal(Convert.ToDouble(dataCoordinats[i].PointY_Width));
             }           
-            return angulars;
+            return dataCoordinats;
         }
         /// <summary>
         /// Перевод десятичной системы в Градусы/минуты/секунды 
