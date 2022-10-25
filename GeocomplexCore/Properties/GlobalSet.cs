@@ -21,5 +21,8 @@ namespace GeocomplexCore.Properties
 
         public static int IdProjectStatic { get; set; }
 
+        //Id участка
+        public static int NameDis { get; set; }
+
     }
 }

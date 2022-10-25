@@ -5,6 +5,7 @@ using GeocomplexCore.BD.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.Model.Coordinat;
+using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
 using Microsoft.EntityFrameworkCore;
@@ -215,6 +216,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                        .FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict.ToString();
 
                     LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
+                    GlobalSet.NameDis = PassedParameter;
                     return _namedistrict;
 
 

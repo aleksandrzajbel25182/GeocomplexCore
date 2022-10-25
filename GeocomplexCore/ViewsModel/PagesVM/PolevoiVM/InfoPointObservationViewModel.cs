@@ -2,7 +2,9 @@
 using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.BD;
 using GeocomplexCore.BD.Context;
+using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
+using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 {
@@ -201,6 +204,19 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         // ---------------------------------------------------------------------------------------------------------------------
         #region Команды//Commands
 
+        #region Команда НАЗАД
+        /// <summary>
+        /// Команда НАЗАД
+        /// </summary>
+        public ICommand BackNavigateCommand { get; }
+        private bool BackNavigateCommandExecute(object p) => true;
+        private void OnBackNavigateCommandExcuted(object p)
+        {
+            LocatorStatic.Data.PageHeader = $"Участок";
+            this.navigationmaneger.Navigate("InfoDistrict",GlobalSet.NameDis);
+        }
+        #endregion
+   
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
 
@@ -247,7 +263,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 new FormatCoordinatModel() { Name = "Десятичная" },
                 new FormatCoordinatModel() { Name = "Градусы,минуты,секунды" }
             };
-
+            BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
         }
     }
 }
