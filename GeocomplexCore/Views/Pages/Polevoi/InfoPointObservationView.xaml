@@ -39,7 +39,8 @@
                                   Height="50"
                                   IsEnabled="False"
                                   Width="250"
-                                  Margin="20" />
+                                  Margin="20"
+                                  Cursor="Arrow" />
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Населенный пункт"
                                   Height="50"
@@ -162,21 +163,26 @@
                                               materialDesign:HintAssist.Hint="Тип координат"
                                               Height="50"
                                               Width="375"
-                                              IsEnabled="False"
-                                              Margin="0,15,0,15" />
+                                              Margin="0,15,0,15"
+                                              ItemsSource="{Binding FormatCoordinat}"
+                                              SelectedItem="{Binding FormatordSelected , UpdateSourceTrigger=PropertyChanged}"
+                                              DisplayMemberPath="Name"
+                                              />
                                     <StackPanel Orientation="Horizontal">
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="Долгота °"
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Longitude[0] , UpdateSourceTrigger=PropertyChanged}"/>
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="Широта °"
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Width[0]}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
@@ -184,13 +190,15 @@
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Longitude[1]}"/>
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="Широта &apos;"
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Width[1]}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
@@ -198,13 +206,15 @@
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Longitude[2]}"/>
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="Широта &quot;"
                                                   Height="50"
                                                   IsEnabled="False"
                                                   Width="174"
-                                                  Margin="20" />
+                                                  Margin="20"
+                                                  Text="{Binding Width[2]}" />
                                     </StackPanel>
                                     <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                               materialDesign:HintAssist.Hint="Абсолютная отметка"
