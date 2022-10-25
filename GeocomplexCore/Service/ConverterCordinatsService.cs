@@ -37,6 +37,11 @@ namespace GeocomplexCore.Service
             dataCoordinats = dataCoord;
         }
 
+        public ConverterCordinatsService()
+        {
+            
+        }
+
 
         /// <summary>
         /// Создание списка с форматированным данными
@@ -56,7 +61,7 @@ namespace GeocomplexCore.Service
         /// </summary>
         /// <param name="X">Переменная которую нужно конвертировать</param>
         /// <returns></returns>
-        private string FormatingDecimal(double? X)
+        public string FormatingDecimal(double? X)
         {
             degrees = (int)X;
             // Получаем минуты
