@@ -19,11 +19,11 @@
                      FontFamily="ARVO">
                 <StackPanel>
                     <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                              materialDesign:HintAssist.Hint="Наименование"
+                              materialDesign:HintAssist.Hint="Маршрут"
                               Height="50"
                               IsEnabled="False"
                               Margin="20"
-                              Text="{Binding ID}"
+                              Text="{Binding WRoute}"
                               Cursor="Arrow" />
 
                     <StackPanel Orientation="Horizontal">
@@ -40,7 +40,9 @@
                                   IsEnabled="False"
                                   Width="250"
                                   Margin="20"
-                                  Cursor="Arrow" />
+                                  Cursor="Arrow"
+                                  Text="{Binding WNumber}"
+                                  />
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Населенный пункт"
                                   Height="50"
@@ -221,7 +223,8 @@
                                               Height="50"
                                               IsEnabled="False"
                                               Width="375"
-                                              Margin="20" />
+                                              Margin="20"
+                                              Text="{Binding PointZ}"/>
                                 </StackPanel>
                             </Grid>
                         </materialDesign:Card>

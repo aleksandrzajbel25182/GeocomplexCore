@@ -21,15 +21,15 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ConverterCordinatsService converter;
 
 
-        private string _Id;
-        public string ID
+        private string _wRoute;
+        public string WRoute
         {
             get
             {
-                _Id = Watchpoints.WpointId.ToString();
-                return _Id;
+                _wRoute = Watchpoints.Route.RouteName;
+                return _wRoute;
             }
-            set => Set(ref _Id, value);
+            set => Set(ref _wRoute, value);
         }
 
         /// <summary>
@@ -121,7 +121,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 {
                     var data = db.Watchpoints
                         .Where(w => w.WpointId == PassedParameter)
-                        .Include(c => c.WpointCoordinates).ToList();
+                        .Include(c => c.WpointCoordinates)
+                        .Include(r=>r.Route)
+                        .ToList();
 
                     foreach (var item in data)
                     {
