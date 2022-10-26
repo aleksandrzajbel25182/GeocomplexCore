@@ -77,6 +77,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
+                if (Watchpoints.WpointLocation == null)
+                    return _wlocation = "Нет сведений";
                 _wlocation = Watchpoints.WpointLocation;
                 return _wlocation;
             }
