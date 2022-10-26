@@ -13,7 +13,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+/* 
+ В комментариях есть сокращение ТН - точка наблюдения; 
+                                БД - база данных
+ */
 namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 {
     internal class InfoPointObservationViewModel : ViewModel, INavigatedToAware
@@ -23,7 +26,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private NavigationManager navigationmaneger;
         private ConverterCordinatsService converter;
 
-
+        /// <summary>
+        /// Маршрут по которому делалась ТН
+        /// </summary>
         private string _wRoute;
         public string WRoute
         {
@@ -49,6 +54,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _wnumber, value);
         }
 
+        /// <summary>
+        /// Дата добавления ТН
+        /// </summary>
         private DateTime? _wDateStart;
         public DateTime? WDateStart
         {
@@ -60,8 +68,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _wDateStart, value);
         }
 
+        /// <summary>
+        /// ПРимечания/Описание
+        /// </summary>
         private string _wnote;
-
         public string Wnote
         {
             get
@@ -72,6 +82,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _wnote, value);
         }
 
+        /// <summary>
+        /// Местоположения ТН
+        /// </summary>
         private string _wlocation;
         public string Wlocation
         {
@@ -116,7 +129,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set { _pointZ = value; }
         }
 
-
+        /// <summary>
+        /// Данные из БД по ТН
+        /// </summary>
         private Watchpoint _watchpoints;
         private Watchpoint Watchpoints
         {
@@ -176,7 +191,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 FormatingCoord();
             }
         }
-
 
 
         /// <summary>
@@ -259,7 +273,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public InfoPointObservationViewModel(NavigationManager navigationmaneger)
         {
             this.navigationmaneger = navigationmaneger;
-
+            // Создание данных для выпадающего списка по формату координат
             FormatCoordinat = new ObservableCollection<FormatCoordinatModel>()
             {
                 new FormatCoordinatModel() { Name = "Десятичная" },
