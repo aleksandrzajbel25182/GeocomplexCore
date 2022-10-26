@@ -45,10 +45,11 @@
                                   />
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Населенный пункт"
-                                  Height="50"
+                                  MinHeight="50"
                                   IsEnabled="False"
                                   Width="330"
                                   Margin="20"
+                                  TextWrapping="Wrap"
                                   Text="{Binding Wlocation}"/>
 
                         <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
