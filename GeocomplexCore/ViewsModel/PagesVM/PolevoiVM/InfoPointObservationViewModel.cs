@@ -26,6 +26,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private NavigationManager navigationmaneger;
         private ConverterCordinatsService converter;
 
+        
         /// <summary>
         /// Маршрут по которому делалась ТН
         /// </summary>
@@ -212,7 +213,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 return;
 
             PassedParameter = (int)arg;
-
+            LocatorStatic.Data.PageHeader += $" Точка наблюдения: {Watchpoints.WpointId}";
         }
 
 
