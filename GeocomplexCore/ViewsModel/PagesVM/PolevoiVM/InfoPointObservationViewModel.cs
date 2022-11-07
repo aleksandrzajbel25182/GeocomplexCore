@@ -115,6 +115,37 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _width, value);
 
         }
+        
+        //Кординыты X
+        private double? _wpointX;
+        public double? WpointX
+        {
+            get
+            {
+                foreach (var item in Watchpoints.WpointCoordinates)
+                {
+                    _wpointX = item.WpCoordinatesX;
+                }
+
+                return _wpointX;
+            }
+            set { _wpointX = value; }
+        }
+        //Кординыты Y
+        private double? _wpointY;
+        public double? WpointY
+        {
+            get
+            {
+                foreach (var item in Watchpoints.WpointCoordinates)
+                {
+                    _wpointY = item.WpCoordinatesY;
+                }
+
+                return _wpointY;
+            }
+            set { _wpointY = value; }
+        }
 
         // Z точка или абс отметка
         private double? _pointZ;
@@ -244,11 +275,13 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             switch (FormatordSelected.Name)
             {
                 case "Десятичная":
-
+                    ShowCoordinatDegMinsSek = false;
+                    ShowCoordinatDeсimal = true;
                     break;
 
                 case "Градусы,минуты,секунды":
-
+                    ShowCoordinatDegMinsSek = true;
+                    ShowCoordinatDeсimal = false;
                     converter = new ConverterCordinatsService();
                     string l = "", w = "";
                     foreach (var item in Watchpoints.WpointCoordinates)
@@ -268,7 +301,25 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Видимость градусы минуты секунды
+        /// </summary>
+        private bool _showCoordinatDegMinsSek;
+        public bool ShowCoordinatDegMinsSek
+        {
+            get { return _showCoordinatDegMinsSek; }
+            set => Set(ref _showCoordinatDegMinsSek, value);
+        }
 
+        /// <summary>
+        /// Видимость градусы минуты секунды
+        /// </summary>
+        private bool _showCoordinatDeсimal;
+        public bool ShowCoordinatDeсimal
+        {
+            get { return _showCoordinatDeсimal; }
+            set => Set(ref _showCoordinatDeсimal, value);
+        }
 
 
         public InfoPointObservationViewModel(NavigationManager navigationmaneger)
@@ -281,6 +332,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 new FormatCoordinatModel() { Name = "Градусы,минуты,секунды" }
             };
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
+            ShowCoordinatDegMinsSek = false;
+            ShowCoordinatDeсimal = true;
         }
     }
 }
