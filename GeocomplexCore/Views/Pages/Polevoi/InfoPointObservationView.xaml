@@ -296,7 +296,45 @@
 
             </TabItem>
             <TabItem Header="Объекты наблюдения"
-                     FontFamily="ARVO" />
+                     FontFamily="ARVO">
+                <TabControl Style="{StaticResource MaterialDesignTabControl}"
+                            mde:TabControlAssist.TabHeaderInactiveBrush="Black"
+                            mde:TabControlAssist.TabHeaderHighlightBrush="#166051">
+                    <TabItem Header="Почвы и грунт"
+                             FontFamily="ARVO" />
+                    <TabItem Header="ЭГП"
+                             FontFamily="ARVO" />
+                    <TabItem FontFamily="ARVO">
+                        <TabItem.Header>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="Техногенные объекты"
+                                       VerticalAlignment="Center" />
+                        </TabItem.Header>
+
+                    </TabItem>
+                    <TabItem Header="Растительность"
+                             FontFamily="ARVO" />
+                    <TabItem FontFamily="ARVO">
+                        <TabItem.Header>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="Поверхностные воды"
+                                       VerticalAlignment="Center" />
+                        </TabItem.Header>
+                    </TabItem> 
+                    <TabItem FontFamily="ARVO">
+                        <TabItem.Header>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="Подземные воды"
+                                       VerticalAlignment="Center" />
+                        </TabItem.Header>
+                    </TabItem>
+                 
+                    <TabItem Header="Водозабор"
+                             FontFamily="ARVO" />
+                    <TabItem Header="Скважины"
+                             FontFamily="ARVO" />
+                </TabControl>
+            </TabItem>
             <TabItem Header="Фотографии"
                      FontFamily="ARVO" />
             <TabItem Header="Схемы"
