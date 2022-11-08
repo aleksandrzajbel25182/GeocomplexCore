@@ -106,7 +106,7 @@
                 <DataGrid.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick" 
                      Command="{Binding GoDistrictPageCommand , Mode=OneTime}" 
-                     CommandParameter="{Binding ElementName=Name, Path=SelectedItem}" />
+                      />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Id" 
