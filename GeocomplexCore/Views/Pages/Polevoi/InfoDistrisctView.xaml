@@ -393,16 +393,6 @@
                                     DockPanel.Dock="Top">
                             <Button Style="{StaticResource StyleCircleButton}"
                                     Margin="110,0,0,0"
-                                    Command="{Binding BackCommand}">
-                                <Image Source="/Resources/Icons/ActionIcons/Back.ico"
-                                       Width="25"
-                                       Height="25" />
-                                <Button.ToolTip>
-                                    Назад
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Style="{StaticResource StyleCircleButton}"
-                                    Margin="40,0,0,0"
                                     Command="{Binding OpenChildWindow}">
                                 <Image Source="/Resources/Icons/ActionIcons/Add.ico"
                                        Width="25"
