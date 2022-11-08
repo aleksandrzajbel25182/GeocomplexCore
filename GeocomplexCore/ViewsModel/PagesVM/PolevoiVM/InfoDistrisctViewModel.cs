@@ -36,14 +36,14 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     DPointX = "X";
                     DPointY = "Y";
                     DPointZ = "Z";
-                    CollectionData = CollectionViewSource.GetDefaultView(LoadDistrcit());
+                    CollectionDataCoordinat = CollectionViewSource.GetDefaultView(LoadDistrcit());
                     break;
 
                 case "Градусы,минуты,секунды":
                     converter = new ConverterCordinatsService(LoadDistrcit());
                     converter.ConverterDecimal();
                     _coordinatModels = new ObservableCollection<CoordinatModel>(converter.dataCoordinats);
-                    CollectionData = CollectionViewSource.GetDefaultView(CooordinatModels);
+                    CollectionDataCoordinat = CollectionViewSource.GetDefaultView(CooordinatModels);
                     DPointX = "Долгота";
                     DPointY = "Широта";
                     DPointZ = "Абс. отм";
@@ -73,6 +73,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 }
                 return _coordinatModels;
             }
+        }
+
+        /// <summary>
+        /// Фильтрация 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private bool FilterByName(object obj)
+        {
+            if (!string.IsNullOrEmpty(TextToFilter))
+            {
+                var objProject = obj as Route;
+                return objProject != null && objProject.RouteName.Contains(TextToFilter);
+            }
+            return true;
+
         }
 
         #endregion
@@ -117,10 +133,16 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
         /// <summary>
-        /// Выводим в Datagrid для просмотра и фильтрации 
+        /// Коллецкция для координат
+        /// </summary>
+        private ICollectionView? _collectiondataCoordinat;
+        public ICollectionView? CollectionDataCoordinat { get => _collectiondataCoordinat; set => Set(ref _collectiondataCoordinat, value); }
+
+        /// <summary>
+        /// Коллецкция маршрутов для фильтрации
         /// </summary>
         private ICollectionView? _collectiondata;
-        public ICollectionView? CollectionData { get => _collectiondata; set => Set(ref _collectiondata, value); }
+        public ICollectionView? CollectionData { get { _collectiondata = CollectionViewSource.GetDefaultView(DatacolRouDistcrit); return _collectiondata; } set => Set(ref _collectiondata, value); }
 
         /// <summary>
         /// Коллекция координат
@@ -225,6 +247,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _namedistrict, value);
         }
 
+        
         /// <summary>
         /// Колекция маршрутов
         /// </summary>
@@ -249,6 +272,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
                         });
                     }
+                    
                     return _datacolRouDistcrit;
 
                 }
@@ -285,9 +309,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         }
 
-        //private ICollectionView? _collectiondata;
-        //public ICollectionView? CollectionData { get => _collectiondata; set => Set(ref _collectiondata, value); }
 
+        /// <summary>
+        /// Поле для ввода текста фильтрации 
+        /// </summary>
+        private string? _textToFilter;
+        public string? TextToFilter
+        {
+            get => _textToFilter;
+            set
+            {
+                _textToFilter = value;
+                OnPropertyChanged("TextToFilter");
+                // Проводим фильтрацию
+                CollectionData.Filter = FilterByName;
+            }
+        }
 
         #endregion
 
