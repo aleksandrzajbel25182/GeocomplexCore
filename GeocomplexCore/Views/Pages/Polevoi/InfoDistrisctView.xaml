@@ -138,20 +138,19 @@
                                                       VerticalAlignment="Top"
                                                       CanUserAddRows="False"
                                                       Name="DATAGRID">
-                                                <DataGrid.InputBindings>
+                                                <!--<DataGrid.InputBindings>
                                                     <MouseBinding Gesture="LeftDoubleClick"
-                                                                  Command="{Binding GoDistrictPageCommand , Mode=OneTime}"
-                                                                  CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
-                                                </DataGrid.InputBindings>
+                                                                  Command="{Binding GoDistrictPageCommand , Mode=OneTime}" />
+                                                </DataGrid.InputBindings>-->
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="№"
                                                                         Binding="{Binding ID,Mode=OneWay}"
                                                                         MinWidth="80"
                                                                         Width="20" />
-                                                    <DataGridTextColumn Binding="{Binding PointX_Longitude, Mode=OneWay}"                                   
+                                                    <DataGridTextColumn Binding="{Binding PointX_Longitude, Mode=OneWay}"
                                                                         MinWidth="120"
                                                                         x:Name="column1"
-                                                                        Width="*">                                                      
+                                                                        Width="*">
                                                         <DataGridTextColumn.Header>
                                                             <TextBlock Text="{Binding DataContext.DPointX,
                                                                 RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
@@ -187,15 +186,14 @@
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        Margin="10,10,0,0" />
-                                                <ComboBox 
-                                                          materialDesign:HintAssist.Hint="Формат"
+                                                <ComboBox materialDesign:HintAssist.Hint="Формат"
                                                           Width="256"
                                                           HorizontalAlignment="Left"
                                                           VerticalAlignment="Top"
                                                           Margin="10,55,0,0"
                                                           ItemsSource="{Binding FormatCoordinat}"
                                                           SelectedItem="{Binding FormatordSelected}"
-                                                          DisplayMemberPath="Name">                                                    
+                                                          DisplayMemberPath="Name">
 
                                                 </ComboBox>
                                             </Grid>
