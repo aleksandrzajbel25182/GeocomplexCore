@@ -183,7 +183,7 @@
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
 
-                                                <Label Content="Система координат"
+                                                <Label Content="Формат координат"
                                                        Width="150"
                                                        Height="30"
                                                        HorizontalAlignment="Left"
