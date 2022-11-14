@@ -140,6 +140,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 _selectIDproject = SelecetedItem.Id;
                 _selectNameproject = SelecetedItem.Name;
                 DataCol.Clear();
+                CollectionData.Filter = null;
+                CollectionData.Refresh();
                 CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
                 GlobalSet.FlagStatic = "District";
                 if(CollectionData.Cast<object>().Count() == 0)
