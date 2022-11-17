@@ -850,7 +850,7 @@ namespace GeocomplexCore.BD.Context
                     .WithMany(p => p.WpointCoordinates)
                     .HasForeignKey(d => d.WpointId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_wpoint_wpoint_id");
+                    .HasConstraintName("fk_wpointid");
             });
 
             modelBuilder.Entity<WtrFenceangele>(entity =>
