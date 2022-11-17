@@ -10,8 +10,6 @@ namespace GeocomplexCore.BD
     {
         public Watchpoint()
         {
-            WaterpipeWtrs = new HashSet<WaterpipeWtr>();
-            WellHydrogeologicals = new HashSet<WellHydrogeological>();
             WpointCoordinates = new HashSet<WpointCoordinate>();
         }
 
@@ -25,11 +23,23 @@ namespace GeocomplexCore.BD
         public int FUserId { get; set; }
         public int FWpointCoord { get; set; }
         public string? WpointIndLandscape { get; set; }
+        public int? IdTypereliefa { get; set; }
+        public int? IdFormareliefa { get; set; }
+        public int? IdExposition { get; set; }
+        public int? IdSlope { get; set; }
+        public int? IdFormariver { get; set; }
+        public int? IdSubtypereliefa { get; set; }
+        public int? IdHeightreliefa { get; set; }
 
         public virtual UserDatum FUser { get; set; } = null!;
+        public virtual GuideSprexposition? IdExpositionNavigation { get; set; }
+        public virtual GuideFormareliefa? IdFormareliefaNavigation { get; set; }
+        public virtual GuideFormariver? IdFormariverNavigation { get; set; }
+        public virtual GuideHeightreliefa? IdHeightreliefaNavigation { get; set; }
+        public virtual GuideSlope? IdSlopeNavigation { get; set; }
+        public virtual GuideSubtypereliefa? IdSubtypereliefaNavigation { get; set; }
+        public virtual GuideTypereliefa? IdTypereliefaNavigation { get; set; }
         public virtual Route Route { get; set; } = null!;
-        public virtual ICollection<WaterpipeWtr> WaterpipeWtrs { get; set; }
-        public virtual ICollection<WellHydrogeological> WellHydrogeologicals { get; set; }
         public virtual ICollection<WpointCoordinate> WpointCoordinates { get; set; }
     }
 }

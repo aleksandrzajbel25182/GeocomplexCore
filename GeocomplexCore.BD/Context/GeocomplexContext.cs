@@ -19,6 +19,13 @@ namespace GeocomplexCore.BD.Context
 
         public virtual DbSet<District> Districts { get; set; } = null!;
         public virtual DbSet<DistrictPoint> DistrictPoints { get; set; } = null!;
+        public virtual DbSet<GuideFormareliefa> GuideFormareliefas { get; set; } = null!;
+        public virtual DbSet<GuideFormariver> GuideFormarivers { get; set; } = null!;
+        public virtual DbSet<GuideHeightreliefa> GuideHeightreliefas { get; set; } = null!;
+        public virtual DbSet<GuideSlope> GuideSlopes { get; set; } = null!;
+        public virtual DbSet<GuideSprexposition> GuideSprexpositions { get; set; } = null!;
+        public virtual DbSet<GuideSubtypereliefa> GuideSubtypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideTypereliefa> GuideTypereliefas { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
         public virtual DbSet<PhotoWaterintake> PhotoWaterintakes { get; set; } = null!;
@@ -45,17 +52,20 @@ namespace GeocomplexCore.BD.Context
             {
                 if (!optionsBuilder.IsConfigured)
                 {
-                    var builder = new ConfigurationBuilder();
-                    // установка пути к текущему каталогу
-                    builder.SetBasePath(Directory.GetCurrentDirectory());
-                    // получаем конфигурацию из файла appsettings.json
-                    builder.AddJsonFile("appsetting.json");
-                    // создаем конфигурацию
-                    var config = builder.Build();
-                    // получаем строку подключения
-                    string connectionString = config.GetConnectionString("DefaultConnection");
+                    if (!optionsBuilder.IsConfigured)
+                    {
+                        var builder = new ConfigurationBuilder();
+                        // установка пути к текущему каталогу
+                        builder.SetBasePath(Directory.GetCurrentDirectory());
+                        // получаем конфигурацию из файла appsettings.json
+                        builder.AddJsonFile("appsetting.json");
+                        // создаем конфигурацию
+                        var config = builder.Build();
+                        // получаем строку подключения
+                        string connectionString = config.GetConnectionString("DefaultConnection");
 
-                    optionsBuilder.UseNpgsql(connectionString);
+                        optionsBuilder.UseNpgsql(connectionString);
+                    }
                 }
             }
         }
@@ -125,6 +135,132 @@ namespace GeocomplexCore.BD.Context
                     .HasForeignKey(d => d.IdDistrict)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_id_distcrit_point");
+            });
+
+            modelBuilder.Entity<GuideFormareliefa>(entity =>
+            {
+                entity.HasKey(e => e.IdFormareliefa)
+                    .HasName(" guide.formareliefa_pkey");
+
+                entity.ToTable("guide.formareliefa");
+
+                entity.HasComment("Форма рельефа");
+
+                entity.Property(e => e.IdFormareliefa)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_formareliefa");
+
+                entity.Property(e => e.NameFormareliefa)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_formareliefa");
+            });
+
+            modelBuilder.Entity<GuideFormariver>(entity =>
+            {
+                entity.HasKey(e => e.IdFormariver)
+                    .HasName("guide.formariver_pkey");
+
+                entity.ToTable("guide.formariver");
+
+                entity.HasComment("Форма речной долины");
+
+                entity.Property(e => e.IdFormariver)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_formariver");
+
+                entity.Property(e => e.NameFormariver)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_formariver");
+            });
+
+            modelBuilder.Entity<GuideHeightreliefa>(entity =>
+            {
+                entity.HasKey(e => e.IdHeightreliefa)
+                    .HasName("guide.heightreliefa_pkey");
+
+                entity.ToTable("guide.heightreliefa");
+
+                entity.HasComment("Высотность рельефа");
+
+                entity.Property(e => e.IdHeightreliefa)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_heightreliefa");
+
+                entity.Property(e => e.NameHeightreliefa)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_heightreliefa");
+            });
+
+            modelBuilder.Entity<GuideSlope>(entity =>
+            {
+                entity.HasKey(e => e.IdSlope)
+                    .HasName("guide.slope _pkey");
+
+                entity.ToTable("guide.slope");
+
+                entity.HasComment("Крутизна склона");
+
+                entity.Property(e => e.IdSlope)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_slope ");
+
+                entity.Property(e => e.NameSlope)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_slope");
+            });
+
+            modelBuilder.Entity<GuideSprexposition>(entity =>
+            {
+                entity.HasKey(e => e.IdSprexposition)
+                    .HasName("guide.sprexposition_pkey");
+
+                entity.ToTable("guide.sprexposition");
+
+                entity.HasComment("Экспозиция");
+
+                entity.Property(e => e.IdSprexposition)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_sprexposition");
+
+                entity.Property(e => e.NameSprexposition)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_sprexposition");
+            });
+
+            modelBuilder.Entity<GuideSubtypereliefa>(entity =>
+            {
+                entity.HasKey(e => e.IdSubtypereliefa)
+                    .HasName("guide.subtypereliefa_pkey");
+
+                entity.ToTable("guide.subtypereliefa");
+
+                entity.HasComment("Подтип рельефа");
+
+                entity.Property(e => e.IdSubtypereliefa)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_subtypereliefa");
+
+                entity.Property(e => e.NameSubtypereliefa)
+                    .HasColumnType("character varying")
+                    .HasColumnName("name_subtypereliefa");
+            });
+
+            modelBuilder.Entity<GuideTypereliefa>(entity =>
+            {
+                entity.HasKey(e => e.IdTypereliefa)
+                    .HasName("guide.typereliefa_pkey");
+
+                entity.ToTable("guide.typereliefa");
+
+                entity.HasComment("Тип рельефа");
+
+                entity.Property(e => e.IdTypereliefa)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typereliefa");
+
+                entity.Property(e => e.NameTypereliefa)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_typereliefa");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -335,6 +471,20 @@ namespace GeocomplexCore.BD.Context
 
                 entity.Property(e => e.FWpointCoord).HasColumnName("f_wpoint_coord");
 
+                entity.Property(e => e.IdExposition).HasColumnName("id_exposition");
+
+                entity.Property(e => e.IdFormareliefa).HasColumnName("id_formareliefa");
+
+                entity.Property(e => e.IdFormariver).HasColumnName("id_formariver");
+
+                entity.Property(e => e.IdHeightreliefa).HasColumnName("id_heightreliefa");
+
+                entity.Property(e => e.IdSlope).HasColumnName("id_slope");
+
+                entity.Property(e => e.IdSubtypereliefa).HasColumnName("id_subtypereliefa");
+
+                entity.Property(e => e.IdTypereliefa).HasColumnName("id_typereliefa");
+
                 entity.Property(e => e.RouteId).HasColumnName("route_id");
 
                 entity.Property(e => e.WpointDateAdd).HasColumnName("wpoint_date_add");
@@ -364,6 +514,41 @@ namespace GeocomplexCore.BD.Context
                     .HasForeignKey(d => d.FUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_wpoint_user_id");
+
+                entity.HasOne(d => d.IdExpositionNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdExposition)
+                    .HasConstraintName("fk_wpoint_id_exposition");
+
+                entity.HasOne(d => d.IdFormareliefaNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdFormareliefa)
+                    .HasConstraintName("fk_wpoint_id_formareliefa");
+
+                entity.HasOne(d => d.IdFormariverNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdFormariver)
+                    .HasConstraintName("fk_wpoint_id_formariver ");
+
+                entity.HasOne(d => d.IdHeightreliefaNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdHeightreliefa)
+                    .HasConstraintName("fk_wpoint_id_heightreliefa");
+
+                entity.HasOne(d => d.IdSlopeNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdSlope)
+                    .HasConstraintName("fk_wpoint_id_slope");
+
+                entity.HasOne(d => d.IdSubtypereliefaNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdSubtypereliefa)
+                    .HasConstraintName("fk_wpoint_id_subtypereliefa");
+
+                entity.HasOne(d => d.IdTypereliefaNavigation)
+                    .WithMany(p => p.Watchpoints)
+                    .HasForeignKey(d => d.IdTypereliefa)
+                    .HasConstraintName("fk_wpoint_id_typereliefa");
 
                 entity.HasOne(d => d.Route)
                     .WithMany(p => p.Watchpoints)
@@ -501,12 +686,6 @@ namespace GeocomplexCore.BD.Context
                 entity.Property(e => e.WaterpipeWtrMaterialpipe).HasColumnName("waterpipe_wtr_materialpipe");
 
                 entity.Property(e => e.WpointId).HasColumnName("wpoint_id");
-
-                entity.HasOne(d => d.Wpoint)
-                    .WithMany(p => p.WaterpipeWtrs)
-                    .HasForeignKey(d => d.WpointId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_culvert_wpoint_id");
             });
 
             modelBuilder.Entity<Watertower>(entity =>
@@ -609,11 +788,6 @@ namespace GeocomplexCore.BD.Context
                     .HasColumnName("well_hydro_passport");
 
                 entity.Property(e => e.WpointId).HasColumnName("wpoint_id");
-
-                entity.HasOne(d => d.Wpoint)
-                    .WithMany(p => p.WellHydrogeologicals)
-                    .HasForeignKey(d => d.WpointId)
-                    .HasConstraintName("fk_wellhydro_wpoint");
             });
 
             modelBuilder.Entity<WellOtherUse>(entity =>
@@ -676,7 +850,7 @@ namespace GeocomplexCore.BD.Context
                     .WithMany(p => p.WpointCoordinates)
                     .HasForeignKey(d => d.WpointId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_wpoint_coordinates_wp");
+                    .HasConstraintName("fk_wpoint_wpoint_id");
             });
 
             modelBuilder.Entity<WtrFenceangele>(entity =>

@@ -27,7 +27,6 @@ namespace GeocomplexCore.BD
         public bool? Waterintake { get; set; }
         public string? WellHydroNote { get; set; }
 
-        public virtual Watchpoint? Wpoint { get; set; }
         public virtual ICollection<WellHydroCoordinate> WellHydroCoordinates { get; set; }
     }
 }

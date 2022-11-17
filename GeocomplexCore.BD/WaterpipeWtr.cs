@@ -19,7 +19,6 @@ namespace GeocomplexCore.BD
         public double? WaterpipeWtrMaterialpipe { get; set; }
         public double? WaterpipeWtrLength { get; set; }
 
-        public virtual Watchpoint Wpoint { get; set; } = null!;
         public virtual ICollection<StreetWaterpipe> StreetWaterpipes { get; set; }
     }
 }
