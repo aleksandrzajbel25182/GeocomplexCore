@@ -93,43 +93,71 @@
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,15,0,15" />
+                                              Margin="0,15,0,15"
+                                              ItemsSource="{Binding Formareliefa}"
+                                              DisplayMemberPath="NameFormareliefa"
+                                              SelectedItem="{Binding SelectedFormarelirfa}"/>
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Тип рельефа"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Typereliefa}"
+                                              SelectedItem="{Binding SelectedTypereliefa}"
+                                              DisplayMemberPath="NameTypereliefa"
+                                              />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Подтип рельефа"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Sybtypereliefa}"
+                                              SelectedItem="{Binding SelectedSybtypereliefa}"
+                                              DisplayMemberPath="NameSubtypereliefa"
+                                              />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Высотность"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Heightreliefa}"
+                                              SelectedItem="{Binding SelectedHeightreliefa}"
+                                              DisplayMemberPath="NameHeightreliefa"
+                                              
+                                              />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Экспозиция"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Exposition}"
+                                              SelectedItem="{Binding SelectedExposition}"
+                                              DisplayMemberPath="NameSprexposition"
+                                              />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Крутизна склона"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Slope}"
+                                              SelectedItem="{Binding SelectedSlope}"
+                                              DisplayMemberPath="NameSlope"
+                                              />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Форма речной долины"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
-                                              Margin="0,0,0,15" />
+                                              Margin="0,0,0,15"
+                                              ItemsSource="{Binding Formariver}"
+                                              SelectedItem="{Binding SelectedFormariver }"
+                                              DisplayMemberPath="NameFormariver"
+                                              />
                                 </StackPanel>
                             </Grid>
                         </materialDesign:Card>
