@@ -211,7 +211,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _watchpoints, value);
         }
 
-
+        #region Коллекции "Геоморфологическая колонка" 
+                
         #region Список Форма рельефа
         private ObservableCollection<GuideFormareliefa> _formareliefa = new ObservableCollection<GuideFormareliefa>();
         public ObservableCollection<GuideFormareliefa> Formareliefa
@@ -410,6 +411,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public GuideSlope SelectedSlope { get; set; }
         #endregion
 
+        #region Список Форма речной долины
         private ObservableCollection<GuideFormariver> _formariver = new ObservableCollection<GuideFormariver>();
         public ObservableCollection<GuideFormariver> Formariver
         {
@@ -440,7 +442,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set { _formariver = value; }
         }
         public GuideFormariver SelectedFormariver { get; set; }
-
+        #endregion
+        #endregion
 
         /// <summary>
         /// Список формата
