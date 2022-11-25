@@ -19,12 +19,16 @@ namespace GeocomplexCore.BD.Context
 
         public virtual DbSet<District> Districts { get; set; } = null!;
         public virtual DbSet<DistrictPoint> DistrictPoints { get; set; } = null!;
+        public virtual DbSet<Ground> Grounds { get; set; } = null!;
+        public virtual DbSet<GuideBreed> GuideBreeds { get; set; } = null!;
+        public virtual DbSet<GuideColor> GuideColors { get; set; } = null!;
         public virtual DbSet<GuideFormareliefa> GuideFormareliefas { get; set; } = null!;
         public virtual DbSet<GuideFormariver> GuideFormarivers { get; set; } = null!;
         public virtual DbSet<GuideHeightreliefa> GuideHeightreliefas { get; set; } = null!;
         public virtual DbSet<GuideSlope> GuideSlopes { get; set; } = null!;
         public virtual DbSet<GuideSprexposition> GuideSprexpositions { get; set; } = null!;
         public virtual DbSet<GuideSubtypereliefa> GuideSubtypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideTypebreed> GuideTypebreeds { get; set; } = null!;
         public virtual DbSet<GuideTypereliefa> GuideTypereliefas { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
@@ -137,6 +141,118 @@ namespace GeocomplexCore.BD.Context
                     .HasConstraintName("fk_id_distcrit_point");
             });
 
+            modelBuilder.Entity<Ground>(entity =>
+            {
+                entity.HasKey(e => e.IdGround)
+                    .HasName("ground_pkey");
+
+                entity.ToTable("ground");
+
+                entity.HasComment("Почва и грунт");
+
+                entity.Property(e => e.IdGround)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_ground");
+
+                entity.Property(e => e.DataGround).HasColumnName("data_ground");
+
+                entity.Property(e => e.DescriptionGround)
+                    .HasMaxLength(1000)
+                    .HasColumnName("description_ground");
+
+                entity.Property(e => e.FBreedId).HasColumnName("f_breed_id");
+
+                entity.Property(e => e.FColor).HasColumnName("f_color");
+
+                entity.Property(e => e.FDopcolor)
+                    .HasMaxLength(20)
+                    .HasColumnName("f_dopcolor");
+
+                entity.Property(e => e.FUserId).HasColumnName("f_user_id");
+
+                entity.Property(e => e.FWpointId).HasColumnName("f_wpoint_id");
+
+                entity.Property(e => e.FromGround).HasColumnName("from_ground");
+
+                entity.Property(e => e.ToGround).HasColumnName("to_ground");
+
+                entity.HasOne(d => d.FBreed)
+                    .WithMany(p => p.Grounds)
+                    .HasForeignKey(d => d.FBreedId)
+                    .HasConstraintName("fk_breed_id");
+
+                entity.HasOne(d => d.FColorNavigation)
+                    .WithMany(p => p.Grounds)
+                    .HasForeignKey(d => d.FColor)
+                    .HasConstraintName("fk_f_color");
+
+                entity.HasOne(d => d.FUser)
+                    .WithMany(p => p.Grounds)
+                    .HasForeignKey(d => d.FUserId)
+                    .HasConstraintName("fk_user_id");
+
+                entity.HasOne(d => d.FWpoint)
+                    .WithMany(p => p.Grounds)
+                    .HasForeignKey(d => d.FWpointId)
+                    .HasConstraintName("fk_wpoint_id");
+            });
+
+            modelBuilder.Entity<GuideBreed>(entity =>
+            {
+                entity.HasKey(e => e.IdBreed)
+                    .HasName("guide.breed_pkey");
+
+                entity.ToTable("guide.breed");
+
+                entity.HasComment("Справочник породы");
+
+                entity.Property(e => e.IdBreed)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_breed");
+
+                entity.Property(e => e.FTypegroundId).HasColumnName("f_typeground_id");
+
+                entity.Property(e => e.NameBreed)
+                    .HasMaxLength(500)
+                    .HasColumnName("name_breed");
+
+                entity.Property(e => e.NamersBred)
+                    .HasMaxLength(500)
+                    .HasColumnName("namers_bred")
+                    .HasComment("Окончание наименования");
+
+                entity.HasOne(d => d.FTypeground)
+                    .WithMany(p => p.GuideBreeds)
+                    .HasForeignKey(d => d.FTypegroundId)
+                    .HasConstraintName("fk_id_typebred");
+            });
+
+            modelBuilder.Entity<GuideColor>(entity =>
+            {
+                entity.HasKey(e => e.IdColor)
+                    .HasName("guide.color_pkey");
+
+                entity.ToTable("guide.color");
+
+                entity.HasComment("Справочник цвет");
+
+                entity.Property(e => e.IdColor)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_color");
+
+                entity.Property(e => e.BreedColor).HasColumnName("breed_color");
+
+                entity.Property(e => e.NameColor)
+                    .HasMaxLength(255)
+                    .HasColumnName("name_color");
+
+                entity.Property(e => e.PrimaryColor).HasColumnName("primary_color");
+
+                entity.Property(e => e.SecondaryColor).HasColumnName("secondary_color");
+
+                entity.Property(e => e.WaterColor).HasColumnName("water_color");
+            });
+
             modelBuilder.Entity<GuideFormareliefa>(entity =>
             {
                 entity.HasKey(e => e.IdFormareliefa)
@@ -243,6 +359,24 @@ namespace GeocomplexCore.BD.Context
                 entity.Property(e => e.NameSubtypereliefa)
                     .HasColumnType("character varying")
                     .HasColumnName("name_subtypereliefa");
+            });
+
+            modelBuilder.Entity<GuideTypebreed>(entity =>
+            {
+                entity.HasKey(e => e.IdTypebreed)
+                    .HasName("guide.typebreed_pkey");
+
+                entity.ToTable("guide.typebreed");
+
+                entity.HasComment("Тип породы");
+
+                entity.Property(e => e.IdTypebreed)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typebreed");
+
+                entity.Property(e => e.NameTypebreed)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_typebreed");
             });
 
             modelBuilder.Entity<GuideTypereliefa>(entity =>
