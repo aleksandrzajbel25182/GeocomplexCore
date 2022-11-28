@@ -96,7 +96,7 @@
                                               Margin="0,15,0,15"
                                               ItemsSource="{Binding Formareliefa}"
                                               DisplayMemberPath="NameFormareliefa"
-                                              SelectedItem="{Binding SelectedFormarelirfa}"/>
+                                              SelectedItem="{Binding SelectedFormarelirfa}" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Тип рельефа"
                                               Height="50"
@@ -105,8 +105,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Typereliefa}"
                                               SelectedItem="{Binding SelectedTypereliefa}"
-                                              DisplayMemberPath="NameTypereliefa"
-                                              />
+                                              DisplayMemberPath="NameTypereliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Подтип рельефа"
                                               Height="50"
@@ -115,8 +114,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Sybtypereliefa}"
                                               SelectedItem="{Binding SelectedSybtypereliefa}"
-                                              DisplayMemberPath="NameSubtypereliefa"
-                                              />
+                                              DisplayMemberPath="NameSubtypereliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Высотность"
                                               Height="50"
@@ -125,9 +123,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Heightreliefa}"
                                               SelectedItem="{Binding SelectedHeightreliefa}"
-                                              DisplayMemberPath="NameHeightreliefa"
-                                              
-                                              />
+                                              DisplayMemberPath="NameHeightreliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Экспозиция"
                                               Height="50"
@@ -136,8 +132,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Exposition}"
                                               SelectedItem="{Binding SelectedExposition}"
-                                              DisplayMemberPath="NameSprexposition"
-                                              />
+                                              DisplayMemberPath="NameSprexposition" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Крутизна склона"
                                               Height="50"
@@ -146,8 +141,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Slope}"
                                               SelectedItem="{Binding SelectedSlope}"
-                                              DisplayMemberPath="NameSlope"
-                                              />
+                                              DisplayMemberPath="NameSlope" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Форма речной долины"
                                               Height="50"
@@ -156,8 +150,7 @@
                                               Margin="0,0,0,15"
                                               ItemsSource="{Binding Formariver}"
                                               SelectedItem="{Binding SelectedFormariver }"
-                                              DisplayMemberPath="NameFormariver"
-                                              />
+                                              DisplayMemberPath="NameFormariver" />
                                 </StackPanel>
                             </Grid>
                         </materialDesign:Card>
@@ -329,7 +322,127 @@
                             mde:TabControlAssist.TabHeaderInactiveBrush="Black"
                             mde:TabControlAssist.TabHeaderHighlightBrush="#166051">
                     <TabItem Header="Почвы и грунт"
-                             FontFamily="ARVO" />
+                             FontFamily="ARVO">
+
+                        <materialDesign:Card Width="1245"
+                                             Height="340"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,20"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Основная информация"
+                                       Grid.Row="0"
+                                       Margin="5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0.5"
+                                        VerticalAlignment="Bottom" />
+
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                                    materialDesign:HintAssist.Hint="Дата создания"
+                                                    IsEnabled="False"
+                                                    HorizontalAlignment="Left"
+                                                    Width="250"
+                                                    VerticalAlignment="Top"
+                                                    Margin="50,20,50,0"
+                                                    SelectedDate="{Binding GroundData}" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Пользователь"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="250"
+                                                  VerticalAlignment="Top"
+                                                  Margin="50,20,50,0"
+                                                  TextWrapping="Wrap"
+                                                  Text="{Binding GroundUserName}" />
+
+
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="ОТ"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="250"
+                                                  VerticalAlignment="Top"
+                                                  Margin="50,20,50,0"
+                                                  TextWrapping="Wrap"
+                                                  Text="{Binding GroundFrom}" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="ДО"
+                                                  IsEnabled="False"
+                                                  Width="250"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Top"
+                                                  Margin="50,20,0,0"
+                                                  TextWrapping="Wrap"
+                                                  Text="{Binding GroundTo}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Порода"
+                                                  Height="50"
+                                                  Width="450"
+                                                  Margin="50,20,50,0"
+                                                  IsEnabled="False"
+                                                  ItemsSource="{Binding GroundBreed}"
+                                                  SelectedItem="{Binding SelectedGroundBreed}"
+                                                  DisplayMemberPath="NameBreed" />
+                                        
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Оттенок"
+                                                  Height="50"
+                                                  Width="250"
+                                                  HorizontalAlignment="Left"
+                                                  Margin="50,20,50,0"
+                                                  IsEnabled="False"
+                                                  ItemsSource="{Binding GroundDopcolor}"
+                                                  SelectedItem="{Binding SelectedGroundDopcolor}"
+                                                  DisplayMemberPath="NameColor" />
+
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Основной цвет"
+                                                  materialDesign:HintAssist.FloatingOffset="1,-42"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  HorizontalAlignment="Left"
+                                                  Height="50"
+                                                  Width="250"
+                                                  Margin="50,20,50,0"
+                                                  IsEnabled="False"
+                                                  ItemsSource="{Binding GroundColor}"
+                                                  SelectedItem="{Binding SelectedGroundColor}"
+                                                  DisplayMemberPath="NameColor"
+                                                  />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical"
+                                                Width="320">
+
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.Hint="Описание"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Margin="20,20,0,0"
+                                                  TextWrapping="Wrap"
+                                                  Height="255"
+                                                  Width="278"
+                                                  Text="{Binding GroundDescription}"/>
+                                    </StackPanel>
+
+
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                    </TabItem>
                     <TabItem Header="ЭГП"
                              FontFamily="ARVO" />
                     <TabItem FontFamily="ARVO">
@@ -348,7 +461,7 @@
                                        Text="Поверхностные воды"
                                        VerticalAlignment="Center" />
                         </TabItem.Header>
-                    </TabItem> 
+                    </TabItem>
                     <TabItem FontFamily="ARVO">
                         <TabItem.Header>
                             <TextBlock TextWrapping="Wrap"
@@ -356,7 +469,7 @@
                                        VerticalAlignment="Center" />
                         </TabItem.Header>
                     </TabItem>
-                 
+
                     <TabItem Header="Водозабор"
                              FontFamily="ARVO" />
                     <TabItem Header="Скважины"

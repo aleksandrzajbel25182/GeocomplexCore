@@ -26,6 +26,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private NavigationManager navigationmaneger;
         private ConverterCordinatsService converter;
 
+        #region Точка наблюдения/Основная информация
+
 
         /// <summary>
         /// Маршрут по которому делалась ТН
@@ -212,7 +214,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
 
         #region Коллекции "Геоморфологическая колонка" 
-                
+
         #region Список Форма рельефа
         private ObservableCollection<GuideFormareliefa> _formareliefa = new ObservableCollection<GuideFormareliefa>();
         public ObservableCollection<GuideFormareliefa> Formareliefa
@@ -465,6 +467,255 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 FormatingCoord();
             }
         }
+        #endregion
+
+
+        #region ПОРОДА и почва
+
+        private Ground _ground;
+        private Ground Ground
+        {
+            get
+            {
+                using (GeocomplexContext db = new GeocomplexContext())
+                {
+                    var data = db.Grounds
+                        .Where(w => w.FWpointId == Watchpoints.WpointId)
+                        .Include(f => f.FColorNavigation)
+                        .Include(us => us.FUser)
+                        .ToList();
+
+                    foreach (var item in data)
+                    {
+                        _ground = new Ground
+                        {
+                            IdGround = item.IdGround,
+                            FromGround = item.FromGround,
+                            ToGround = item.ToGround,
+                            FColorNavigation = item.FColorNavigation,
+                            FDopcolor = item.FDopcolor,
+                            FColor = item.FColor,
+                            DataGround = item.DataGround,
+                            DescriptionGround = item.DescriptionGround,
+                            FUserId = item.FUserId,
+                            FUser = item.FUser,
+                            FBreed = item.FBreed,
+                            FBreedId = item.FBreedId
+
+                        };
+                    }
+                    return _ground;
+
+
+                }
+            }
+            set => Set(ref _ground, value);
+        }
+
+
+
+        #region Список Породы
+        private ObservableCollection<GuideBreed> _groundBreed = new ObservableCollection<GuideBreed>();
+        public ObservableCollection<GuideBreed> GroundBreed
+        {
+            get
+            {
+                using (GeocomplexContext db = new GeocomplexContext())
+                {
+                    var data = db.GuideBreeds.ToList();
+                    foreach (var item in data)
+                    {
+                        _groundBreed.Add(new GuideBreed
+                        {
+                            IdBreed = item.IdBreed,
+                            NameBreed = item.NameBreed,
+                            NamersBred = item.NamersBred
+                        });
+
+                    }
+                    for (int i = 0; i < _groundBreed.Count; i++)
+                    {
+                        if (_groundBreed[i].IdBreed == Ground.FBreedId)
+                            SelectedGroundBreed = _groundBreed[i];
+                    }
+
+
+                    return _groundBreed;
+                }
+            }
+            set { _groundBreed = value; }
+        }
+        public GuideBreed SelectedGroundBreed { get; set; }
+        #endregion
+
+        #region Список Оттенка
+        private ObservableCollection<GuideColor> _groundDopcolor = new ObservableCollection<GuideColor>();
+        public ObservableCollection<GuideColor> GroundDopcolor
+        {
+            get
+            {
+                using (GeocomplexContext db = new GeocomplexContext())
+                {
+                    var data = db.GuideColors.ToList();
+                    foreach (var item in data)
+                    {
+                        if (item.BreedColor == 1 || item.PrimaryColor == 1)
+                        {
+                            _groundDopcolor.Add(new GuideColor
+                            {
+                                IdColor = item.IdColor,
+                                NameColor = item.NameColor
+
+
+                            });
+                        }
+
+
+                    }
+
+                    int dpc  =Convert.ToInt32(Ground.FDopcolor.Replace(";", ""));
+                    for (int i = 0; i < _groundDopcolor.Count; i++)
+                    {
+                     
+                        if (_groundDopcolor[i].IdColor == dpc)
+                            SelectedGroundDopcolor = _groundDopcolor[i];
+                    }
+
+
+                    return _groundDopcolor;
+                }
+            }
+            set { _groundDopcolor = value; }
+        }
+        public GuideColor SelectedGroundDopcolor { get; set; }
+        #endregion
+
+
+        #region Список Цвета
+        private ObservableCollection<GuideColor> _groundColor = new ObservableCollection<GuideColor>();
+        public ObservableCollection<GuideColor> GroundColor
+        {
+            get
+            {
+                using (GeocomplexContext db = new GeocomplexContext())
+                {
+                    var data = db.GuideColors.ToList();
+                    foreach (var item in data)
+                    {
+                        if (item.BreedColor == 1 || item.PrimaryColor == 1)
+                        {
+                            _groundColor.Add(new GuideColor
+                            {
+                                IdColor = item.IdColor,
+                                NameColor = item.NameColor
+
+
+                            });
+                        }
+
+
+                    }
+                    for (int i = 0; i < _groundColor.Count; i++)
+                    {
+
+                        if (_groundColor[i].IdColor == Ground.FColor)
+                            SelectedGroundColor = _groundColor[i];
+                    }
+
+
+                    return _groundColor;
+                }
+            }
+            set { _groundColor = value; }
+        }
+        public GuideColor SelectedGroundColor { get; set; }
+        #endregion
+
+        #region Порода Дата
+        /// <summary>
+        /// Порода Дата
+        /// </summary>
+        private DateTime? _groundData;
+        public DateTime? GroundData
+        {
+            get
+            {
+                _groundData = new DateTime(Ground.DataGround.Value.Year, Ground.DataGround.Value.Month, Ground.DataGround.Value.Day);
+                return _groundData;
+            }
+            set => Set(ref _groundData, value);
+        }
+        #endregion
+
+
+        #region Почва пользователь
+        /// <summary>
+        /// Почва пользователь
+        /// </summary>
+        private string _groundUserName;
+        public string GroundUserName
+        {
+            get
+            {
+
+                _groundUserName = Ground.FUser.UserName;
+                return _groundUserName;
+            }
+            set => Set(ref _groundUserName, value);
+        }
+        #endregion
+
+        #region Почва Описание
+        /// <summary>
+        /// Почва Описание
+        /// </summary>
+        private string _groundDescription;
+        public string GroundDescription
+        {
+            get
+            {
+
+                _groundDescription = Ground.DescriptionGround;
+                return _groundDescription;
+            }
+            set => Set(ref _groundDescription, value);
+        }
+        #endregion
+
+        #region Интервал ОТ
+        /// <summary>
+        /// Интервал ОТ
+        /// </summary>
+        private string _groundFrom;
+        public string GroundFrom
+        {
+            get
+            {
+                _groundFrom = Ground.FromGround.ToString();
+                return _groundFrom;
+            }
+            set => Set(ref _groundFrom, value);
+        }
+        #endregion
+
+        #region Интервал ДО
+        /// <summary>
+        /// Интервал ДО
+        /// </summary>
+        private string _groundTo;
+        public string GroundTo
+        {
+            get
+            {
+                _groundTo = Ground.ToGround.ToString();
+                return _groundTo;
+            }
+            set => Set(ref _groundTo, value);
+        }
+        #endregion
+
+
+        #endregion
 
 
         /// <summary>
