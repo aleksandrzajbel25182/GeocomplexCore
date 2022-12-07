@@ -398,7 +398,7 @@
                                                   ItemsSource="{Binding GroundBreed}"
                                                   SelectedItem="{Binding SelectedGroundBreed}"
                                                   DisplayMemberPath="NameBreed" />
-                                        
+
                                         <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                   materialDesign:HintAssist.Hint="Оттенок"
                                                   Height="50"
@@ -421,8 +421,7 @@
                                                   IsEnabled="False"
                                                   ItemsSource="{Binding GroundColor}"
                                                   SelectedItem="{Binding SelectedGroundColor}"
-                                                  DisplayMemberPath="NameColor"
-                                                  />
+                                                  DisplayMemberPath="NameColor" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical"
                                                 Width="320">
@@ -435,7 +434,7 @@
                                                   TextWrapping="Wrap"
                                                   Height="255"
                                                   Width="278"
-                                                  Text="{Binding GroundDescription}"/>
+                                                  Text="{Binding GroundDescription}" />
                                     </StackPanel>
 
 
@@ -444,7 +443,141 @@
                         </materialDesign:Card>
                     </TabItem>
                     <TabItem Header="ЭГП"
-                             FontFamily="ARVO" />
+                             FontFamily="ARVO">
+                        <materialDesign:Card Width="1100"
+                                             Height="540"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="50,50,0,20"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="72*" />
+                                    <RowDefinition Height="53*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Основная информация"
+                                       Grid.Row="0"
+                                       Margin="5,5,5,5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0"
+                                        VerticalAlignment="Top"
+                                        Grid.Row="1" />
+
+                                <Grid Grid.Row="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="0">
+                                            <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                                        materialDesign:HintAssist.Hint="Дата создания"
+                                                        IsEnabled="False"
+                                                        HorizontalAlignment="Left"
+                                                        Width="250"
+                                                        VerticalAlignment="Top"
+                                                        Margin="50,20,50,0" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Пользователь"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="250"
+                                                      VerticalAlignment="Top"
+                                                      Margin="50,20,50,0"
+                                                      TextWrapping="Wrap" />
+
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Группа процесса"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="250"
+                                                      VerticalAlignment="Top"
+                                                      Margin="50,20,50,0" />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Тип процесса"
+                                                      IsEnabled="False"
+                                                      Width="250"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      Margin="50,20,0,0" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="1">
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Глубина"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Ширина"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Протяженность"
+                                                      materialDesign:HintAssist.FloatingOffset="1,-42"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Объем"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="2">
+
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Площадь"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Скорость"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Вторичный элемент"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="50,20,50,0"
+                                                      IsEnabled="False" />
+                                        </StackPanel>
+
+                                    </Grid>
+
+
+
+                                </Grid>
+                                <TextBox  Grid.Row="2"
+                                          Style="{StaticResource StyleOutlinedTextBox}"
+                                          materialDesign:HintAssist.Hint="Доп сведения"
+                                          TextWrapping="Wrap"
+                                          Margin="50,13,50,12"
+                                          IsEnabled="False" />
+                            </Grid>
+                        </materialDesign:Card>
+                    </TabItem>
                     <TabItem FontFamily="ARVO">
                         <TabItem.Header>
                             <TextBlock TextWrapping="Wrap"
