@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeocomplexCore.BD\GeocomplexCore.BD.csproj" />
+    <ProjectReference Include="..\GeocomplexCore.BD\GeocomplexCore.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
