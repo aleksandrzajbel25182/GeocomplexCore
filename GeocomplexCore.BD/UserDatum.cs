@@ -11,6 +11,7 @@ namespace GeocomplexCore.BD
         public UserDatum()
         {
             Districts = new HashSet<District>();
+            Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
             Routes = new HashSet<Route>();
             Watchpoints = new HashSet<Watchpoint>();
@@ -23,6 +24,7 @@ namespace GeocomplexCore.BD
         public string UserName { get; set; } = null!;
 
         public virtual ICollection<District> Districts { get; set; }
+        public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
         public virtual ICollection<Watchpoint> Watchpoints { get; set; }

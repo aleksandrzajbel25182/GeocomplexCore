@@ -19,17 +19,22 @@ namespace GeocomplexCore.BD.Context
 
         public virtual DbSet<District> Districts { get; set; } = null!;
         public virtual DbSet<DistrictPoint> DistrictPoints { get; set; } = null!;
+        public virtual DbSet<Egp> Egps { get; set; } = null!;
         public virtual DbSet<Ground> Grounds { get; set; } = null!;
         public virtual DbSet<GuideBreed> GuideBreeds { get; set; } = null!;
         public virtual DbSet<GuideColor> GuideColors { get; set; } = null!;
+        public virtual DbSet<GuideEgpelement> GuideEgpelements { get; set; } = null!;
         public virtual DbSet<GuideFormareliefa> GuideFormareliefas { get; set; } = null!;
         public virtual DbSet<GuideFormariver> GuideFormarivers { get; set; } = null!;
+        public virtual DbSet<GuideGroupprocce> GuideGroupprocces { get; set; } = null!;
         public virtual DbSet<GuideHeightreliefa> GuideHeightreliefas { get; set; } = null!;
         public virtual DbSet<GuideSlope> GuideSlopes { get; set; } = null!;
         public virtual DbSet<GuideSprexposition> GuideSprexpositions { get; set; } = null!;
         public virtual DbSet<GuideSubtypereliefa> GuideSubtypereliefas { get; set; } = null!;
         public virtual DbSet<GuideTypebreed> GuideTypebreeds { get; set; } = null!;
+        public virtual DbSet<GuideTypeprocess> GuideTypeprocesses { get; set; } = null!;
         public virtual DbSet<GuideTypereliefa> GuideTypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideVidprocess> GuideVidprocesses { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
         public virtual DbSet<PhotoWaterintake> PhotoWaterintakes { get; set; } = null!;
@@ -139,6 +144,90 @@ namespace GeocomplexCore.BD.Context
                     .HasForeignKey(d => d.IdDistrict)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_id_distcrit_point");
+            });
+
+            modelBuilder.Entity<Egp>(entity =>
+            {
+                entity.ToTable("egp");
+
+                entity.HasComment("ЭГП");
+
+                entity.Property(e => e.EgpId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("egp_id");
+
+                entity.Property(e => e.DataEgp).HasColumnName("data_egp");
+
+                entity.Property(e => e.EgpArea)
+                    .HasColumnName("egp_area")
+                    .HasComment("площадь");
+
+                entity.Property(e => e.EgpDeep)
+                    .HasColumnName("egp_deep")
+                    .HasComment("глубина");
+
+                entity.Property(e => e.EgpDescription)
+                    .HasMaxLength(5000)
+                    .HasColumnName("egp_description");
+
+                entity.Property(e => e.EgpLength)
+                    .HasColumnName("egp_length")
+                    .HasComment("протяженность процесса");
+
+                entity.Property(e => e.EgpSpeed)
+                    .HasColumnName("egp_speed")
+                    .HasComment("Cкорость развития процесса");
+
+                entity.Property(e => e.EgpVolume)
+                    .HasColumnName("egp_volume")
+                    .HasComment("объем");
+
+                entity.Property(e => e.EgpWidth)
+                    .HasColumnName("egp_width")
+                    .HasComment("ширина");
+
+                entity.Property(e => e.FEgpelement).HasColumnName("f_egpelement");
+
+                entity.Property(e => e.FGroupprocess).HasColumnName("f_groupprocess");
+
+                entity.Property(e => e.FTypeprocess).HasColumnName("f_typeprocess");
+
+                entity.Property(e => e.FUserId).HasColumnName("f_user_id");
+
+                entity.Property(e => e.FVidprocess).HasColumnName("f_vidprocess");
+
+                entity.Property(e => e.FWpointId).HasColumnName("f_wpoint_id");
+
+                entity.HasOne(d => d.FEgpelementNavigation)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FEgpelement)
+                    .HasConstraintName("f_egpelement_id");
+
+                entity.HasOne(d => d.FGroupprocessNavigation)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FGroupprocess)
+                    .HasConstraintName("f_groupprocess_id");
+
+                entity.HasOne(d => d.FTypeprocessNavigation)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FTypeprocess)
+                    .HasConstraintName("f_typeprocess_id");
+
+                entity.HasOne(d => d.FUser)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FUserId)
+                    .HasConstraintName("f_user_id");
+
+                entity.HasOne(d => d.FVidprocessNavigation)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FVidprocess)
+                    .HasConstraintName("f_vid_process_id");
+
+                entity.HasOne(d => d.FWpoint)
+                    .WithMany(p => p.Egps)
+                    .HasForeignKey(d => d.FWpointId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_wpoint_id");
             });
 
             modelBuilder.Entity<Ground>(entity =>
@@ -253,6 +342,24 @@ namespace GeocomplexCore.BD.Context
                 entity.Property(e => e.WaterColor).HasColumnName("water_color");
             });
 
+            modelBuilder.Entity<GuideEgpelement>(entity =>
+            {
+                entity.HasKey(e => e.IdEgpelement)
+                    .HasName("guide.egpelement_pkey");
+
+                entity.ToTable("guide.egpelement");
+
+                entity.HasComment("Справочник Вторичный элемент ЭГП");
+
+                entity.Property(e => e.IdEgpelement)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_egpelement");
+
+                entity.Property(e => e.NameEgpelement)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_egpelement");
+            });
+
             modelBuilder.Entity<GuideFormareliefa>(entity =>
             {
                 entity.HasKey(e => e.IdFormareliefa)
@@ -287,6 +394,24 @@ namespace GeocomplexCore.BD.Context
                 entity.Property(e => e.NameFormariver)
                     .HasMaxLength(100)
                     .HasColumnName("name_formariver");
+            });
+
+            modelBuilder.Entity<GuideGroupprocce>(entity =>
+            {
+                entity.HasKey(e => e.IdGroupprocces)
+                    .HasName("guide.groupprocces_pkey");
+
+                entity.ToTable("guide.groupprocces");
+
+                entity.HasComment("Справочник группы процессов ЭГП");
+
+                entity.Property(e => e.IdGroupprocces)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_groupprocces");
+
+                entity.Property(e => e.NameGroupprocess)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_groupprocess");
             });
 
             modelBuilder.Entity<GuideHeightreliefa>(entity =>
@@ -379,6 +504,26 @@ namespace GeocomplexCore.BD.Context
                     .HasColumnName("name_typebreed");
             });
 
+            modelBuilder.Entity<GuideTypeprocess>(entity =>
+            {
+                entity.HasKey(e => e.IdTypeprocess)
+                    .HasName("guide.typeprocess_pkey1");
+
+                entity.ToTable("guide.typeprocess");
+
+                entity.HasComment("Справочник Тип процесс ЭГП");
+
+                entity.Property(e => e.IdTypeprocess)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typeprocess");
+
+                entity.Property(e => e.FGroupprocess).HasColumnName("f_groupprocess");
+
+                entity.Property(e => e.NameTypeprocess)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_typeprocess");
+            });
+
             modelBuilder.Entity<GuideTypereliefa>(entity =>
             {
                 entity.HasKey(e => e.IdTypereliefa)
@@ -395,6 +540,24 @@ namespace GeocomplexCore.BD.Context
                 entity.Property(e => e.NameTypereliefa)
                     .HasMaxLength(100)
                     .HasColumnName("name_typereliefa");
+            });
+
+            modelBuilder.Entity<GuideVidprocess>(entity =>
+            {
+                entity.HasKey(e => e.IdTypeprocess)
+                    .HasName("guide.typeprocess_pkey");
+
+                entity.ToTable("guide.vidprocess");
+
+                entity.HasComment("Справочник Вид процесса ЭГП");
+
+                entity.Property(e => e.IdTypeprocess)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typeprocess");
+
+                entity.Property(e => e.NameTypeprocess)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_typeprocess");
             });
 
             modelBuilder.Entity<Location>(entity =>

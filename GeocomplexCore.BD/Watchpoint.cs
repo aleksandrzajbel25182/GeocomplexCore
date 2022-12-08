@@ -10,6 +10,7 @@ namespace GeocomplexCore.BD
     {
         public Watchpoint()
         {
+            Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
             WpointCoordinates = new HashSet<WpointCoordinate>();
         }
@@ -41,6 +42,7 @@ namespace GeocomplexCore.BD
         public virtual GuideSubtypereliefa? IdSubtypereliefaNavigation { get; set; }
         public virtual GuideTypereliefa? IdTypereliefaNavigation { get; set; }
         public virtual Route Route { get; set; } = null!;
+        public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
         public virtual ICollection<WpointCoordinate> WpointCoordinates { get; set; }
     }

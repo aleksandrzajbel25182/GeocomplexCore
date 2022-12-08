@@ -717,6 +717,154 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
+        //#region ЭГП
+
+
+        //private Egp _egp;
+        //private Egp EGP
+        //{
+        //    get
+        //    {
+        //        using (GeocomplexContext db = new GeocomplexContext())
+        //        {
+        //            var data = db.Egps
+        //                .Where(w => w.FWpointId == Watchpoints.WpointId)
+        //                .Include(f => f.FEgpelementNavigation)
+        //                .Include(fg => fg.FGroupprocessNavigation)
+        //                .Include(ft => ft.FTypeprocessNavigation)
+        //                .Include(fv => fv.FVidprocessNavigation)
+        //                .Include(us => us.FUser)
+        //                .ToList();
+
+        //            foreach (var item in data)
+        //            {
+        //                _egp = new Egp
+        //                {
+        //                    EgpId = item.EgpId,
+        //                    FWpointId = item.FWpointId,
+        //                    EgpSpeed = item.EgpSpeed,
+        //                    EgpArea = item.EgpArea,
+        //                    EgpDeep = item.EgpDeep,
+        //                    EgpDescription = item.EgpDescription,
+        //                    EgpLength = item.EgpLength,
+        //                    EgpVolume = item.EgpVolume,
+        //                    EgpWidth = item.EgpWidth,
+        //                    DataEgp = item.DataEgp,
+        //                    FEgpelementNavigation = item.FEgpelementNavigation,
+        //                    FGroupprocessNavigation = item.FGroupprocessNavigation,
+        //                    FTypeprocessNavigation = item.FTypeprocessNavigation,
+        //                    FVidprocessNavigation = item.FVidprocessNavigation,
+        //                    FUser = item.FUser
+
+        //                };
+        //            }
+        //            data.Clear();
+        //            return _egp;
+
+
+        //        }
+        //    }
+        //    set => Set(ref _egp, value);
+        //}
+
+
+
+
+        //private DateTime? _egpDate;
+        //public DateTime? Egpdate
+        //{
+        //    get
+        //    {
+        //        _egpDate = new DateTime(EGP.DataEgp.Value.Year, EGP.DataEgp.Value.Month, EGP.DataEgp.Value.Day);
+        //        return _egpDate;
+        //    }
+        //    set => Set(ref _egpDate, value);
+        //}
+
+
+        //private string _egpUserName;
+        //public string EgpUserName
+        //{
+        //    get
+        //    {
+        //        _egpUserName = EGP.FUser.UserName; return _groundUserName;
+        //    }
+
+        //}
+
+        //private ObservableCollection<GuideGroupprocce> _egpgroupprocess = new ObservableCollection<GuideGroupprocce>();
+        //public ObservableCollection<GuideGroupprocce> Egpgroupprocess
+        //{
+        //    get
+        //    {
+        //        using (GeocomplexContext db = new GeocomplexContext())
+        //        {
+        //            var data = db.GuideGroupprocces.ToList();
+        //            foreach (var item in data)
+        //            {
+        //                _egpgroupprocess.Add(new GuideGroupprocce
+        //                {
+        //                    IdGroupprocces = item.IdGroupprocces,
+        //                    NameGroupprocess = item.NameGroupprocess
+
+        //                });
+
+        //            }
+        //            for (int i = 0; i < _egpgroupprocess.Count; i++)
+        //            {
+        //                if (_egpgroupprocess[i].IdGroupprocces == EGP.FGroupprocess)
+        //                    SelectedGroupprocce = _egpgroupprocess[i];
+        //            }
+
+
+        //            return _egpgroupprocess;
+        //        }
+        //    }
+        //    set { _egpgroupprocess = value; }
+        //}
+        //public GuideGroupprocce SelectedGroupprocce { get; set; }
+
+
+        ///// <summary>
+        ///// Глубина ЭГП
+        ///// </summary>
+        //private double? _egpDeep;
+        //public double? EgpDeep
+        //{
+        //    get { _egpDeep = EGP.EgpDeep; return _egpDeep; }
+        //    set { _egpDeep = value; }
+        //}
+
+        ///// <summary>
+        ///// Ширина ЭГП
+        ///// </summary>
+        //private double? _egpWidth;
+        //public double? EgpWidth
+        //{
+        //    get { _egpWidth = EGP.EgpWidth; return _egpWidth; }
+        //    set { _egpWidth = value; }
+        //}
+
+        ///// <summary>
+        ///// Протяженность
+        ///// </summary>
+        //private double? _egpLength;
+        //public double? EgpLength
+        //{
+        //    get { _egpLength = EGP.EgpLength; return _egpLength; }
+        //    set { _egpLength = value; }
+        //}
+        ///// <summary>
+        ///// Объем
+        ///// </summary>
+        //private double? _egpVolume;
+        //public double? EgpVolume
+        //{
+        //    get { _egpVolume = EGP.EgpVolume; return _egpVolume; }
+        //    set { _egpVolume = value; }
+        //}
+
+        //#endregion
 
         /// <summary>
         /// Переменная хранимая данные переданные из другой страницы
