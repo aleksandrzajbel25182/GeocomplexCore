@@ -513,7 +513,9 @@
                                                       Width="250"
                                                       HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"
-                                                      Margin="50,20,0,0" />
+                                                      Margin="50,20,0,0"
+                                                      ItemsSource="{Binding Egptypeprocess}"
+                                                      SelectedItem="{Binding SelectedTypeprocess}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="1">
@@ -557,19 +559,24 @@
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
-                                                      IsEnabled="False" />
+                                                      IsEnabled="False"
+                                                      Text="{Binding EgpArea}"/>
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Скорость"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
-                                                      IsEnabled="False" />
-                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      IsEnabled="False"
+                                                      Text="{Binding EgpSpeed}"/>
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Вторичный элемент"
+                                                      IsEnabled="False"                                                    
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
-                                                      IsEnabled="False" />
+                                                      ItemsSource="{Binding EgpElement}"
+                                                      SelectedItem="{Binding SelectedEgpElement}"
+                                                       />
                                         </StackPanel>
 
                                     </Grid>
@@ -582,7 +589,8 @@
                                           materialDesign:HintAssist.Hint="Доп сведения"
                                           TextWrapping="Wrap"
                                           Margin="50,13,50,12"
-                                          IsEnabled="False" />
+                                          IsEnabled="False"
+                                          Text="{Binding EgpDescription}"/>
                             </Grid>
                         </materialDesign:Card>
                     </TabItem>

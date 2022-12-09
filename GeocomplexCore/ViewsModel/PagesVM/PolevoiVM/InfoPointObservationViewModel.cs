@@ -27,6 +27,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ConverterCordinatsService converter;
         private GeocomplexContext db = new GeocomplexContext();
         private Ground ground;
+        private Egp egp;
 
         #region Точка наблюдения/Основная информация
 
@@ -473,7 +474,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
         #region Свойства ПОРОДА и почва
-        
+
 
         #region Список Породы
         private ObservableCollection<GuideBreed> _groundBreed = new ObservableCollection<GuideBreed>();
@@ -498,7 +499,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
             set { _groundBreed = value; }
         }
-        public GuideBreed SelectedGroundBreed { get; set; } 
+        public GuideBreed SelectedGroundBreed { get; set; }
         #endregion
 
         #region Список Оттенка
@@ -648,8 +649,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 if (_groundTo is null)
                     return _groundTo;
                 return _groundTo;
-               
-           
+
+
             }
             set => Set(ref _groundTo, value);
         }
@@ -658,154 +659,246 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
-        //#region ЭГП
+        #region ЭГП
+
+        /// <summary>
+        /// /Группа процессов
+        /// </summary>
+        private ObservableCollection<GuideGroupprocce> _egpgroupprocess = new ObservableCollection<GuideGroupprocce>();
+        public ObservableCollection<GuideGroupprocce> Egpgroupprocess
+        {
+            get
+            {
+
+                var data = db.GuideGroupprocces.ToList();
+                foreach (var item in data)
+                {
+                    _egpgroupprocess.Add(new GuideGroupprocce
+                    {
+                        IdGroupprocces = item.IdGroupprocces,
+                        NameGroupprocess = item.NameGroupprocess
+                    });
+                }
+                data.Clear();
+
+                GetEgp();
+
+                return _egpgroupprocess;
+
+            }
+            set { _egpgroupprocess = value; }
+        }
+        /// <summary>
+        /// Выбранная группа процесса эгп
+        /// </summary>
+        public GuideGroupprocce SelectedGroupprocce { get; set; }
+
+        /// <summary>
+        /// ЭГП тип Процесса
+        /// </summary>
+        private ObservableCollection<GuideTypeprocess> _egptypeprocess = new ObservableCollection<GuideTypeprocess>();
+        public ObservableCollection<GuideTypeprocess> Egptypeprocess
+        {
+            get
+            {
+                var data = db.GuideTypeprocesses.ToList();
+                foreach (var item in data)
+                {
+                    _egptypeprocess.Add(new GuideTypeprocess
+                    {
+                        IdTypeprocess = item.IdTypeprocess,
+                        NameTypeprocess = item.NameTypeprocess
+
+                    });
+                }
+                data.Clear();
+                GetEgp();
+
+                return _egptypeprocess;
+
+            }
+            set { _egptypeprocess = value; }
+        }
+        /// <summary>
+        /// Выбранный тип процесса
+        /// </summary>
+        public GuideTypeprocess SelectedTypeprocess { get; set; }
+
+        /// <summary>
+        /// Вторичный элемент ЭГП
+        /// </summary>
+        private ObservableCollection<GuideEgpelement> _egpElement = new ObservableCollection<GuideEgpelement>();
+        public ObservableCollection<GuideEgpelement> EgpElement
+
+        {
+            get
+            {
+                var data = db.GuideEgpelements.ToList();
+                foreach (var item in data)
+                {
+                    _egpElement.Add(new GuideEgpelement
+                    {
+                         IdEgpelement= item.IdEgpelement,
+                        NameEgpelement = item.NameEgpelement
+
+                    });
+                }
+                data.Clear();
+                GetEgp();
+                return _egpElement;
+            }
+            set { _egpElement = value; }
+        }
+        /// <summary>
+        /// Выбранный вторичный элемент
+        /// </summary>
+        public GuideEgpelement SelectedEgpElement { get; set; }
+
+        /// <summary>
+        /// Дата ЭГП
+        /// </summary>
+        private DateTime? _egpDate;
+        public DateTime? Egpdate
+        {
+            get
+            {
+                GetEgp();
+                if (_egpDate is null)
+                    return _egpDate;
+                return _egpDate;
+            }
+            set => Set(ref _egpDate, value);
+        }
 
 
-        //private Egp _egp;
-        //private Egp EGP
-        //{
-        //    get
-        //    {
-        //        using (GeocomplexContext db = new GeocomplexContext())
-        //        {
-        //            var data = db.Egps
-        //                .Where(w => w.FWpointId == Watchpoints.WpointId)
-        //                .Include(f => f.FEgpelementNavigation)
-        //                .Include(fg => fg.FGroupprocessNavigation)
-        //                .Include(ft => ft.FTypeprocessNavigation)
-        //                .Include(fv => fv.FVidprocessNavigation)
-        //                .Include(us => us.FUser)
-        //                .ToList();
+        private string _egpUserName;
+        public string EgpUserName
+        {
+            get
+            {
+                GetEgp();
+                if (_egpUserName is null)
+                    return _egpUserName;
+                return _egpUserName;
+            }
+            set =>Set(ref _egpUserName,value);
 
-        //            foreach (var item in data)
-        //            {
-        //                _egp = new Egp
-        //                {
-        //                    EgpId = item.EgpId,
-        //                    FWpointId = item.FWpointId,
-        //                    EgpSpeed = item.EgpSpeed,
-        //                    EgpArea = item.EgpArea,
-        //                    EgpDeep = item.EgpDeep,
-        //                    EgpDescription = item.EgpDescription,
-        //                    EgpLength = item.EgpLength,
-        //                    EgpVolume = item.EgpVolume,
-        //                    EgpWidth = item.EgpWidth,
-        //                    DataEgp = item.DataEgp,
-        //                    FEgpelementNavigation = item.FEgpelementNavigation,
-        //                    FGroupprocessNavigation = item.FGroupprocessNavigation,
-        //                    FTypeprocessNavigation = item.FTypeprocessNavigation,
-        //                    FVidprocessNavigation = item.FVidprocessNavigation,
-        //                    FUser = item.FUser
+        }
 
-        //                };
-        //            }
-        //            data.Clear();
-        //            return _egp;
+        /// <summary>
+        /// Глубина ЭГП
+        /// </summary>
+        private double? _egpDeep;
+        public double? EgpDeep
+        {
+            get
+            {
+                GetEgp();
+                if (_egpDeep is null)
+                    return _egpDeep;
+                return _egpDeep;
+            }
+            set { _egpDeep = value; }
+        }
+
+        /// <summary>
+        /// Ширина ЭГП
+        /// </summary>
+        private double? _egpWidth;
+        public double? EgpWidth
+        {
+            get
+            {
+                GetEgp();
+                if (_egpWidth is null)
+                    return _egpWidth;
+                return _egpWidth;
+            }
+            set { _egpWidth = value; }
+        }
+
+        /// <summary>
+        /// Протяженность
+        /// </summary>
+        private double? _egpLength;
+        public double? EgpLength
+        {
+            get
+            {
+                GetEgp();
+                if (_egpLength is null)
+                    return _egpLength;
+                return _egpLength;
+            }
+            set { _egpLength = value; }
+        }
+
+        /// <summary>
+        /// Объем
+        /// </summary>
+        private double? _egpVolume;
+        public double? EgpVolume
+        {
+            get
+            {
+                GetEgp();
+                if (_egpVolume is null)
+                    return _egpVolume;
+                return _egpVolume;
+            }
+            set { _egpVolume = value; }
+        }
+
+        /// <summary>
+        /// Площадь ЭГП
+        /// </summary>
+        private double? _egpArea;
+        public double? EgpArea
+        {
+            get
+            {
+                GetEgp();
+                if (_egpArea is null)
+                    return _egpArea;
+                return _egpArea;
+            }
+            set { _egpArea = value; }
+        }
+
+        /// <summary>
+        /// Скорость эгп
+        /// </summary>
+        private double? _egpSpeed;
+        public double? EgpSpeed
+        {
+            get
+            {
+                GetEgp();
+                if (_egpSpeed is null)
+                    return _egpSpeed;
+                return _egpSpeed;
+            }
+            set { _egpSpeed = value; }
+        }
+
+        /// <summary>
+        /// Дополнительные сведения/Описание ЭГП
+        /// </summary>
+        private string? _egpDescription;
+        public string? EgpDescription
+        {
+            get
+            {
+                GetEgp();
+                if (_egpDescription is null)
+                    return _egpDescription;
+                return _egpDescription;
+            }
+            set { _egpDescription = value; }
+        }
 
 
-        //        }
-        //    }
-        //    set => Set(ref _egp, value);
-        //}
-
-
-
-
-        //private DateTime? _egpDate;
-        //public DateTime? Egpdate
-        //{
-        //    get
-        //    {
-        //        _egpDate = new DateTime(EGP.DataEgp.Value.Year, EGP.DataEgp.Value.Month, EGP.DataEgp.Value.Day);
-        //        return _egpDate;
-        //    }
-        //    set => Set(ref _egpDate, value);
-        //}
-
-
-        //private string _egpUserName;
-        //public string EgpUserName
-        //{
-        //    get
-        //    {
-        //        _egpUserName = EGP.FUser.UserName; return _groundUserName;
-        //    }
-
-        //}
-
-        //private ObservableCollection<GuideGroupprocce> _egpgroupprocess = new ObservableCollection<GuideGroupprocce>();
-        //public ObservableCollection<GuideGroupprocce> Egpgroupprocess
-        //{
-        //    get
-        //    {
-        //        using (GeocomplexContext db = new GeocomplexContext())
-        //        {
-        //            var data = db.GuideGroupprocces.ToList();
-        //            foreach (var item in data)
-        //            {
-        //                _egpgroupprocess.Add(new GuideGroupprocce
-        //                {
-        //                    IdGroupprocces = item.IdGroupprocces,
-        //                    NameGroupprocess = item.NameGroupprocess
-
-        //                });
-
-        //            }
-        //            for (int i = 0; i < _egpgroupprocess.Count; i++)
-        //            {
-        //                if (_egpgroupprocess[i].IdGroupprocces == EGP.FGroupprocess)
-        //                    SelectedGroupprocce = _egpgroupprocess[i];
-        //            }
-
-
-        //            return _egpgroupprocess;
-        //        }
-        //    }
-        //    set { _egpgroupprocess = value; }
-        //}
-        //public GuideGroupprocce SelectedGroupprocce { get; set; }
-
-
-        ///// <summary>
-        ///// Глубина ЭГП
-        ///// </summary>
-        //private double? _egpDeep;
-        //public double? EgpDeep
-        //{
-        //    get { _egpDeep = EGP.EgpDeep; return _egpDeep; }
-        //    set { _egpDeep = value; }
-        //}
-
-        ///// <summary>
-        ///// Ширина ЭГП
-        ///// </summary>
-        //private double? _egpWidth;
-        //public double? EgpWidth
-        //{
-        //    get { _egpWidth = EGP.EgpWidth; return _egpWidth; }
-        //    set { _egpWidth = value; }
-        //}
-
-        ///// <summary>
-        ///// Протяженность
-        ///// </summary>
-        //private double? _egpLength;
-        //public double? EgpLength
-        //{
-        //    get { _egpLength = EGP.EgpLength; return _egpLength; }
-        //    set { _egpLength = value; }
-        //}
-        ///// <summary>
-        ///// Объем
-        ///// </summary>
-        //private double? _egpVolume;
-        //public double? EgpVolume
-        //{
-        //    get { _egpVolume = EGP.EgpVolume; return _egpVolume; }
-        //    set { _egpVolume = value; }
-        //}
-
-        //#endregion
+        #endregion
 
         /// <summary>
         /// Переменная хранимая данные переданные из другой страницы
@@ -927,12 +1020,16 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 }
 
                 //Выбранный список оттенка
-                int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
-                for (int i = 0; i < _groundDopcolor.Count; i++)
+                if(ground.FDopcolor is not null)
                 {
-                    if (_groundDopcolor[i].IdColor == dpc)
-                        SelectedGroundDopcolor = _groundDopcolor[i];
+                    int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
+                    for (int i = 0; i < _groundDopcolor.Count; i++)
+                    {
+                        if (_groundDopcolor[i].IdColor == dpc)
+                            SelectedGroundDopcolor = _groundDopcolor[i];
+                    }
                 }
+                             
 
                 //Выбранный список цвета
                 for (int i = 0; i < _groundColor.Count; i++)
@@ -948,6 +1045,77 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
 
         }
+       
+        /// <summary>
+       /// Читаем данные из базы для ЭГП и заносим их в свойства
+       /// </summary>
+        private void GetEgp()
+        {
+            var data = db.Egps
+                .Where(w => w.FWpointId == Watchpoints.WpointId)
+                .Include(f => f.FEgpelementNavigation)
+                .Include(fg => fg.FGroupprocessNavigation)
+                .Include(ft => ft.FTypeprocessNavigation)
+                .Include(fv => fv.FVidprocessNavigation)
+                .Include(us => us.FUser)
+                .ToList();
+
+            if (data.Count != 0)
+            {
+
+
+                foreach (var item in data)
+                {
+                    egp = new Egp
+                    {
+                        EgpId = item.EgpId,
+                        FWpointId = item.FWpointId,
+                        EgpSpeed = item.EgpSpeed,
+                        EgpArea = item.EgpArea,
+                        EgpDeep = item.EgpDeep,
+                        EgpDescription = item.EgpDescription,
+                        EgpLength = item.EgpLength,
+                        EgpVolume = item.EgpVolume,
+                        EgpWidth = item.EgpWidth,
+                        DataEgp = item.DataEgp,
+                        FEgpelementNavigation = item.FEgpelementNavigation,
+                        FGroupprocessNavigation = item.FGroupprocessNavigation,
+                        FTypeprocessNavigation = item.FTypeprocessNavigation,
+                        FVidprocessNavigation = item.FVidprocessNavigation,
+                        FUser = item.FUser
+
+                    };
+                }
+                data.Clear();
+                _egpDate = new DateTime(egp.DataEgp.Value.Year, egp.DataEgp.Value.Month, egp.DataEgp.Value.Day);
+                _egpUserName = egp.FUser.UserName;
+                _egpDeep = egp.EgpDeep;
+                _egpWidth = egp.EgpWidth;
+                _egpLength = egp.EgpLength;
+                _egpVolume = egp.EgpVolume;
+                _egpArea = egp.EgpArea;
+                _egpSpeed = egp.EgpSpeed;
+                _egpDescription = egp.EgpDescription;
+                for (int i = 0; i < _egpgroupprocess.Count; i++)
+                {
+                    if (_egpgroupprocess[i].IdGroupprocces == egp.FGroupprocess)
+                        SelectedGroupprocce = _egpgroupprocess[i];
+                }
+                for (int i = 0; i < _egptypeprocess.Count; i++)
+                {
+                    if (_egptypeprocess[i].IdTypeprocess == egp.FTypeprocess)
+                        SelectedTypeprocess = _egptypeprocess[i];
+                }
+                for (int i = 0; i < _egpElement.Count; i++)
+                {
+                    if (_egpElement[i].IdEgpelement == egp.FEgpelement)
+                        SelectedEgpElement = _egpElement[i];
+                }
+            }
+            data.Clear();
+
+        }
+
 
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
