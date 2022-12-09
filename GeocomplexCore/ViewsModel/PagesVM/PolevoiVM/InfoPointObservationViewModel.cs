@@ -28,6 +28,41 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private GeocomplexContext db = new GeocomplexContext();
         private Ground ground;
         private Egp egp;
+        private Watchpoint Watchpoints;
+        #region Свойства для видимости элементов
+
+
+        /// <summary>
+        /// Видимость градусы минуты секунды
+        /// </summary>
+        private bool _showCoordinatDegMinsSek;
+        public bool ShowCoordinatDegMinsSek
+        {
+            get { return _showCoordinatDegMinsSek; }
+            set => Set(ref _showCoordinatDegMinsSek, value);
+        }
+
+        /// <summary>
+        /// Видимость градусы минуты секунды
+        /// </summary>
+        private bool _showCoordinatDeсimal;
+        public bool ShowCoordinatDeсimal
+        {
+            get { return _showCoordinatDeсimal; }
+            set => Set(ref _showCoordinatDeсimal, value);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Переменная хранимая данные переданные из другой страницы
+        /// </summary>
+        private int _passedParameter;
+        public int PassedParameter
+        {
+            get => _passedParameter;
+            set => Set(ref _passedParameter, value);
+        }
 
         #region Точка наблюдения/Основная информация
 
@@ -40,7 +75,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _wRoute = Watchpoints.Route.RouteName;
+                GetWatchpoints();
                 return _wRoute;
             }
             set => Set(ref _wRoute, value);
@@ -54,7 +89,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _wnumber = Watchpoints.WpointNumber.ToString();
+                GetWatchpoints();
                 return _wnumber;
             }
             set => Set(ref _wnumber, value);
@@ -68,7 +103,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _wDateStart = new DateTime(Watchpoints.WpointDateAdd.Value.Year, Watchpoints.WpointDateAdd.Value.Month, Watchpoints.WpointDateAdd.Value.Day);
+                GetWatchpoints();
                 return _wDateStart;
             }
             set => Set(ref _wDateStart, value);
@@ -82,7 +117,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _wnote = Watchpoints.WpointNote;
+                GetWatchpoints();
                 return _wnote;
             }
             set => Set(ref _wnote, value);
@@ -96,9 +131,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                if (Watchpoints.WpointLocation == null)
-                    return _wlocation = "Нет сведений";
-                _wlocation = Watchpoints.WpointLocation;
+                GetWatchpoints();
                 return _wlocation;
             }
             set => Set(ref _wlocation, value);
@@ -127,10 +160,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                foreach (var item in Watchpoints.WpointCoordinates)
-                {
-                    _wpointX = item.WpCoordinatesX;
-                }
+                GetWatchpoints();
 
                 return _wpointX;
             }
@@ -142,10 +172,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                foreach (var item in Watchpoints.WpointCoordinates)
-                {
-                    _wpointY = item.WpCoordinatesY;
-                }
+                GetWatchpoints();
 
                 return _wpointY;
             }
@@ -158,64 +185,13 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                foreach (var item in Watchpoints.WpointCoordinates)
-                {
-                    _pointZ = item.WpCoordinatesZ;
-                }
+                GetWatchpoints();
 
                 return _pointZ;
             }
             set { _pointZ = value; }
         }
-
-        /// <summary>
-        /// Данные из БД по ТН
-        /// </summary>
-        private Watchpoint _watchpoints;
-        private Watchpoint Watchpoints
-        {
-            get
-            {
-                using (GeocomplexContext db = new GeocomplexContext())
-                {
-                    var data = db.Watchpoints
-                        .Where(w => w.WpointId == PassedParameter)
-                        .Include(c => c.WpointCoordinates)
-                        .Include(r => r.Route)
-                        .ToList();
-
-                    foreach (var item in data)
-                    {
-                        _watchpoints = new Watchpoint
-                        {
-                            WpointId = item.WpointId,
-                            Route = item.Route,
-                            WpointType = item.WpointType,
-                            WpointNumber = item.WpointNumber,
-                            WpointLocation = item.WpointLocation,
-                            WpointDateAdd = item.WpointDateAdd,
-                            WpointNote = item.WpointNote,
-                            FUser = item.FUser,
-                            WpointIndLandscape = item.WpointIndLandscape,
-                            WpointCoordinates = item.WpointCoordinates,
-                            IdExposition = item.IdExposition,
-                            IdFormareliefa = item.IdFormareliefa,
-                            IdFormariver = item.IdFormariver,
-                            IdHeightreliefa = item.IdHeightreliefa,
-                            IdSlope = item.IdSlope,
-                            IdSubtypereliefa = item.IdSubtypereliefa,
-                            IdTypereliefa = item.IdTypereliefa
-
-                        };
-                    }
-                    return _watchpoints;
-
-
-                }
-            }
-            set => Set(ref _watchpoints, value);
-        }
-
+    
         #region Коллекции "Геоморфологическая колонка" 
 
         #region Список Форма рельефа
@@ -224,27 +200,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideFormareliefas.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideFormareliefas.ToList();
-                    foreach (var item in data)
+                    _formareliefa.Add(new GuideFormareliefa
                     {
-                        _formareliefa.Add(new GuideFormareliefa
-                        {
-                            IdFormareliefa = item.IdFormareliefa,
-                            NameFormareliefa = item.NameFormareliefa
-                        });
+                        IdFormareliefa = item.IdFormareliefa,
+                        NameFormareliefa = item.NameFormareliefa
+                    });
 
-                    }
-                    for (int i = 0; i < _formareliefa.Count; i++)
-                    {
-                        if (_formareliefa[i].IdFormareliefa == Watchpoints.IdFormareliefa)
-                            SelectedFormarelirfa = _formareliefa[i];
-                    }
-
-
-                    return _formareliefa;
                 }
+                GetWatchpoints();
+                return _formareliefa;
             }
             set { _formareliefa = value; }
         }
@@ -257,27 +224,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideTypereliefas.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideTypereliefas.ToList();
-                    foreach (var item in data)
+                    _typereliefa.Add(new GuideTypereliefa
                     {
-                        _typereliefa.Add(new GuideTypereliefa
-                        {
-                            IdTypereliefa = item.IdTypereliefa,
-                            NameTypereliefa = item.NameTypereliefa
-                        });
+                        IdTypereliefa = item.IdTypereliefa,
+                        NameTypereliefa = item.NameTypereliefa
+                    });
 
-                    }
-                    for (int i = 0; i < _typereliefa.Count; i++)
-                    {
-                        if (_typereliefa[i].IdTypereliefa == Watchpoints.IdTypereliefa)
-                            SelectedTypereliefa = _typereliefa[i];
-                    }
-
-
-                    return _typereliefa;
                 }
+                GetWatchpoints();
+                return _typereliefa;
             }
             set { _typereliefa = value; }
         }
@@ -290,27 +248,17 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideSubtypereliefas.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideSubtypereliefas.ToList();
-                    foreach (var item in data)
+                    _sybtypereliefa.Add(new GuideSubtypereliefa
                     {
-                        _sybtypereliefa.Add(new GuideSubtypereliefa
-                        {
-                            IdSubtypereliefa = item.IdSubtypereliefa,
-                            NameSubtypereliefa = item.NameSubtypereliefa
-                        });
-
-                    }
-                    for (int i = 0; i < _sybtypereliefa.Count; i++)
-                    {
-                        if (_sybtypereliefa[i].IdSubtypereliefa == Watchpoints.IdSubtypereliefa)
-                            SelectedSybtypereliefa = _sybtypereliefa[i];
-                    }
-
-
-                    return _sybtypereliefa;
+                        IdSubtypereliefa = item.IdSubtypereliefa,
+                        NameSubtypereliefa = item.NameSubtypereliefa
+                    });
                 }
+                GetWatchpoints();
+                return _sybtypereliefa;
             }
             set { _sybtypereliefa = value; }
         }
@@ -323,27 +271,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideHeightreliefas.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideHeightreliefas.ToList();
-                    foreach (var item in data)
+                    _heightreliefa.Add(new GuideHeightreliefa
                     {
-                        _heightreliefa.Add(new GuideHeightreliefa
-                        {
-                            IdHeightreliefa = item.IdHeightreliefa,
-                            NameHeightreliefa = item.NameHeightreliefa
-                        });
+                        IdHeightreliefa = item.IdHeightreliefa,
+                        NameHeightreliefa = item.NameHeightreliefa
+                    });
 
-                    }
-                    for (int i = 0; i < _heightreliefa.Count; i++)
-                    {
-                        if (_heightreliefa[i].IdHeightreliefa == Watchpoints.IdHeightreliefa)
-                            SelectedHeightreliefa = _heightreliefa[i];
-                    }
-
-
-                    return _heightreliefa;
                 }
+                GetWatchpoints();
+                return _heightreliefa;
             }
             set { _ = value; }
         }
@@ -356,27 +295,19 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideSprexpositions.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideSprexpositions.ToList();
-                    foreach (var item in data)
+                    _exposition.Add(new GuideSprexposition
                     {
-                        _exposition.Add(new GuideSprexposition
-                        {
-                            IdSprexposition = item.IdSprexposition,
-                            NameSprexposition = item.NameSprexposition
-                        });
+                        IdSprexposition = item.IdSprexposition,
+                        NameSprexposition = item.NameSprexposition
+                    });
 
-                    }
-                    for (int i = 0; i < _exposition.Count; i++)
-                    {
-                        if (_exposition[i].IdSprexposition == Watchpoints.IdExposition)
-                            SelectedExposition = _exposition[i];
-                    }
-
-
-                    return _exposition;
                 }
+                GetWatchpoints();
+                return _exposition;
+
             }
             set { _exposition = value; }
         }
@@ -389,27 +320,19 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideSlopes.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideSlopes.ToList();
-                    foreach (var item in data)
+                    _slope.Add(new GuideSlope
                     {
-                        _slope.Add(new GuideSlope
-                        {
-                            IdSlope = item.IdSlope,
-                            NameSlope = item.NameSlope
-                        });
+                        IdSlope = item.IdSlope,
+                        NameSlope = item.NameSlope
+                    });
 
-                    }
-                    for (int i = 0; i < _slope.Count; i++)
-                    {
-                        if (_slope[i].IdSlope == Watchpoints.IdSlope)
-                            SelectedSlope = _slope[i];
-                    }
-
-
-                    return _slope;
                 }
+                GetWatchpoints();
+                return _slope;
+
             }
             set { _slope = value; }
         }
@@ -422,27 +345,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideFormarivers.AsNoTracking().ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideFormarivers.ToList();
-                    foreach (var item in data)
+                    _formariver.Add(new GuideFormariver
                     {
-                        _formariver.Add(new GuideFormariver
-                        {
-                            IdFormariver = item.IdFormariver,
-                            NameFormariver = item.NameFormariver
-                        });
+                        IdFormariver = item.IdFormariver,
+                        NameFormariver = item.NameFormariver
+                    });
 
-                    }
-                    for (int i = 0; i < _formariver.Count; i++)
-                    {
-                        if (_formariver[i].IdFormariver == Watchpoints.IdFormariver)
-                            SelectedFormariver = _formariver[i];
-                    }
-
-
-                    return _formariver;
                 }
+                GetWatchpoints();
+                return _formariver;
             }
             set { _formariver = value; }
         }
@@ -472,7 +386,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
         #endregion
 
-
         #region Свойства ПОРОДА и почва
 
 
@@ -482,7 +395,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                var data = db.GuideBreeds.ToList();
+                var data = db.GuideBreeds.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     _groundBreed.Add(new GuideBreed
@@ -508,7 +421,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                var data = db.GuideColors.ToList();
+                var data = db.GuideColors.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     if (item.BreedColor == 1 || item.PrimaryColor == 1)
@@ -537,7 +450,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                var data = db.GuideColors.ToList();
+                var data = db.GuideColors.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     if (item.BreedColor == 1 || item.PrimaryColor == 1)
@@ -670,7 +583,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             get
             {
 
-                var data = db.GuideGroupprocces.ToList();
+                var data = db.GuideGroupprocces.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     _egpgroupprocess.Add(new GuideGroupprocce
@@ -701,7 +614,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                var data = db.GuideTypeprocesses.ToList();
+                var data = db.GuideTypeprocesses.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     _egptypeprocess.Add(new GuideTypeprocess
@@ -733,12 +646,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                var data = db.GuideEgpelements.ToList();
+                var data = db.GuideEgpelements.AsNoTracking().ToList();
                 foreach (var item in data)
                 {
                     _egpElement.Add(new GuideEgpelement
                     {
-                         IdEgpelement= item.IdEgpelement,
+                        IdEgpelement = item.IdEgpelement,
                         NameEgpelement = item.NameEgpelement
 
                     });
@@ -781,7 +694,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     return _egpUserName;
                 return _egpUserName;
             }
-            set =>Set(ref _egpUserName,value);
+            set => Set(ref _egpUserName, value);
 
         }
 
@@ -900,29 +813,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
-        /// <summary>
-        /// Переменная хранимая данные переданные из другой страницы
-        /// </summary>
-        private int _passedParameter;
-        public int PassedParameter
-        {
-            get => _passedParameter;
-            set => Set(ref _passedParameter, value);
-        }
-        /// <summary>
-        /// Принимаем переменную переданную из другой страницы
-        /// </summary>
-        /// <param name="arg"></param>
-        public void OnNavigatedTo(object arg)
-        {
-            if (!(arg is int))
-                return;
-
-            PassedParameter = (int)arg;
-            LocatorStatic.Data.PageHeader += $" Точка наблюдения: {Watchpoints.WpointId}";
-        }
-
-
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
         #region Команды//Commands
@@ -1020,7 +910,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 }
 
                 //Выбранный список оттенка
-                if(ground.FDopcolor is not null)
+                if (ground.FDopcolor is not null)
                 {
                     int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
                     for (int i = 0; i < _groundDopcolor.Count; i++)
@@ -1029,7 +919,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                             SelectedGroundDopcolor = _groundDopcolor[i];
                     }
                 }
-                             
+
 
                 //Выбранный список цвета
                 for (int i = 0; i < _groundColor.Count; i++)
@@ -1045,10 +935,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
 
         }
-       
+
         /// <summary>
-       /// Читаем данные из базы для ЭГП и заносим их в свойства
-       /// </summary>
+        /// Читаем данные из базы для ЭГП и заносим их в свойства
+        /// </summary>
         private void GetEgp()
         {
             var data = db.Egps
@@ -1117,28 +1007,126 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
 
 
+        /// <summary>
+        /// Читаем данные из базы для Точки наблюдения и заносим их в свойства
+        /// </summary>
+        private void GetWatchpoints()
+        {
+
+            var data = db.Watchpoints
+                .Where(w => w.WpointId == PassedParameter)
+                .Include(c => c.WpointCoordinates)
+                .Include(r => r.Route)
+                .ToList();
+
+            foreach (var item in data)
+            {
+                Watchpoints = new Watchpoint
+                {
+                    WpointId = item.WpointId,
+                    Route = item.Route,
+                    WpointType = item.WpointType,
+                    WpointNumber = item.WpointNumber,
+                    WpointLocation = item.WpointLocation,
+                    WpointDateAdd = item.WpointDateAdd,
+                    WpointNote = item.WpointNote,
+                    FUser = item.FUser,
+                    WpointIndLandscape = item.WpointIndLandscape,
+                    WpointCoordinates = item.WpointCoordinates,
+                    IdExposition = item.IdExposition,
+                    IdFormareliefa = item.IdFormareliefa,
+                    IdFormariver = item.IdFormariver,
+                    IdHeightreliefa = item.IdHeightreliefa,
+                    IdSlope = item.IdSlope,
+                    IdSubtypereliefa = item.IdSubtypereliefa,
+                    IdTypereliefa = item.IdTypereliefa
+
+                };
+            }
+            data.Clear();
+            _wnote = Watchpoints.WpointNote;
+            _wDateStart = new DateTime(Watchpoints.WpointDateAdd.Value.Year, Watchpoints.WpointDateAdd.Value.Month, Watchpoints.WpointDateAdd.Value.Day);
+            _wRoute = Watchpoints.Route.RouteName;
+            _wnumber = Watchpoints.WpointNumber.ToString();
+
+            if (Watchpoints.WpointLocation == null)
+                _wlocation = "Нет сведений";
+            _wlocation = Watchpoints.WpointLocation;
+
+            foreach (var item in Watchpoints.WpointCoordinates)
+            {
+                _wpointX = item.WpCoordinatesX;
+            }
+
+            foreach (var item in Watchpoints.WpointCoordinates)
+            {
+                _wpointY = item.WpCoordinatesY;
+            }
+
+            foreach (var item in Watchpoints.WpointCoordinates)
+            {
+                _pointZ = item.WpCoordinatesZ;
+            }
+
+
+            for (int i = 0; i < _formareliefa.Count; i++)
+            {
+                if (_formareliefa[i].IdFormareliefa == Watchpoints.IdFormareliefa)
+                    SelectedFormarelirfa = _formareliefa[i];
+            }
+
+            for (int i = 0; i < _typereliefa.Count; i++)
+            {
+                if (_typereliefa[i].IdTypereliefa == Watchpoints.IdTypereliefa)
+                    SelectedTypereliefa = _typereliefa[i];
+            }
+
+            for (int i = 0; i < _sybtypereliefa.Count; i++)
+            {
+                if (_sybtypereliefa[i].IdSubtypereliefa == Watchpoints.IdSubtypereliefa)
+                    SelectedSybtypereliefa = _sybtypereliefa[i];
+            }
+
+            for (int i = 0; i < _heightreliefa.Count; i++)
+            {
+                if (_heightreliefa[i].IdHeightreliefa == Watchpoints.IdHeightreliefa)
+                    SelectedHeightreliefa = _heightreliefa[i];
+            }
+            for (int i = 0; i < _exposition.Count; i++)
+            {
+                if (_exposition[i].IdSprexposition == Watchpoints.IdExposition)
+                    SelectedExposition = _exposition[i];
+            }
+            for (int i = 0; i < _slope.Count; i++)
+            {
+                if (_slope[i].IdSlope == Watchpoints.IdSlope)
+                    SelectedSlope = _slope[i];
+            }
+
+            for (int i = 0; i < _formariver.Count; i++)
+            {
+                if (_formariver[i].IdFormariver == Watchpoints.IdFormariver)
+                    SelectedFormariver = _formariver[i];
+            }
+
+        }
+
+        /// <summary>
+        /// Принимаем переменную переданную из другой страницы
+        /// </summary>
+        /// <param name="arg"></param>
+        public void OnNavigatedTo(object arg)
+        {
+            if (!(arg is int))
+                return;
+
+            PassedParameter = (int)arg;
+            GetWatchpoints();
+            LocatorStatic.Data.PageHeader += $" Точка наблюдения: {Watchpoints.WpointId}";
+        }
+
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Видимость градусы минуты секунды
-        /// </summary>
-        private bool _showCoordinatDegMinsSek;
-        public bool ShowCoordinatDegMinsSek
-        {
-            get { return _showCoordinatDegMinsSek; }
-            set => Set(ref _showCoordinatDegMinsSek, value);
-        }
-
-        /// <summary>
-        /// Видимость градусы минуты секунды
-        /// </summary>
-        private bool _showCoordinatDeсimal;
-        public bool ShowCoordinatDeсimal
-        {
-            get { return _showCoordinatDeсimal; }
-            set => Set(ref _showCoordinatDeсimal, value);
-        }
-
 
         public InfoPointObservationViewModel(NavigationManager navigationmaneger)
         {
