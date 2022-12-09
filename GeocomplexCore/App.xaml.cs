@@ -2,18 +2,8 @@
 using Egor92.MvvmNavigation.Abstractions;
 using GeocomplexCore.Service;
 using GeocomplexCore.Views;
-using GeocomplexCore.Views.Pages;
-using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.Views.Windows;
-using GeocomplexCore.ViewsModel.PagesVM;
-using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
 using GeocomplexCore.ViewsModel.WindowsVM;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GeocomplexCore

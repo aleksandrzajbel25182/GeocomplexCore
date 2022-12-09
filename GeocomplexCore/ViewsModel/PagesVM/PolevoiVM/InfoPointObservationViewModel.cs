@@ -25,6 +25,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private NavigationManager navigationmaneger;
         private ConverterCordinatsService converter;
+        private GeocomplexContext db = new GeocomplexContext();
+        private Ground ground;
 
         #region Точка наблюдения/Основная информация
 
@@ -470,49 +472,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         #endregion
 
 
-        #region ПОРОДА и почва
-
-        private Ground _ground;
-        private Ground Ground
-        {
-            get
-            {
-                using (GeocomplexContext db = new GeocomplexContext())
-                {
-                    var data = db.Grounds
-                        .Where(w => w.FWpointId == Watchpoints.WpointId)
-                        .Include(f => f.FColorNavigation)
-                        .Include(us => us.FUser)
-                        .ToList();
-
-                    foreach (var item in data)
-                    {
-                        _ground = new Ground
-                        {
-                            IdGround = item.IdGround,
-                            FromGround = item.FromGround,
-                            ToGround = item.ToGround,
-                            FColorNavigation = item.FColorNavigation,
-                            FDopcolor = item.FDopcolor,
-                            FColor = item.FColor,
-                            DataGround = item.DataGround,
-                            DescriptionGround = item.DescriptionGround,
-                            FUserId = item.FUserId,
-                            FUser = item.FUser,
-                            FBreed = item.FBreed,
-                            FBreedId = item.FBreedId
-
-                        };
-                    }
-                    return _ground;
-
-
-                }
-            }
-            set => Set(ref _ground, value);
-        }
-
-
+        #region Свойства ПОРОДА и почва
+        
 
         #region Список Породы
         private ObservableCollection<GuideBreed> _groundBreed = new ObservableCollection<GuideBreed>();
@@ -520,32 +481,24 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideBreeds.ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideBreeds.ToList();
-                    foreach (var item in data)
+                    _groundBreed.Add(new GuideBreed
                     {
-                        _groundBreed.Add(new GuideBreed
-                        {
-                            IdBreed = item.IdBreed,
-                            NameBreed = item.NameBreed,
-                            NamersBred = item.NamersBred
-                        });
-
-                    }
-                    for (int i = 0; i < _groundBreed.Count; i++)
-                    {
-                        if (_groundBreed[i].IdBreed == Ground.FBreedId)
-                            SelectedGroundBreed = _groundBreed[i];
-                    }
-
-
-                    return _groundBreed;
+                        IdBreed = item.IdBreed,
+                        NameBreed = item.NameBreed,
+                        NamersBred = item.NamersBred
+                    });
                 }
+                data.Clear();
+                GetGround();
+                return _groundBreed;
             }
+
             set { _groundBreed = value; }
         }
-        public GuideBreed SelectedGroundBreed { get; set; }
+        public GuideBreed SelectedGroundBreed { get; set; } 
         #endregion
 
         #region Список Оттенка
@@ -554,36 +507,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideColors.ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideColors.ToList();
-                    foreach (var item in data)
+                    if (item.BreedColor == 1 || item.PrimaryColor == 1)
                     {
-                        if (item.BreedColor == 1 || item.PrimaryColor == 1)
+                        _groundDopcolor.Add(new GuideColor
                         {
-                            _groundDopcolor.Add(new GuideColor
-                            {
-                                IdColor = item.IdColor,
-                                NameColor = item.NameColor
-
-
-                            });
-                        }
-
-
+                            IdColor = item.IdColor,
+                            NameColor = item.NameColor
+                        });
                     }
-
-                    int dpc  =Convert.ToInt32(Ground.FDopcolor.Replace(";", ""));
-                    for (int i = 0; i < _groundDopcolor.Count; i++)
-                    {
-                     
-                        if (_groundDopcolor[i].IdColor == dpc)
-                            SelectedGroundDopcolor = _groundDopcolor[i];
-                    }
-
-
-                    return _groundDopcolor;
                 }
+                data.Clear();
+                GetGround();
+                return _groundDopcolor;
+
             }
             set { _groundDopcolor = value; }
         }
@@ -597,34 +536,21 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                using (GeocomplexContext db = new GeocomplexContext())
+                var data = db.GuideColors.ToList();
+                foreach (var item in data)
                 {
-                    var data = db.GuideColors.ToList();
-                    foreach (var item in data)
+                    if (item.BreedColor == 1 || item.PrimaryColor == 1)
                     {
-                        if (item.BreedColor == 1 || item.PrimaryColor == 1)
+                        _groundColor.Add(new GuideColor
                         {
-                            _groundColor.Add(new GuideColor
-                            {
-                                IdColor = item.IdColor,
-                                NameColor = item.NameColor
-
-
-                            });
-                        }
-
-
+                            IdColor = item.IdColor,
+                            NameColor = item.NameColor
+                        });
                     }
-                    for (int i = 0; i < _groundColor.Count; i++)
-                    {
-
-                        if (_groundColor[i].IdColor == Ground.FColor)
-                            SelectedGroundColor = _groundColor[i];
-                    }
-
-
-                    return _groundColor;
                 }
+                data.Clear();
+                GetGround();
+                return _groundColor;
             }
             set { _groundColor = value; }
         }
@@ -640,7 +566,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _groundData = new DateTime(Ground.DataGround.Value.Year, Ground.DataGround.Value.Month, Ground.DataGround.Value.Day);
+                GetGround();
+                if (_groundData == null)
+                {
+                    return _groundData;
+                }
+
                 return _groundData;
             }
             set => Set(ref _groundData, value);
@@ -657,8 +588,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-
-                _groundUserName = Ground.FUser.UserName;
+                GetGround();
+                if (_groundUserName is null)
+                    return _groundUserName;
                 return _groundUserName;
             }
             set => Set(ref _groundUserName, value);
@@ -674,9 +606,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-
-                _groundDescription = Ground.DescriptionGround;
+                GetGround();
+                if (_groundDescription is null)
+                    return _groundDescription;
                 return _groundDescription;
+
             }
             set => Set(ref _groundDescription, value);
         }
@@ -691,8 +625,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _groundFrom = Ground.FromGround.ToString();
+                GetGround();
+                if (_groundFrom is null)
+                    return _groundFrom;
                 return _groundFrom;
+
             }
             set => Set(ref _groundFrom, value);
         }
@@ -707,8 +644,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             get
             {
-                _groundTo = Ground.ToGround.ToString();
+                GetGround();
+                if (_groundTo is null)
+                    return _groundTo;
                 return _groundTo;
+               
+           
             }
             set => Set(ref _groundTo, value);
         }
@@ -940,6 +881,74 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
             }
         }
+
+        /// <summary>
+        /// Читаем данные из базы для Почвы и грунта и заносим их в свойства
+        /// </summary>
+        private void GetGround()
+        {
+
+            var data = db.Grounds
+                     .Where(w => w.FWpointId == Watchpoints.WpointId)
+                     .Include(f => f.FColorNavigation)
+                     .Include(us => us.FUser)
+                     .ToList();
+
+            if (data.Count != 0)
+            {
+                //Создаем экземпляр класса Ground
+                foreach (var item in data)
+                {
+                    ground = new Ground
+                    {
+                        IdGround = item.IdGround,
+                        FromGround = item.FromGround,
+                        ToGround = item.ToGround,
+                        FColorNavigation = item.FColorNavigation,
+                        FDopcolor = item.FDopcolor,
+                        FColor = item.FColor,
+                        DataGround = item.DataGround,
+                        DescriptionGround = item.DescriptionGround,
+                        FUserId = item.FUserId,
+                        FUser = item.FUser,
+                        FBreed = item.FBreed,
+                        FBreedId = item.FBreedId
+
+                    };
+                }
+                data.Clear();
+
+                _groundData = new DateTime(ground.DataGround.Value.Year, ground.DataGround.Value.Month, ground.DataGround.Value.Day);
+                // Выбраанный Список Породы
+                for (int i = 0; i < _groundBreed.Count; i++)
+                {
+                    if (_groundBreed[i].IdBreed == ground.FBreedId)
+                        SelectedGroundBreed = _groundBreed[i];
+                }
+
+                //Выбранный список оттенка
+                int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
+                for (int i = 0; i < _groundDopcolor.Count; i++)
+                {
+                    if (_groundDopcolor[i].IdColor == dpc)
+                        SelectedGroundDopcolor = _groundDopcolor[i];
+                }
+
+                //Выбранный список цвета
+                for (int i = 0; i < _groundColor.Count; i++)
+                {
+                    if (_groundColor[i].IdColor == ground.FColor)
+                        SelectedGroundColor = _groundColor[i];
+                }
+
+                _groundUserName = ground.FUser.UserName;
+                _groundDescription = ground.DescriptionGround;
+                _groundFrom = ground.FromGround.ToString();
+                _groundTo = ground.ToGround.ToString();
+            }
+
+        }
+
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
         /// <summary>
