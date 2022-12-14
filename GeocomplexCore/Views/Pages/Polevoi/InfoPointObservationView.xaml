@@ -657,7 +657,7 @@
                                         </StackPanel>
                                         <StackPanel Grid.Row="1"
                                                     Orientation="Horizontal">
-                                            <CheckBox Style="{StaticResource StyleOutlinedCheckBox}"
+                                            <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
                                                       
                                                      
                                                       Content="Скважины,колодцы"

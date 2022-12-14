@@ -1045,7 +1045,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             data.Clear();
             _wnote = Watchpoints.WpointNote;
-            _wDateStart = new DateTime(Watchpoints.WpointDateAdd.Value.Year, Watchpoints.WpointDateAdd.Value.Month, Watchpoints.WpointDateAdd.Value.Day);
+            if(Watchpoints.WpointDateAdd is not null)
+                _wDateStart = new DateTime(Watchpoints.WpointDateAdd.Value.Year, Watchpoints.WpointDateAdd.Value.Month, Watchpoints.WpointDateAdd.Value.Day);
             _wRoute = Watchpoints.Route.RouteName;
             _wnumber = Watchpoints.WpointNumber.ToString();
 
