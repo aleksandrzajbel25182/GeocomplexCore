@@ -638,7 +638,8 @@
                                                       HorizontalAlignment="Left"
                                                       Width="350"
                                                       VerticalAlignment="Top"
-                                                      Margin="50,20,0,0" />
+                                                      Margin="50,20,0,0"
+                                                      Text="{Binding TechogjName}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Лицензия"
                                                       IsEnabled="False"
@@ -646,40 +647,38 @@
                                                       Width="300"
                                                       VerticalAlignment="Top"
                                                       Margin="25,20,0,0"
-                                                      TextWrapping="Wrap" />
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding TechobjLicense }" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Воздействие"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
                                                       Width="300"
                                                       VerticalAlignment="Top"
-                                                      Margin="25,20,50,0" />
+                                                      Margin="25,20,50,0"
+                                                      Text="{Binding TechobjSource }" />
                                         </StackPanel>
                                         <StackPanel Grid.Row="1"
                                                     Orientation="Horizontal">
                                             <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                                                      
-                                                     
                                                       Content="Скважины,колодцы"
                                                       Margin="50,20,0,0"
-                                                      IsChecked="{Binding MyProperty, Converter={StaticResource IntToBoolenConverter}}"/>
+                                                      IsEnabled="False"
+                                                      IsChecked="{Binding TechobjProducthole, Converter={StaticResource IntToBoolenConverter}}" />
 
                                             <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                                                      IsChecked="True"
                                                       Content="Скважины наблюдения"
-                                                      Margin="25,20,20,0" />
+                                                      Margin="25,20,0,0"
+                                                      IsEnabled="False"
+                                                      IsChecked="{Binding TechobjWatchhole, Converter={StaticResource IntToBoolenConverter}}" />
 
                                             <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                                                      IsChecked="True"
                                                       Content="Мониторинг воды"
-                                                      Margin="25,20,50,0" />
+                                                      Margin="25,20,20,0"
+                                                      IsEnabled="False"
+                                                      IsChecked="{Binding TechobjMonitoring, Converter={StaticResource IntToBoolenConverter}}" />
                                         </StackPanel>
                                     </StackPanel>
-
-
-
-
-
                                 </Grid>
                                 <TextBox  Grid.Row="2"
                                           Style="{StaticResource StyleOutlinedTextBox}"
@@ -687,7 +686,7 @@
                                           TextWrapping="Wrap"
                                           Margin="50,13,50,12"
                                           IsEnabled="False"
-                                          Text="{Binding EgpDescription}" />
+                                          Text="{Binding TechobjDescription}" />
                             </Grid>
                         </materialDesign:Card>
 

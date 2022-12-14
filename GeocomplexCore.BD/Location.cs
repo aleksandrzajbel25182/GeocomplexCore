@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GeocomplexCore.BD
+namespace GeocomplexCore.DAL
 {
     /// <summary>
     /// Местоположение

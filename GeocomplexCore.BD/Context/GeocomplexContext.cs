@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace GeocomplexCore.BD.Context
+namespace GeocomplexCore.DAL.Context
 {
     public partial class GeocomplexContext : DbContext
     {
@@ -41,6 +41,7 @@ namespace GeocomplexCore.BD.Context
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Route> Routes { get; set; } = null!;
         public virtual DbSet<StreetWaterpipe> StreetWaterpipes { get; set; } = null!;
+        public virtual DbSet<Techobject> Techobjects { get; set; } = null!;
         public virtual DbSet<UserDatum> UserData { get; set; } = null!;
         public virtual DbSet<Watchpoint> Watchpoints { get; set; } = null!;
         public virtual DbSet<WaterObjectDi> WaterObjectDis { get; set; } = null!;
@@ -718,6 +719,77 @@ namespace GeocomplexCore.BD.Context
                     .HasForeignKey(d => d.WaterpipeWtrId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_street_waterpipe");
+            });
+
+            modelBuilder.Entity<Techobject>(entity =>
+            {
+                entity.HasKey(e => e.TechobjId)
+                    .HasName("techobject_pkey");
+
+                entity.ToTable("techobject");
+
+                entity.HasComment("Техногенный объект");
+
+                entity.Property(e => e.TechobjId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("techobj_id");
+
+                entity.Property(e => e.FUserAdd).HasColumnName("f_user_add");
+
+                entity.Property(e => e.FWpointId).HasColumnName("f_wpoint_id");
+
+                entity.Property(e => e.TechobjAmountProducthole)
+                    .HasColumnName("techobj_amount_producthole")
+                    .HasComment("Количество эксплуатационных скважин");
+
+                entity.Property(e => e.TechobjAmountWatchhole)
+                    .HasColumnName("techobj_amount_watchhole")
+                    .HasComment("Количество наблюдательных скважин  ");
+
+                entity.Property(e => e.TechobjData).HasColumnName("techobj_data");
+
+                entity.Property(e => e.TechobjDescription)
+                    .HasMaxLength(1000)
+                    .HasColumnName("techobj_description")
+                    .HasComment("Примечание");
+
+                entity.Property(e => e.TechobjLicense)
+                    .HasMaxLength(255)
+                    .HasColumnName("techobj_license")
+                    .HasComment("Лицензия");
+
+                entity.Property(e => e.TechobjMonitoring)
+                    .HasColumnName("techobj_monitoring")
+                    .HasComment("Наличие программы мониторинга качества воды: 0 - нет, 1 - есть\n");
+
+                entity.Property(e => e.TechobjName)
+                    .HasMaxLength(255)
+                    .HasColumnName("techobj_name");
+
+                entity.Property(e => e.TechobjProducthole)
+                    .HasColumnName("techobj_producthole")
+                    .HasComment("Наличие эксплуатационных скважин, родников, колодцев: 0 -нет, 1 - есть\n");
+
+                entity.Property(e => e.TechobjSource)
+                    .HasMaxLength(500)
+                    .HasColumnName("techobj_source")
+                    .HasComment("Источник техногенного воздействия");
+
+                entity.Property(e => e.TechobjWatchhole)
+                    .HasColumnName("techobj_watchhole")
+                    .HasComment("Наличие наблюдательных скважин: 0 - нет, 1 - есть ");
+
+                entity.HasOne(d => d.FUserAddNavigation)
+                    .WithMany(p => p.Techobjects)
+                    .HasForeignKey(d => d.FUserAdd)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_user_id");
+
+                entity.HasOne(d => d.FWpoint)
+                    .WithMany(p => p.Techobjects)
+                    .HasForeignKey(d => d.FWpointId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_watchpoint_id");
             });
 
             modelBuilder.Entity<UserDatum>(entity =>

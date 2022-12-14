@@ -1,7 +1,7 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
-using GeocomplexCore.BD;
-using GeocomplexCore.BD.Context;
+using GeocomplexCore.DAL;
+using GeocomplexCore.DAL.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.Properties;
@@ -29,6 +29,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private Ground ground;
         private Egp egp;
         private Watchpoint Watchpoints;
+        private Techobject techobject;
         #region Свойства для видимости элементов
 
 
@@ -191,7 +192,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             set { _pointZ = value; }
         }
-    
+
         #region Коллекции "Геоморфологическая колонка" 
 
         #region Список Форма рельефа
@@ -813,6 +814,77 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
+
+        /// <summary>
+        /// Техногенный объект: Наименование
+        /// </summary>
+        private string? _techogjName;
+        public string? TechogjName
+        {
+            get { GetTechobject(); return _techogjName; }
+            set => Set(ref _techogjName, value);
+        }
+
+        /// <summary>
+        /// Техногенный объект: Источник техногенного воздействия
+        /// </summary>
+        private string? _techobjSource;
+        public string? TechobjSource
+        {
+            get { GetTechobject(); return _techobjSource; }
+            set => Set(ref _techobjSource, value);
+        }
+
+        /// <summary>
+        /// Техногенный объект: Лицензия
+        /// </summary>
+        private string? _techobjLicense;
+        public string? TechobjLicense
+        {
+            get { GetTechobject(); return _techobjLicense; }
+            set => Set(ref _techobjLicense, value);
+        }
+
+        /// <summary>
+        /// Техногенный объект: Наличие программы мониторинга качества воды
+        /// </summary>
+        private int? _techobjMonitoring;
+        public int? TechobjMonitoring
+        {
+            get { GetTechobject(); return _techobjMonitoring; }
+            set => Set(ref _techobjMonitoring, value);
+        }
+
+        /// <summary>
+        /// Техногенный объект: Наличие эксплуатационных скважин, родников
+        /// </summary>
+        private int? _techobjProducthole;
+        public int? TechobjProducthole
+        {
+            get { GetTechobject(); return _techobjProducthole; }
+            set => Set(ref _techobjProducthole, value);
+        }
+        /// <summary>
+        /// Техногенный объект: Наличие наблюдательных скважин
+        /// </summary>
+        private int? _techobjWatchhole;
+        public int? TechobjWatchhole
+        {
+            get { GetTechobject(); return _techobjWatchhole; }
+            set => Set(ref _techobjWatchhole, value);
+        }
+
+        /// <summary>
+        /// Техногенный объект: Примечание
+        /// </summary>
+        private string? _techobjDescription;
+        public string? TechobjDescription
+        {
+            get { GetTechobject(); return _techobjDescription; }
+            set => Set(ref _techobjDescription, value);
+        }
+
+
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
         #region Команды//Commands
@@ -1006,6 +1078,36 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         }
 
+        private void GetTechobject()
+        {
+            var data = db.Techobjects
+                .Where(w => w.FWpointId == Watchpoints.WpointId).ToList();
+
+            if (data.Count != 0)
+            {
+                foreach (var item in data)
+                {
+                    techobject = new Techobject
+                    {
+                        TechobjName = item.TechobjName,
+                        TechobjSource = item.TechobjSource,
+                        TechobjLicense = item.TechobjLicense,
+                        TechobjDescription = item.TechobjDescription,
+                        TechobjMonitoring = item.TechobjMonitoring,
+                        TechobjProducthole = item.TechobjWatchhole,
+                        TechobjWatchhole = item.TechobjWatchhole
+                    };
+                }
+                data.Clear();
+                _techogjName = techobject.TechobjName;
+                _techobjSource = techobject.TechobjSource;
+                _techobjLicense = techobject.TechobjLicense;
+                _techobjDescription = techobject.TechobjDescription;
+                _techobjMonitoring = techobject.TechobjMonitoring;
+                _techobjProducthole = techobject.TechobjProducthole;
+                _techobjWatchhole = techobject.TechobjWatchhole;
+            }
+        }
 
         /// <summary>
         /// Читаем данные из базы для Точки наблюдения и заносим их в свойства
@@ -1045,7 +1147,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
             data.Clear();
             _wnote = Watchpoints.WpointNote;
-            if(Watchpoints.WpointDateAdd is not null)
+            if (Watchpoints.WpointDateAdd is not null)
                 _wDateStart = new DateTime(Watchpoints.WpointDateAdd.Value.Year, Watchpoints.WpointDateAdd.Value.Month, Watchpoints.WpointDateAdd.Value.Day);
             _wRoute = Watchpoints.Route.RouteName;
             _wnumber = Watchpoints.WpointNumber.ToString();

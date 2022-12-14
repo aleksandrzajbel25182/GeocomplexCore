@@ -1,6 +1,6 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
-using GeocomplexCore.BD.Context;
+using GeocomplexCore.DAL.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Model;
 using GeocomplexCore.Properties;

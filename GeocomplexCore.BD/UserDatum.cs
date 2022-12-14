@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GeocomplexCore.BD
+namespace GeocomplexCore.DAL
 {
     /// <summary>
     /// Пользователи
@@ -14,6 +14,7 @@ namespace GeocomplexCore.BD
             Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
             Routes = new HashSet<Route>();
+            Techobjects = new HashSet<Techobject>();
             Watchpoints = new HashSet<Watchpoint>();
         }
 
@@ -27,6 +28,7 @@ namespace GeocomplexCore.BD
         public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Techobject> Techobjects { get; set; }
         public virtual ICollection<Watchpoint> Watchpoints { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GeocomplexCore.BD
+namespace GeocomplexCore.DAL
 {
     /// <summary>
     /// Точка наблюдения
@@ -12,6 +12,7 @@ namespace GeocomplexCore.BD
         {
             Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
+            Techobjects = new HashSet<Techobject>();
             WpointCoordinates = new HashSet<WpointCoordinate>();
         }
 
@@ -44,6 +45,7 @@ namespace GeocomplexCore.BD
         public virtual Route Route { get; set; } = null!;
         public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
+        public virtual ICollection<Techobject> Techobjects { get; set; }
         public virtual ICollection<WpointCoordinate> WpointCoordinates { get; set; }
     }
 }
