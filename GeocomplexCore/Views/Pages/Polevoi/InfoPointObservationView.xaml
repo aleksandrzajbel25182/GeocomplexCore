@@ -8,9 +8,13 @@
              xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              mc:Ignorable="d"
+             xmlns:service="clr-namespace:GeocomplexCore.Service"
              Height="1100"
              d:DesignWidth="1335"
              Background="#F2F8F1">
+    <UserControl.Resources>
+        <service:IntToBoolenConverter x:Key="IntToBoolenConverter" />
+    </UserControl.Resources>
 
     <Grid>
         <TabControl Style="{StaticResource MaterialDesignTabControl}"
@@ -446,9 +450,9 @@
                              FontFamily="ARVO">
                         <materialDesign:Card Width="1100"
                                              Height="540"
-                                             HorizontalAlignment="Left"
+                                             HorizontalAlignment="Center"
                                              VerticalAlignment="Top"
-                                             Margin="50,50,0,20"
+                                             Margin="0,50,0,20"
                                              materialDesign:ShadowAssist.Darken="True"
                                              materialDesign:ShadowAssist.ShadowDepth="Depth4"
                                              materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
@@ -485,7 +489,7 @@
                                                         Width="250"
                                                         VerticalAlignment="Top"
                                                         Margin="50,20,50,0"
-                                                        SelectedDate="{Binding Egpdate}"/>
+                                                        SelectedDate="{Binding Egpdate}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Пользователь"
                                                       IsEnabled="False"
@@ -494,7 +498,7 @@
                                                       VerticalAlignment="Top"
                                                       Margin="50,20,50,0"
                                                       TextWrapping="Wrap"
-                                                      Text="{Binding EgpUserName}"/>
+                                                      Text="{Binding EgpUserName}" />
 
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
@@ -505,8 +509,7 @@
                                                       VerticalAlignment="Top"
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding Egpgroupprocess}"
-                                                      SelectedItem="{Binding SelectedGroupprocce}"
-                                                      />
+                                                      SelectedItem="{Binding SelectedGroupprocce}" />
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Тип процесса"
                                                       IsEnabled="False"
@@ -515,7 +518,7 @@
                                                       VerticalAlignment="Top"
                                                       Margin="50,20,0,0"
                                                       ItemsSource="{Binding Egptypeprocess}"
-                                                      SelectedItem="{Binding SelectedTypeprocess}"/>
+                                                      SelectedItem="{Binding SelectedTypeprocess}" />
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="1">
@@ -525,7 +528,7 @@
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpDeep}"/>
+                                                      Text="{Binding EgpDeep}" />
 
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Ширина"
@@ -533,7 +536,7 @@
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpWidth}"/>
+                                                      Text="{Binding EgpWidth}" />
 
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Протяженность"
@@ -542,14 +545,14 @@
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpLength}"/>
+                                                      Text="{Binding EgpLength}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Объем"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpVolume}"/>
+                                                      Text="{Binding EgpVolume}" />
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="2">
@@ -560,23 +563,22 @@
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpArea}"/>
+                                                      Text="{Binding EgpArea}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Скорость"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
-                                                      Text="{Binding EgpSpeed}"/>
+                                                      Text="{Binding EgpSpeed}" />
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Вторичный элемент"
-                                                      IsEnabled="False"                                                    
+                                                      IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding EgpElement}"
-                                                      SelectedItem="{Binding SelectedEgpElement}"
-                                                       />
+                                                      SelectedItem="{Binding SelectedEgpElement}" />
                                         </StackPanel>
 
                                     </Grid>
@@ -590,7 +592,7 @@
                                           TextWrapping="Wrap"
                                           Margin="50,13,50,12"
                                           IsEnabled="False"
-                                          Text="{Binding EgpDescription}"/>
+                                          Text="{Binding EgpDescription}" />
                             </Grid>
                         </materialDesign:Card>
                     </TabItem>
@@ -600,6 +602,99 @@
                                        Text="Техногенные объекты"
                                        VerticalAlignment="Center" />
                         </TabItem.Header>
+                        <materialDesign:Card Width="1100"
+                                             Height="540"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Margin="0,50,0,20"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="73*" />
+                                    <RowDefinition Height="177*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Основная информация"
+                                       Grid.Row="0"
+                                       Margin="5,5,5,5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0"
+                                        VerticalAlignment="Top"
+                                        Grid.Row="1" />
+
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Vertical">
+
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Наименование"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="350"
+                                                      VerticalAlignment="Top"
+                                                      Margin="50,20,0,0" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Лицензия"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="300"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,0,0"
+                                                      TextWrapping="Wrap" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Воздействие"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="300"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,50,0" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1"
+                                                    Orientation="Horizontal">
+                                            <CheckBox Style="{StaticResource StyleOutlinedCheckBox}"
+                                                      
+                                                     
+                                                      Content="Скважины,колодцы"
+                                                      Margin="50,20,0,0"
+                                                      IsChecked="{Binding MyProperty, Converter={StaticResource IntToBoolenConverter}}"/>
+
+                                            <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
+                                                      IsChecked="True"
+                                                      Content="Скважины наблюдения"
+                                                      Margin="25,20,20,0" />
+
+                                            <CheckBox Style="{StaticResource MaterialDesignFilterChipCheckBox}"
+                                                      IsChecked="True"
+                                                      Content="Мониторинг воды"
+                                                      Margin="25,20,50,0" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+
+
+
+
+                                </Grid>
+                                <TextBox  Grid.Row="2"
+                                          Style="{StaticResource StyleOutlinedTextBox}"
+                                          materialDesign:HintAssist.Hint="Примечание"
+                                          TextWrapping="Wrap"
+                                          Margin="50,13,50,12"
+                                          IsEnabled="False"
+                                          Text="{Binding EgpDescription}" />
+                            </Grid>
+                        </materialDesign:Card>
+
+
+
+
+
 
                     </TabItem>
                     <TabItem Header="Растительность"
