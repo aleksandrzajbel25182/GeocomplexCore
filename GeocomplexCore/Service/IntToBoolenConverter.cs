@@ -18,8 +18,8 @@ namespace GeocomplexCore.Service
                     return true;
                 else
                     return false;
-            } 
-            throw new NotImplementedException();
+            }
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

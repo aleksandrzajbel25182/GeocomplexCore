@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
+             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"          
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
@@ -14,6 +14,7 @@
              Background="#F2F8F1">
     <UserControl.Resources>
         <service:IntToBoolenConverter x:Key="IntToBoolenConverter" />
+      
     </UserControl.Resources>
 
     <Grid>
@@ -46,7 +47,7 @@
                                   Width="250"
                                   Margin="20"
                                   Cursor="Arrow"
-                                  Text="{Binding WNumber}" />
+                                  DataContext="{Binding WNumber}" />
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Населенный пункт"
                                   MinHeight="50"
