@@ -4,13 +4,7 @@ using GeocomplexCore.DAL.Context;
 using GeocomplexCore.Infrastructure.Commands;
 using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
-using GeocomplexCore.Views;
-using GeocomplexCore.Views.Pages;
-using GeocomplexCore.Views.Pages.Polevoi;
 using GeocomplexCore.ViewsModel.Base;
-using GeocomplexCore.ViewsModel.PagesVM;
-using GeocomplexCore.ViewsModel.PagesVM.PolevoiVM;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows.Input;
 
@@ -20,6 +14,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
     {
         #region Параметры / Parametrs
         NavigationManager _navigationmaneger;
+        GeocomplexContext db = new GeocomplexContext();        
 
         #region Логин
         /// <summary>
@@ -46,15 +41,12 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         #region Команды
 
-
         #region Команда Подключения и проверки логина с паролем пользователя
         /// <summary>
         ///  Команда Подключения и проверки логина с паролем пользователя
         /// </summary>
         public ICommand ConnectionCommand { get; } // Сама команда
-
         private bool CanConnectionCommandExecute(object p) => true;
-
         // Действия которые должна выполнить команда
         private void OnConnectionCommandExcuted(object p)
         {
@@ -62,7 +54,6 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             {
                 if (Autrorization())
                 {
-                    //Autrorization();
                     _navigationmaneger.Navigate("StartPage");
                 }
                 else
@@ -80,7 +71,6 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         #endregion
 
-
         #endregion
 
         /// <summary>
@@ -90,42 +80,17 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         /// 
         public bool Autrorization()
         {
-            using (GeocomplexContext db = new GeocomplexContext())
+            var autoriz = db.UserData.FirstOrDefault(u => u.UserLogin == Login && u.UserPassword == Password);
+            if (autoriz != null)
             {
-                var autoriz = db.UserData.FirstOrDefault(u => u.UserLogin == Login && u.UserPassword == Password);
-
-                if (autoriz!=null)
-                {
-                    GlobalSet.staticUserID = autoriz.UserId.ToString();
-                    return true;
-                }
-                else
-                    return false;
+                GlobalSet.staticUserID = autoriz.UserId.ToString();
+                return true;
             }
+            else
+                return false;
         }
 
-        //public async void Autrorization()
-        //{
-        //    using (GeocomplexContext db = new GeocomplexContext())
-        //    {
-
-        //        var autoriz = await db.UserData.ToListAsync();
-        //        foreach (var item in autoriz)
-        //        {
-        //           if(item.UserLogin == Login && item.UserPassword == Password)
-        //            {
-        //                GlobalSet.staticUserID = item.UserId.ToString();
-
-        //            }
-        //        }
-        //        autoriz.Clear();
-
-        //    }
-        //}
-
-
         /*-------------------------------------------------------------------------------------------------------------------------------------------*/
-
 
         public AuthorizationWindowViewModel(NavigationManager navigationManager)
         {
