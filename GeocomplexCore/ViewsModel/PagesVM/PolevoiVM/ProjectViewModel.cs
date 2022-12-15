@@ -22,9 +22,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
     {
         #region Parametrs/ Параметры 
 
-
         private NavigationManager navigationManager;
         MainWindowViewModel mainWindowViewModel;
+        GeocomplexContext db = new GeocomplexContext();
 
         //Временная переменная для хранения выделенного ID "Проекта" 
         private int _selectIDproject;
@@ -40,16 +40,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ObservableCollection<ModelData> _datacol = new ObservableCollection<ModelData>();
         public ObservableCollection<ModelData> DataCol
         {
-
-            get
-            {
-                return _datacol;
-            }
-            set
-            {
-                _datacol = value;
-                OnPropertyChanged("DataCol");
-            }
+            get => _datacol;
+            set => Set(ref _datacol, value);
         }
 
         /// <summary>
@@ -65,7 +57,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 GlobalSet.IdProjectStatic = _selectIDproject;
                 OnPropertyChanged("SelecetedItem");
             }
-
         }
 
         /// <summary>
@@ -90,13 +81,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ICollectionView? _collectiondata;
         public ICollectionView? CollectionData { get => _collectiondata; set => Set(ref _collectiondata, value); }
 
-
         #endregion
 
-
-
         #region Commands/Команды
-
 
         #region Открытие окна/Command open
         /// <summary>
@@ -118,15 +105,13 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
 
         #endregion
-
-
+     
+        #region Замена таблиц
         /// <summary>
         /// Команда замены таблицы проектов на учаcтки
         /// </summary>
         public ICommand GoDistrictPageCommand { get; }
-
         private bool CanGoDistrictPageCommandExecute(object p) => true;
-
         private void OnGoDistrictPageCommandExcuted(object p)
         {
             if (GlobalSet.FlagStatic == "District")
@@ -144,17 +129,19 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 CollectionData.Refresh();
                 CollectionData = CollectionViewSource.GetDefaultView(DisttrictData());
                 GlobalSet.FlagStatic = "District";
-                if(CollectionData.Cast<object>().Count() == 0)
+                if (CollectionData.Cast<object>().Count() == 0)
                     MessageService.ShowMessageInformation($"Участков по проекту {_selectNameproject} в базе данных нету!");
             }
 
         }
+        #endregion
 
-
+        #region Обновление таблиц
+        /// <summary>
+        /// Команда Обновление таблицы
+        /// </summary>
         public ICommand UpdateCollectionCommand { get; }
-
         private bool CanUpdateCollectionCommandExecute(object p) => true;
-
         private void OnUpdateCollectionCommandExcuted(object p)
         {
             if (GlobalSet.FlagStatic == "District")
@@ -168,14 +155,14 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 CollectionData = CollectionViewSource.GetDefaultView(ProjectData());
             }
         }
-        
+        #endregion
 
-
-
+        #region Назад        
+        /// <summary>
+        /// Команда назад в зависимости какая таблица загружена
+        /// </summary>
         public ICommand BackCommand { get; }
-
         private bool CanBackCommandExecute(object p) => true;
-
         private void OnBackCommandExcuted(object p)
         {
             switch (Peeremen)
@@ -198,12 +185,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     break;
             }
         }
+        #endregion
 
         #endregion
 
-
         #region Function/Функции
-
 
         /// <summary>
         /// Загрузка "Участков" из базы данных по выбранному "Проекту"
@@ -211,25 +197,20 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <returns></returns>
         public ObservableCollection<ModelData> DisttrictData()
         {
-            using (GeocomplexContext db = new GeocomplexContext())
+            var dat = db.Districts.Where(r => r.PrgId == _selectIDproject).Include(us => us.IdUserNavigation).ToList();
+            foreach (var item in dat)
             {
-                var dat = db.Districts.Where(r => r.PrgId == _selectIDproject).Include(us => us.IdUserNavigation).ToList();
-                foreach (var item in dat)
+                _datacol.Add(new ModelData
                 {
-                    _datacol.Add(new ModelData
-                    {
-                        Id = item.IdDistrict,
-                        Name = item.NameDistrict,
-                        UsName = item.IdUserNavigation.UserName,
-                        DateAdd = item.DateAddDistrict
+                    Id = item.IdDistrict,
+                    Name = item.NameDistrict,
+                    UsName = item.IdUserNavigation.UserName,
+                    DateAdd = item.DateAddDistrict
 
-                    });
-                }                        
-               
-                Peeremen = 2;
-                return _datacol;
-
+                });
             }
+            Peeremen = 2;
+            return _datacol;
 
         }
 
@@ -239,27 +220,20 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <returns></returns>
         public ObservableCollection<ModelData> ProjectData()
         {
-            using (GeocomplexContext db = new GeocomplexContext())
+            Peeremen = 1;
+            var dat = db.Projects.Include(us => us.PrgOrganizationNavigation).ToList();
+            foreach (var item in dat)
             {
-                Peeremen = 1;
-
-                var dat = db.Projects.Include(us => us.PrgOrganizationNavigation).ToList();
-                foreach (var item in dat)
-                {
-                    _datacol.Add(
-                        new ModelData
+                _datacol.Add(
+                    new ModelData
                     {
                         Id = item.PrgId,
                         Name = item.PrgName,
                         UsName = item.PrgOrganizationNavigation.OrgName,
                         DateAdd = item.PrgDate
-
                     });
-                }               
-
-                return _datacol;
-
             }
+            return _datacol;
         }
 
 
@@ -276,7 +250,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 return objProject != null && objProject.Name.Contains(TextToFilter);
             }
             return true;
-
         }
 
         /// <summary>
@@ -298,9 +271,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
-
-
-
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -319,7 +289,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             UpdateCollectionCommand = new LamdaCommand(OnUpdateCollectionCommandExcuted, CanUpdateCollectionCommandExecute);
 
         }
-
 
     }
 }
