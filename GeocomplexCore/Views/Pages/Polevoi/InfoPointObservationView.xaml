@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"          
+             xmlns:local="clr-namespace:GeocomplexCore.Views.Pages.Polevoi"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
@@ -14,7 +14,7 @@
              Background="#F2F8F1">
     <UserControl.Resources>
         <service:IntToBoolenConverter x:Key="IntToBoolenConverter" />
-      
+
     </UserControl.Resources>
 
     <Grid>
@@ -698,7 +698,160 @@
 
                     </TabItem>
                     <TabItem Header="Растительность"
-                             FontFamily="ARVO" />
+                             FontFamily="ARVO">
+
+                        <materialDesign:Card Width="1100"
+                                             Height="540"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Margin="0,50,0,20"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="73*" />
+
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Основная информация"
+                                       Grid.Row="0"
+                                       Margin="5,5,5,5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0"
+                                        VerticalAlignment="Top"
+                                        Grid.Row="1" />
+
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="125,0,0,0">
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Древостой"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Густота леса"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Подрост"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Проективное покрытие"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Margin="50,0,0,0"
+                                            >
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Высота подроста"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Кустарник"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Густота кустарника"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Кустарничек"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="0,30,0,0" />
+                                        </StackPanel>
+                                  
+                                    <StackPanel Margin="50,0,0,0">                                        
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Напочвенный покров"
+                                                  HorizontalAlignment="Left"
+                                                  IsEnabled="False"
+                                                  Height="50"
+                                                  Width="250"
+                                                  Margin="0,30,0,0" />
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Проективное покрытие"
+                                                  HorizontalAlignment="Left"
+                                                  IsEnabled="False"
+                                                  Height="50"
+                                                  Width="250"
+                                                  Margin="0,30,0,0" />
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Санитарное состояние"
+                                                  HorizontalAlignment="Left"
+                                                  IsEnabled="False"
+                                                  Height="50"
+                                                  Width="250"
+                                                  Margin="0,30,0,0" />
+                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Антропогенное воздействие"
+                                                  HorizontalAlignment="Left"
+                                                  IsEnabled="False"
+                                                  Height="50"
+                                                  Width="250"
+                                                  Margin="0,30,0,0" />
+
+                                    </StackPanel>
+                                    <!--<StackPanel>
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.Hint="Примечание"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="300"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,0,0"
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding TechobjLicense }" />
+                                        </StackPanel>-->
+
+
+
+
+
+                                    </StackPanel>
+                                </Grid>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+
+                    </TabItem>
                     <TabItem FontFamily="ARVO">
                         <TabItem.Header>
                             <TextBlock TextWrapping="Wrap"
