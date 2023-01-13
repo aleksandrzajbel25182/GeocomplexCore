@@ -701,7 +701,7 @@
                              FontFamily="ARVO">
 
                         <materialDesign:Card Width="1100"
-                                             Height="540"
+                                             Height="700"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Top"
                                              Margin="0,50,0,20"
@@ -729,14 +729,28 @@
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel Margin="125,0,0,0">
 
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.Hint="Древостой"
-                                                      HorizontalAlignment="Left"
-                                                      VerticalAlignment="Top"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="250"
-                                                      Margin="0,30,0,0" />
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Древостой"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PStands}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </Expander>
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Густота леса"
@@ -744,15 +758,33 @@
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="0,30,0,0" />
+                                                      Margin="0,30,0,0"
+                                                      SelectedItem="{Binding SelectedPlantForestDensities}"
+                                                      ItemsSource="{Binding PlantForestDensities}"
+                                                      DisplayMemberPath="NameDforest" />
 
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.Hint="Подрост"
-                                                      HorizontalAlignment="Left"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="250"
-                                                      Margin="0,30,0,0" />
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Подрост"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PUndergrowth}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </Expander>
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Проективное покрытие"
@@ -760,75 +792,160 @@
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="0,30,0,0" />
+                                                      Margin="0,30,0,0"
+                                                      SelectedItem="{Binding SelectedPlantProjcoverUndergrowth}"
+                                                      ItemsSource="{Binding PlantProjcoverUndergrowth}"
+                                                      DisplayMemberPath="NamePrjUnder" />
                                         </StackPanel>
-                                        <StackPanel
-                                            Margin="50,0,0,0"
-                                            >
+                                        <StackPanel Margin="50,0,0,0">
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Высота подроста"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="0,30,0,0" />
+                                                      Margin="0,30,0,0"
+                                                      SelectedItem="{Binding SelectedPlantHeightUndergrowt}"
+                                                      ItemsSource="{Binding PlantHeightUndergrowt}"
+                                                      DisplayMemberPath="NameHeight" />
 
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.Hint="Кустарник"
-                                                      HorizontalAlignment="Left"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="250"
-                                                      Margin="0,30,0,0" />
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Кустарник"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PBush}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
 
+                                                </Grid>
+                                            </Expander>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Густота кустарника"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="0,30,0,0" />
+                                                      Margin="0,30,0,0"
+                                                      SelectedItem="{Binding SelectedPlantDensityBush}"
+                                                      ItemsSource="{Binding PlantDensityBush}"
+                                                      DisplayMemberPath="NameDbush" />
+
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Кустарничек"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PSmallbush}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </Expander>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="50,0,0,0">
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Напочвенный покров"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PGroundcoverh}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </Expander>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.Hint="Кустарничек"
+                                                      materialDesign:HintAssist.Hint="Проективное покрытие"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="0,30,0,0" />
-                                        </StackPanel>
-                                  
-                                    <StackPanel Margin="50,0,0,0">                                        
-                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                  materialDesign:HintAssist.Hint="Напочвенный покров"
-                                                  HorizontalAlignment="Left"
-                                                  IsEnabled="False"
-                                                  Height="50"
-                                                  Width="250"
-                                                  Margin="0,30,0,0" />
-                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                  materialDesign:HintAssist.Hint="Проективное покрытие"
-                                                  HorizontalAlignment="Left"
-                                                  IsEnabled="False"
-                                                  Height="50"
-                                                  Width="250"
-                                                  Margin="0,30,0,0" />
-                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                  materialDesign:HintAssist.Hint="Санитарное состояние"
-                                                  HorizontalAlignment="Left"
-                                                  IsEnabled="False"
-                                                  Height="50"
-                                                  Width="250"
-                                                  Margin="0,30,0,0" />
-                                        <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                  materialDesign:HintAssist.Hint="Антропогенное воздействие"
-                                                  HorizontalAlignment="Left"
-                                                  IsEnabled="False"
-                                                  Height="50"
-                                                  Width="250"
-                                                  Margin="0,30,0,0" />
+                                                      Margin="0,30,0,0"
+                                                      ItemsSource="{Binding PrjGround}"
+                                                      SelectedItem="{Binding SelectedPlantPrjGround}"
+                                                      DisplayMemberPath="NamePrjGround"/>
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Санитарное состояние"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PSanitar}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
 
-                                    </StackPanel>
-                                    <!--<StackPanel>
+                                                </Grid>
+                                            </Expander>
+                                            <Expander HorizontalAlignment="Stretch"
+                                                      Header="Антропогенное воздействие"
+                                                      FontFamily="Arvo"
+                                                      Margin="0,30,0,0">
+                                                <Grid MaxHeight="300"
+                                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                      Margin="24,8,24,16">
+                                                    <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                             ItemsSource="{Binding PHumanimpact}"
+                                                             ScrollViewer.CanContentScroll="True"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Title}"
+                                                                          IsChecked="{Binding Selected}"
+                                                                          IsEnabled="False" />
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </Expander>
+
+                                        </StackPanel>
+                                        <!--<StackPanel>
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Примечание"
                                                       IsEnabled="False"

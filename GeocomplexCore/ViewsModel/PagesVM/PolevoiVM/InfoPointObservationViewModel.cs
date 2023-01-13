@@ -9,6 +9,8 @@ using GeocomplexCore.Service;
 using GeocomplexCore.ViewsModel.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,9 +32,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private Egp? egp;
         private Watchpoint? watchpoint;
         private Techobject? techobject;
-
-
-
+        private Plant plant;
 
         #region Свойства для видимости элементов
 
@@ -807,6 +807,162 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
         #endregion
 
+
+        #region Растительность
+
+        /// <summary>
+        /// Справочник Густота леса
+        /// </summary>
+        private ObservableCollection<GuideForestDensity> _plantforestdensities = new ObservableCollection<GuideForestDensity>();
+        public ObservableCollection<GuideForestDensity> PlantForestDensities
+        {
+            get => _plantforestdensities;
+            set { _plantforestdensities = value; }
+        }
+        /// <summary>
+        /// Выбранная группа Густота леса
+        /// </summary>
+        public GuideForestDensity SelectedPlantForestDensities { get; set; }
+
+
+        /// <summary>
+        /// Справочник Высоты подроста
+        /// </summary>
+        private ObservableCollection<GuideHeightUndergrowth> _plantheightundergrowt = new ObservableCollection<GuideHeightUndergrowth>();
+        public ObservableCollection<GuideHeightUndergrowth> PlantHeightUndergrowt
+        {
+            get => _plantheightundergrowt;
+            set { _plantheightundergrowt = value; }
+        }
+        /// <summary>
+        /// Выбранная группа Высоты подроста
+        /// </summary>
+        public GuideHeightUndergrowth SelectedPlantHeightUndergrowt { get; set; }
+
+
+
+        /// <summary>
+        /// Справочник проективное покрытие подроста
+        /// </summary>
+        private ObservableCollection<GuideProjcoverUndergrowth> _plantprojcoverundergrowth = new ObservableCollection<GuideProjcoverUndergrowth>();
+        public ObservableCollection<GuideProjcoverUndergrowth> PlantProjcoverUndergrowth
+        {
+            get => _plantprojcoverundergrowth;
+            set { _plantprojcoverundergrowth = value; }
+        }
+        /// <summary>
+        /// Выбранная группа проективное покрытие подроста
+        /// </summary>
+        public GuideProjcoverUndergrowth SelectedPlantProjcoverUndergrowth { get; set; }
+
+
+        /// <summary>
+        /// Справочник Густота кустарников
+        /// </summary>
+        private ObservableCollection<GuideDensityBush> _plantdensitybush = new ObservableCollection<GuideDensityBush>();
+        public ObservableCollection<GuideDensityBush> PlantDensityBush
+        {
+            get => _plantdensitybush;
+            set { _plantdensitybush = value; }
+        }
+        /// <summary>
+        /// Выбранная группа Густота кустарников
+        /// </summary>
+        public GuideDensityBush SelectedPlantDensityBush { get; set; }
+
+
+        private ObservableCollection<Node> _pBush = new ObservableCollection<Node>();
+        /// <summary>
+        /// Кустарник
+        /// </summary>
+        public ObservableCollection<Node> PBush
+        {
+            get => _pBush;
+            set => Set(ref _pBush, value);
+        }
+
+
+        private ObservableCollection<Node> _pStands = new ObservableCollection<Node>();
+        /// <summary>
+        /// Древостой
+        /// </summary>
+        public ObservableCollection<Node> PStands
+        {
+            get => _pStands;
+            set => Set(ref _pStands, value);
+        }
+
+        private ObservableCollection<Node> _pSmallbush = new ObservableCollection<Node>();
+        /// <summary>
+        /// Кустарничек
+        /// </summary>
+        public ObservableCollection<Node> PSmallbush
+        {
+            get => _pSmallbush;
+            set => Set(ref _pSmallbush, value);
+        }
+
+
+        private ObservableCollection<Node> _pUndergrowth = new ObservableCollection<Node>();
+        /// <summary>
+        /// Подрост
+        /// </summary>
+        public ObservableCollection<Node> PUndergrowth
+        {
+            get => _pUndergrowth;
+            set => Set(ref _pUndergrowth, value);
+        }
+
+        private ObservableCollection<Node> _pGroundcoverh = new ObservableCollection<Node>();
+        /// <summary>
+        /// Напочвенный покров
+        /// </summary>
+        public ObservableCollection<Node> PGroundcoverh
+        {
+            get => _pGroundcoverh;
+            set => Set(ref _pGroundcoverh, value);
+        }
+
+        /// <summary>
+        /// Санитарное состояние
+        /// </summary>
+        private ObservableCollection<Node> _pSanitar = new ObservableCollection<Node>();
+        public ObservableCollection<Node> PSanitar
+        {
+            get => _pSanitar;
+            set => Set(ref _pSanitar, value);
+        }
+
+
+
+        private ObservableCollection<Node> _pHumanimpact = new ObservableCollection<Node>();
+        /// <summary>
+        /// Антропогенное воздействие
+        /// </summary>
+        public ObservableCollection<Node> PHumanimpact
+        {
+            get => _pHumanimpact;
+            set => Set(ref _pHumanimpact, value);
+        }
+
+        private ObservableCollection<GuideProjcoverGroundcover> _prjGround = new ObservableCollection<GuideProjcoverGroundcover>();
+        /// <summary>
+        /// Проективное покрытие Напочвенного покрова
+        /// </summary>
+        public ObservableCollection<GuideProjcoverGroundcover> PrjGround
+        {
+            get => _prjGround;
+            set { _prjGround = value; }
+        }
+        /// <summary>
+        /// Выбранная группа Проективное покрытие Напочвенного покрова
+        /// </summary>
+        public GuideProjcoverGroundcover SelectedPlantPrjGround { get; set; }
+
+
+
+        #endregion
+
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
         #region Команды//Commands
@@ -878,7 +1034,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             QueryDataBaseEgp();
             QueryDataBaseGuideEgp();
             QueryDataBaseTechobject();
-
+            QueryDataBasePlant();
+            QueryDataBaseGuidePlant();
             LocatorStatic.Data.PageHeader += $" Точка наблюдения: {watchpoint.WpointId}";
         }
 
@@ -1017,6 +1174,39 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             data.Clear();
             return techobject;
         }
+        /// <summary>
+        /// Чтение из базы данных по Растительности
+        /// </summary>
+        /// <returns>Возвращаем класс Plant </returns>
+        private Plant QueryDataBasePlant()
+        {
+            var data = db.Plants.Where(w => w.FWatchpoint == watchpoint.WpointId).ToList();
+            foreach (var item in data)
+            {
+                plant = new Plant()
+                {
+                    PlantForestDensity = item.PlantForestDensity,
+                    PlantHeightUndergrowth = item.PlantHeightUndergrowth,
+                    PlantProjcoverUndergrowth = item.PlantProjcoverUndergrowth,
+                    FUsrAdd = item.FUsrAdd,
+                    PlantData = item.PlantData,
+                    PlantStands = item.PlantStands,
+                    PlantUndergrowth = item.PlantUndergrowth,
+                    PlantBush = item.PlantBush,
+                    PlantGroundcover = item.PlantGroundcover,
+                    PlantSanitarycondition = item.PlantSanitarycondition,
+                    PlantHumanimpact = item.PlantHumanimpact,
+                    PlantSmallbush = item.PlantSmallbush,
+                    PlantProjcoverGroundcover = item.PlantProjcoverGroundcover,
+                    PlantDensityBush = item.PlantDensityBush
+                };
+
+            }
+            data.Clear();
+            return plant;
+        }
+
+
         /// <summary>
         /// Читаем из базы данных все справочники по грунту и почве
         /// </summary>
@@ -1246,7 +1436,168 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
 
         }
+
+        /// <summary>
+        /// Читаем из базы данных все справочники по Растительности
+        /// </summary>
+        private void QueryDataBaseGuidePlant()
+        {         if(plant is not null)
+            {
+                // Получаем данные по справочнику Густоты леса
+                _plantforestdensities = db.GuideForestDensities.AsNoTracking().ToObservableCollection();
+                // Выводим выбранный элемент густоты леса
+                SelectedPlantForestDensities = _plantforestdensities.FirstOrDefault( p => p.IdDforest == plant.PlantForestDensity );
+
+                // Получаем данные по справочнику Высоты подроста
+                _plantheightundergrowt = db.GuideHeightUndergrowths.AsNoTracking().ToObservableCollection();
+                // Выводим выбранный элемент Высоты подроста
+                SelectedPlantHeightUndergrowt = _plantheightundergrowt.FirstOrDefault(p => p.IdHeight == plant.PlantHeightUndergrowth );
+
+                // Получаем данные по справочнику проективное покрытие подроста
+                _plantprojcoverundergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
+
+                // Выводим выбранный элемент проективное покрытие подроста
+                SelectedPlantProjcoverUndergrowth = _plantprojcoverundergrowth.FirstOrDefault(p => p.IdPrjUnder == plant.PlantProjcoverUndergrowth  && plant.PlantProjcoverUndergrowth is not null);
+
+                // Получаем данные по справочнику Густота кустарника
+                _plantdensitybush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
+                // Выводим выбранный элемент ГУстота кустарника
+                SelectedPlantDensityBush = _plantdensitybush.FirstOrDefault(p => p.IdDbush == plant.PlantDensityBush && plant.PlantDensityBush is not null);
+
+                //Проективное покрытие напочвенного покрова
+                _prjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
+                SelectedPlantPrjGround = _prjGround.FirstOrDefault(p => p.IdPrjGround == plant.PlantProjcoverGroundcover );
+
+                // санитрное состояние
+                PSanitar = AddGuideExpander(plant.PlantSanitarycondition, PSanitar, "Санитарное");
+                //Антропогенное воздействие
+                PHumanimpact = AddGuideExpander(plant.PlantHumanimpact, PHumanimpact, "Антропогоенное");
+                //Кустарник
+                PBush = AddGuideExpander(plant.PlantBush, PBush, 2);
+                //Древостой
+                PStands = AddGuideExpander(plant.PlantStands, PStands, 1);
+                //Кустарничек
+                PSmallbush = AddGuideExpander(plant.PlantSmallbush, PSmallbush, 4);
+                //Подрост
+                PUndergrowth = AddGuideExpander(plant.PlantUndergrowth, PUndergrowth, 1);
+                //Напочвенный покров
+                PGroundcoverh = AddGuideExpander(plant.PlantGroundcover, PGroundcoverh, 3);
+
+            }
+        }
+        /// <summary>
+        /// Заполнение коллекции типа ObservableCollection<Node> из справочника GuidePlants(Растительность)
+        /// </summary>
+        /// <param name="str">Строка, в которой лежит несколько элементов в виде ID объекта через  ';' </param>
+        /// <param name="nodecoll">Заполняемая коллекция</param>
+        /// <param name="typePlant">Тип раститительности</param>
+        /// <returns>Возвращение заполнениной коллекции</returns>
+        private ObservableCollection<Node> AddGuideExpander(string str, ObservableCollection<Node> nodecoll, int typePlant)
+        {
+            var gplants = db.GuidePlants.AsNoTracking().ToList();
+            nodecoll.Clear();
+            if (!string.IsNullOrEmpty(str))
+            {
+                str.TrimEnd(';');
+                var array = str.Split(';');
+                foreach (var item in gplants)
+                {
+                    if (typePlant == item.FTypePlant)
+                    {
+                        for (int i = 0; i < array.Length; i++)
+                        {
+                            if (array[i] != "")
+                            {
+                                if (Convert.ToInt32(array[i]) == item.IdPlant)
+                                {
+                                    nodecoll.Add(new Node(item.NamePlant, true));
+                                }
+                            }
+                        }
+                        var b = nodecoll.Contains(t => t.Title == item.NamePlant);
+                        if (!b)
+                            nodecoll.Add(new Node(item.NamePlant, false));
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in gplants)
+                {
+                    nodecoll.Add(new Node(item.NamePlant, false));
+                }
+            }
+            gplants.Clear();
+            return nodecoll;
+        }
+
+        /// <summary>
+        /// Заполнение коллекции типа ObservableCollection<Node> данными из справочника GuideSanitaryconditions (санитарное состояние) и GuideHumanimpacts(Антропогоенное воздействие)
+        /// </summary>
+        /// <param name="str"> Строка, в которой лежит несколько элементов в виде ID объекта через ';' </param>
+        /// <param name="nodecoll"> Заполняемая коллекция</param>     
+        /// <returns>Возвращение заполнениной коллекции</returns>
+        private ObservableCollection<Node> AddGuideExpander(string str, ObservableCollection<Node> nodecoll, string guide)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                str.TrimEnd(';');
+                var array = str.Split(';');
+                switch (guide)
+                {
+                    case "Санитарное":
+                        var gsanitar = db.GuideSanitaryconditions.AsNoTracking().ToList();
+                        foreach (var item in gsanitar)
+                        {
+                            for (int i = 0; i < array.Length; i++)
+                            {
+                                if (array[i] != "")
+                                {
+
+
+                                    if (Convert.ToInt32(array[i]) == item.IdSanitar)
+                                    {
+                                        nodecoll.Add(new Node(item.NameSanitar, true));
+                                    }
+                                }
+
+                            }
+                            var b = nodecoll.Contains(t => t.Title == item.NameSanitar);
+                            if (!b)
+                                nodecoll.Add(new Node(item.NameSanitar, false));
+                        }
+                        break;
+                    case "Антропогоенное":
+                        var ghum = db.GuideHumanimpacts.AsNoTracking().ToList();
+                        foreach (var item in ghum)
+                        {
+                            for (int i = 0; i < array.Length; i++)
+                            {
+                                if (array[i] != "")
+                                {
+                                    if (Convert.ToInt32(array[i]) == item.IdHumanimpact)
+                                    {
+                                        nodecoll.Add(new Node(item.NameHumanimpact, true));
+                                    }
+                                }
+
+                            }
+                            var b = nodecoll.Contains(t => t.Title == item.NameHumanimpact);
+                            if (!b)
+                                nodecoll.Add(new Node(item.NameHumanimpact, false));
+                        }
+                        break;
+
+                }
+
+            }
+            return nodecoll;
+
+        }
+
         #endregion
+
+
         // ---------------------------------------------------------------------------------------------------------------------
 
         public InfoPointObservationViewModel(NavigationManager navigationmaneger)
@@ -1263,4 +1614,32 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             ShowCoordinatDeсimal = true;
         }
     }
+    /// <summary>
+    /// Класс предназначенный для списков отображающие чекбоксами элементы 
+    /// </summary>
+    class Node : ViewModel
+    {
+        public Node(string title, bool selected)
+        {
+            Title = title;
+            Selected = selected;
+        }
+        private string _title;
+
+        public string Title
+        {
+            get => _title;
+            set => Set(ref _title, value);
+        }
+        private bool _isSelected;
+
+        public bool Selected
+        {
+            get => _isSelected;
+            set => Set(ref _isSelected, value);
+        }
+
+
+    }
+
 }
