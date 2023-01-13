@@ -23,14 +23,23 @@ namespace GeocomplexCore.DAL.Context
         public virtual DbSet<Ground> Grounds { get; set; } = null!;
         public virtual DbSet<GuideBreed> GuideBreeds { get; set; } = null!;
         public virtual DbSet<GuideColor> GuideColors { get; set; } = null!;
+        public virtual DbSet<GuideDensityBush> GuideDensityBushes { get; set; } = null!;
         public virtual DbSet<GuideEgpelement> GuideEgpelements { get; set; } = null!;
+        public virtual DbSet<GuideForestDensity> GuideForestDensities { get; set; } = null!;
         public virtual DbSet<GuideFormareliefa> GuideFormareliefas { get; set; } = null!;
         public virtual DbSet<GuideFormariver> GuideFormarivers { get; set; } = null!;
         public virtual DbSet<GuideGroupprocce> GuideGroupprocces { get; set; } = null!;
+        public virtual DbSet<GuideHeightUndergrowth> GuideHeightUndergrowths { get; set; } = null!;
         public virtual DbSet<GuideHeightreliefa> GuideHeightreliefas { get; set; } = null!;
+        public virtual DbSet<GuideHumanimpact> GuideHumanimpacts { get; set; } = null!;
+        public virtual DbSet<GuidePlant> GuidePlants { get; set; } = null!;
+        public virtual DbSet<GuideProjcoverGroundcover> GuideProjcoverGroundcovers { get; set; } = null!;
+        public virtual DbSet<GuideProjcoverUndergrowth> GuideProjcoverUndergrowths { get; set; } = null!;
+        public virtual DbSet<GuideSanitarycondition> GuideSanitaryconditions { get; set; } = null!;
         public virtual DbSet<GuideSlope> GuideSlopes { get; set; } = null!;
         public virtual DbSet<GuideSprexposition> GuideSprexpositions { get; set; } = null!;
         public virtual DbSet<GuideSubtypereliefa> GuideSubtypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideTypePlant> GuideTypePlants { get; set; } = null!;
         public virtual DbSet<GuideTypebreed> GuideTypebreeds { get; set; } = null!;
         public virtual DbSet<GuideTypeprocess> GuideTypeprocesses { get; set; } = null!;
         public virtual DbSet<GuideTypereliefa> GuideTypereliefas { get; set; } = null!;
@@ -38,6 +47,7 @@ namespace GeocomplexCore.DAL.Context
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
         public virtual DbSet<PhotoWaterintake> PhotoWaterintakes { get; set; } = null!;
+        public virtual DbSet<Plant> Plants { get; set; } = null!;
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Route> Routes { get; set; } = null!;
         public virtual DbSet<StreetWaterpipe> StreetWaterpipes { get; set; } = null!;
@@ -62,20 +72,17 @@ namespace GeocomplexCore.DAL.Context
             {
                 if (!optionsBuilder.IsConfigured)
                 {
-                    if (!optionsBuilder.IsConfigured)
-                    {
-                        var builder = new ConfigurationBuilder();
-                        // установка пути к текущему каталогу
-                        builder.SetBasePath(Directory.GetCurrentDirectory());
-                        // получаем конфигурацию из файла appsettings.json
-                        builder.AddJsonFile("appsetting.json");
-                        // создаем конфигурацию
-                        var config = builder.Build();
-                        // получаем строку подключения
-                        string connectionString = config.GetConnectionString("DefaultConnection");
+                    var builder = new ConfigurationBuilder();
+                    // установка пути к текущему каталогу
+                    builder.SetBasePath(Directory.GetCurrentDirectory());
+                    // получаем конфигурацию из файла appsettings.json
+                    builder.AddJsonFile("appsetting.json");
+                    // создаем конфигурацию
+                    var config = builder.Build();
+                    // получаем строку подключения
+                    string connectionString = config.GetConnectionString("DefaultConnection");
 
-                        optionsBuilder.UseNpgsql(connectionString);
-                    }
+                    optionsBuilder.UseNpgsql(connectionString);
                 }
             }
         }
@@ -343,6 +350,24 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.WaterColor).HasColumnName("water_color");
             });
 
+            modelBuilder.Entity<GuideDensityBush>(entity =>
+            {
+                entity.HasKey(e => e.IdDbush)
+                    .HasName("guide.density_bush_pkey");
+
+                entity.ToTable("guide.density_bush");
+
+                entity.HasComment("Справочник густота кустарников");
+
+                entity.Property(e => e.IdDbush)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_dbush");
+
+                entity.Property(e => e.NameDbush)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_dbush");
+            });
+
             modelBuilder.Entity<GuideEgpelement>(entity =>
             {
                 entity.HasKey(e => e.IdEgpelement)
@@ -359,6 +384,24 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.NameEgpelement)
                     .HasMaxLength(50)
                     .HasColumnName("name_egpelement");
+            });
+
+            modelBuilder.Entity<GuideForestDensity>(entity =>
+            {
+                entity.HasKey(e => e.IdDforest)
+                    .HasName("guide.forest_density_pkey");
+
+                entity.ToTable("guide.forest_density");
+
+                entity.HasComment("Справочник густота леса");
+
+                entity.Property(e => e.IdDforest)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_dforest");
+
+                entity.Property(e => e.NameDforest)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_dforest");
             });
 
             modelBuilder.Entity<GuideFormareliefa>(entity =>
@@ -415,6 +458,24 @@ namespace GeocomplexCore.DAL.Context
                     .HasColumnName("name_groupprocess");
             });
 
+            modelBuilder.Entity<GuideHeightUndergrowth>(entity =>
+            {
+                entity.HasKey(e => e.IdHeight)
+                    .HasName("guide.height_undergrowth_pkey");
+
+                entity.ToTable("guide.height_undergrowth");
+
+                entity.HasComment("Справочник высоты подроста");
+
+                entity.Property(e => e.IdHeight)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_height");
+
+                entity.Property(e => e.NameHeight)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_height");
+            });
+
             modelBuilder.Entity<GuideHeightreliefa>(entity =>
             {
                 entity.HasKey(e => e.IdHeightreliefa)
@@ -431,6 +492,106 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.NameHeightreliefa)
                     .HasMaxLength(100)
                     .HasColumnName("name_heightreliefa");
+            });
+
+            modelBuilder.Entity<GuideHumanimpact>(entity =>
+            {
+                entity.HasKey(e => e.IdHumanimpact)
+                    .HasName("guide.humanimpact_pkey");
+
+                entity.ToTable("guide.humanimpact");
+
+                entity.HasComment("Справочник Антропогенное воздействие");
+
+                entity.Property(e => e.IdHumanimpact)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_humanimpact");
+
+                entity.Property(e => e.NameHumanimpact)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_humanimpact");
+            });
+
+            modelBuilder.Entity<GuidePlant>(entity =>
+            {
+                entity.HasKey(e => e.IdPlant)
+                    .HasName("guide.plants_pkey");
+
+                entity.ToTable("guide.plants");
+
+                entity.HasComment("Справочник растительности");
+
+                entity.Property(e => e.IdPlant)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_plant");
+
+                entity.Property(e => e.FTypePlant)
+                    .HasColumnName("f_type_plant")
+                    .HasComment("ID тип растительности");
+
+                entity.Property(e => e.NamePlant)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_plant");
+
+                entity.HasOne(d => d.FTypePlantNavigation)
+                    .WithMany(p => p.GuidePlants)
+                    .HasForeignKey(d => d.FTypePlant)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_id_type_plant");
+            });
+
+            modelBuilder.Entity<GuideProjcoverGroundcover>(entity =>
+            {
+                entity.HasKey(e => e.IdPrjGround)
+                    .HasName("guide.projcover_groundcover_pkey");
+
+                entity.ToTable("guide.projcover_groundcover");
+
+                entity.HasComment("Справочник проективное покрытие напочвенный покров(трава)");
+
+                entity.Property(e => e.IdPrjGround)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_prj_ground");
+
+                entity.Property(e => e.NamePrjGround)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_prj_ground");
+            });
+
+            modelBuilder.Entity<GuideProjcoverUndergrowth>(entity =>
+            {
+                entity.HasKey(e => e.IdPrjUnder)
+                    .HasName("guide.projcover_undergrowth_pkey");
+
+                entity.ToTable("guide.projcover_undergrowth");
+
+                entity.HasComment("Справочник проективное покрытие подроста");
+
+                entity.Property(e => e.IdPrjUnder)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_prj_under");
+
+                entity.Property(e => e.NamePrjUnder)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_prj_under");
+            });
+
+            modelBuilder.Entity<GuideSanitarycondition>(entity =>
+            {
+                entity.HasKey(e => e.IdSanitar)
+                    .HasName("guide.sanitarycondition_pkey");
+
+                entity.ToTable("guide.sanitarycondition");
+
+                entity.HasComment("Справочник санитарное состояние");
+
+                entity.Property(e => e.IdSanitar)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_sanitar");
+
+                entity.Property(e => e.NameSanitar)
+                    .HasMaxLength(60)
+                    .HasColumnName("name_sanitar");
             });
 
             modelBuilder.Entity<GuideSlope>(entity =>
@@ -485,6 +646,24 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.NameSubtypereliefa)
                     .HasColumnType("character varying")
                     .HasColumnName("name_subtypereliefa");
+            });
+
+            modelBuilder.Entity<GuideTypePlant>(entity =>
+            {
+                entity.HasKey(e => e.IdTypePlant)
+                    .HasName("guide.type_plant_pkey");
+
+                entity.ToTable("guide.type_plant");
+
+                entity.HasComment("Справочник тип растительности");
+
+                entity.Property(e => e.IdTypePlant)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_type_plant");
+
+                entity.Property(e => e.NameTypePlant)
+                    .HasMaxLength(50)
+                    .HasColumnName("name_type_plant");
             });
 
             modelBuilder.Entity<GuideTypebreed>(entity =>
@@ -623,6 +802,115 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.PhotoWaterintakePath)
                     .HasMaxLength(1000)
                     .HasColumnName("photo_waterintake_path");
+            });
+
+            modelBuilder.Entity<Plant>(entity =>
+            {
+                entity.ToTable("plants");
+
+                entity.HasComment("Раститетельность");
+
+                entity.Property(e => e.PlantId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("plant_id");
+
+                entity.Property(e => e.FUsrAdd).HasColumnName("f_usr_add");
+
+                entity.Property(e => e.FWatchpoint).HasColumnName("f_watchpoint");
+
+                entity.Property(e => e.PlantBush)
+                    .HasMaxLength(25)
+                    .HasColumnName("plant_bush")
+                    .HasComment("Кустарник");
+
+                entity.Property(e => e.PlantData)
+                    .HasColumnName("plant_data")
+                    .HasComment("Дата добавления");
+
+                entity.Property(e => e.PlantDensityBush)
+                    .HasColumnName("plant_density_bush")
+                    .HasComment("Густота кустарников");
+
+                entity.Property(e => e.PlantForestDensity)
+                    .HasColumnName("plant_forest_density")
+                    .HasComment("Густота леса");
+
+                entity.Property(e => e.PlantGroundcover)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_groundcover")
+                    .HasComment("Напочвенный покров (трава)");
+
+                entity.Property(e => e.PlantHeightUndergrowth)
+                    .HasColumnName("plant_height_undergrowth")
+                    .HasComment("Высота подроста");
+
+                entity.Property(e => e.PlantHumanimpact)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_humanimpact")
+                    .HasComment("Антропогенное воздействие");
+
+                entity.Property(e => e.PlantProjcoverGroundcover)
+                    .HasColumnName("plant_projcover_groundcover")
+                    .HasComment("Проективное покрытие напочвенный покров (трава)");
+
+                entity.Property(e => e.PlantProjcoverUndergrowth)
+                    .HasColumnName("plant_projcover_undergrowth")
+                    .HasComment("Проективное покрытие подроста");
+
+                entity.Property(e => e.PlantSanitarycondition)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_sanitarycondition")
+                    .HasComment("Санитарное состояние");
+
+                entity.Property(e => e.PlantSmallbush)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_smallbush")
+                    .HasComment("Кустарничек");
+
+                entity.Property(e => e.PlantStands)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_stands")
+                    .HasComment("Древостой");
+
+                entity.Property(e => e.PlantUndergrowth)
+                    .HasMaxLength(50)
+                    .HasColumnName("plant_undergrowth")
+                    .HasComment("Подрост");
+
+                entity.HasOne(d => d.FUsrAddNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.FUsrAdd)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_user_id");
+
+                entity.HasOne(d => d.FWatchpointNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.FWatchpoint)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_wpoint_id");
+
+                entity.HasOne(d => d.PlantForestDensityNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.PlantForestDensity)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_forest_density_id");
+
+                entity.HasOne(d => d.PlantHeightUndergrowthNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.PlantHeightUndergrowth)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_height_undergrowth_id");
+
+                entity.HasOne(d => d.PlantProjcoverGroundcoverNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.PlantProjcoverGroundcover)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("f_projcover_groundcover");
+
+                entity.HasOne(d => d.PlantProjcoverUndergrowthNavigation)
+                    .WithMany(p => p.Plants)
+                    .HasForeignKey(d => d.PlantProjcoverUndergrowth)
+                    .HasConstraintName("f_projcover_undergrowth_id");
             });
 
             modelBuilder.Entity<Project>(entity =>

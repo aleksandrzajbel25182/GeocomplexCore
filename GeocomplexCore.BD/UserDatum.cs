@@ -13,6 +13,7 @@ namespace GeocomplexCore.DAL
             Districts = new HashSet<District>();
             Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
+            Plants = new HashSet<Plant>();
             Routes = new HashSet<Route>();
             Techobjects = new HashSet<Techobject>();
             Watchpoints = new HashSet<Watchpoint>();
@@ -27,6 +28,7 @@ namespace GeocomplexCore.DAL
         public virtual ICollection<District> Districts { get; set; }
         public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
+        public virtual ICollection<Plant> Plants { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
         public virtual ICollection<Techobject> Techobjects { get; set; }
         public virtual ICollection<Watchpoint> Watchpoints { get; set; }
