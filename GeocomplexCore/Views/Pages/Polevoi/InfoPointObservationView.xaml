@@ -510,7 +510,8 @@
                                                       VerticalAlignment="Top"
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding Egpgroupprocess}"
-                                                      SelectedItem="{Binding SelectedGroupprocce}" />
+                                                      SelectedItem="{Binding SelectedGroupprocce}"
+                                                      DisplayMemberPath="NameGroupprocess"/>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Тип процесса"
                                                       IsEnabled="False"
@@ -519,7 +520,8 @@
                                                       VerticalAlignment="Top"
                                                       Margin="50,20,0,0"
                                                       ItemsSource="{Binding Egptypeprocess}"
-                                                      SelectedItem="{Binding SelectedTypeprocess}" />
+                                                      SelectedItem="{Binding SelectedTypeprocess}"
+                                                      DisplayMemberPath="NameTypeprocess"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="1">
@@ -579,7 +581,8 @@
                                                       Width="250"
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding EgpElement}"
-                                                      SelectedItem="{Binding SelectedEgpElement}" />
+                                                      SelectedItem="{Binding SelectedEgpElement}"
+                                                      DisplayMemberPath="NameEgpelement"/>
                                         </StackPanel>
 
                                     </Grid>

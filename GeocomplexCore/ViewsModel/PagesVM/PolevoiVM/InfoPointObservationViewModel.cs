@@ -239,71 +239,113 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #region Список Форма рельефа
         private ObservableCollection<GuideFormareliefa> _formareliefa = new ObservableCollection<GuideFormareliefa>();
+        /// <summary>
+        /// Форма рельефа
+        /// </summary>
         public ObservableCollection<GuideFormareliefa> Formareliefa
         {
             get => _formareliefa;
             set { _formareliefa = value; }
         }
+        /// <summary>
+        /// Выбранная Форма рельефа
+        /// </summary>
         public GuideFormareliefa SelectedFormarelirfa { get; set; }
         #endregion
 
         #region Cписок Тип рельефа 
         private ObservableCollection<GuideTypereliefa> _typereliefa = new ObservableCollection<GuideTypereliefa>();
+        /// <summary>
+        /// Список рельефа
+        /// </summary>
         public ObservableCollection<GuideTypereliefa> Typereliefa
         {
             get => _typereliefa;
             set { _typereliefa = value; }
         }
+        /// <summary>
+        /// Выбранный Список рельефа
+        /// </summary>
         public GuideTypereliefa SelectedTypereliefa { get; set; }
         #endregion
 
         #region Список Подтип рельефа
         private ObservableCollection<GuideSubtypereliefa> _sybtypereliefa = new ObservableCollection<GuideSubtypereliefa>();
+        /// <summary>
+        /// Подтип рельефа
+        /// </summary>
         public ObservableCollection<GuideSubtypereliefa> Sybtypereliefa
         {
             get => _sybtypereliefa;
             set { _sybtypereliefa = value; }
         }
+        /// <summary>
+        /// Выбранный Подтип рельефа
+        /// </summary>
         public GuideSubtypereliefa SelectedSybtypereliefa { get; set; }
         #endregion
 
         #region Список Высотность рельефа
         private ObservableCollection<GuideHeightreliefa> _heightreliefa = new ObservableCollection<GuideHeightreliefa>();
+        /// <summary>
+        /// Высотность рельефа
+        /// </summary>
         public ObservableCollection<GuideHeightreliefa> Heightreliefa
         {
             get => _heightreliefa;
             set { _ = value; }
         }
+        /// <summary>
+        /// Выбранная Высотность рельефа
+        /// </summary>
         public GuideHeightreliefa SelectedHeightreliefa { get; set; }
         #endregion
 
         #region Список Экспозиция
         private ObservableCollection<GuideSprexposition> _exposition = new ObservableCollection<GuideSprexposition>();
+        /// <summary>
+        /// Экспозиция
+        /// </summary>
         public ObservableCollection<GuideSprexposition> Exposition
         {
             get => _exposition;
             set { _exposition = value; }
         }
+        /// <summary>
+        /// Выбранная Экспозиция
+        /// </summary>
         public GuideSprexposition SelectedExposition { get; set; }
         #endregion
 
         #region Список Крутизна склона
         private ObservableCollection<GuideSlope> _slope = new ObservableCollection<GuideSlope>();
+        /// <summary>
+        /// Крутизна склона
+        /// </summary>
         public ObservableCollection<GuideSlope> Slope
         {
             get => _slope;
             set { _slope = value; }
         }
+        /// <summary>
+        /// Выбранная Крутизна склона
+        /// </summary>
         public GuideSlope SelectedSlope { get; set; }
         #endregion
 
         #region Список Форма речной долины
         private ObservableCollection<GuideFormariver> _formariver = new ObservableCollection<GuideFormariver>();
+        /// <summary>
+        /// Форма речной долины
+        /// </summary>
         public ObservableCollection<GuideFormariver> Formariver
         {
             get => _formariver;
             set { _formariver = value; }
         }
+        /// <summary>
+        /// Выбранная Форма речной долины
+        /// </summary>
         public GuideFormariver SelectedFormariver { get; set; }
         #endregion
         #endregion
@@ -335,12 +377,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #region Список Породы
         private ObservableCollection<GuideBreed> _groundBreed = new ObservableCollection<GuideBreed>();
+        /// <summary>
+        /// Список породы
+        /// </summary>
         public ObservableCollection<GuideBreed> GroundBreed
         {
             get => _groundBreed;
 
             set { _groundBreed = value; }
         }
+        /// <summary>
+        /// Выбранный список породы
+        /// </summary>
         public GuideBreed SelectedGroundBreed { get; set; }
         #endregion
 
@@ -351,12 +399,18 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             get => _groundDopcolor;
             set { _groundDopcolor = value; }
         }
+        /// <summary>
+        /// Выбранный Оттенок
+        /// </summary>
         public GuideColor SelectedGroundDopcolor { get; set; }
         #endregion
 
 
         #region Список Цвета
         private ObservableCollection<GuideColor> _groundColor = new ObservableCollection<GuideColor>();
+        /// <summary>
+        /// Список цвета
+        /// </summary>
         public ObservableCollection<GuideColor> GroundColor
         {
             get => _groundColor;
@@ -472,10 +526,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #region ЭГП
 
+
+        private ObservableCollection<GuideGroupprocce> _egpgroupprocess = new ObservableCollection<GuideGroupprocce>();
         /// <summary>
         /// /Группа процессов
         /// </summary>
-        private ObservableCollection<GuideGroupprocce> _egpgroupprocess = new ObservableCollection<GuideGroupprocce>();
         public ObservableCollection<GuideGroupprocce> Egpgroupprocess
         {
             get => _egpgroupprocess;
@@ -486,10 +541,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// </summary>
         public GuideGroupprocce SelectedGroupprocce { get; set; }
 
+
+        private ObservableCollection<GuideTypeprocess> _egptypeprocess = new ObservableCollection<GuideTypeprocess>();
         /// <summary>
         /// ЭГП тип Процесса
         /// </summary>
-        private ObservableCollection<GuideTypeprocess> _egptypeprocess = new ObservableCollection<GuideTypeprocess>();
         public ObservableCollection<GuideTypeprocess> Egptypeprocess
         {
             get => _egptypeprocess;
@@ -500,12 +556,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// </summary>
         public GuideTypeprocess SelectedTypeprocess { get; set; }
 
+
+        private ObservableCollection<GuideEgpelement> _egpElement = new ObservableCollection<GuideEgpelement>();
         /// <summary>
         /// Вторичный элемент ЭГП
         /// </summary>
-        private ObservableCollection<GuideEgpelement> _egpElement = new ObservableCollection<GuideEgpelement>();
         public ObservableCollection<GuideEgpelement> EgpElement
-
         {
             get => _egpElement;
             set { _egpElement = value; }
@@ -1015,8 +1071,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             }
         }
 
-
-
         /// <summary>
         /// Принимаем переменную переданную из другой страницы
         /// </summary>
@@ -1120,9 +1174,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             var data = db.Egps
                .Where(w => w.FWpointId == watchpoint.WpointId)
-               .Include(f => f.FEgpelementNavigation)
-               .Include(fg => fg.FGroupprocessNavigation)
-               .Include(ft => ft.FTypeprocessNavigation)
                .Include(fv => fv.FVidprocessNavigation)
                .Include(us => us.FUser)
                .ToList();
@@ -1140,9 +1191,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                     EgpVolume = item.EgpVolume,
                     EgpWidth = item.EgpWidth,
                     DataEgp = item.DataEgp,
-                    FEgpelementNavigation = item.FEgpelementNavigation,
-                    FGroupprocessNavigation = item.FGroupprocessNavigation,
-                    FTypeprocessNavigation = item.FTypeprocessNavigation,
+                    FEgpelement = item.FEgpelement,
+                    FGroupprocess = item.FGroupprocess,
+                    FTypeprocess = item.FTypeprocess,
                     FVidprocessNavigation = item.FVidprocessNavigation,
                     FUser = item.FUser
 
@@ -1206,7 +1257,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             return plant;
         }
 
-
         /// <summary>
         /// Читаем из базы данных все справочники по грунту и почве
         /// </summary>
@@ -1214,22 +1264,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             if (ground is not null)
             {
-                var gbreeds = db.GuideBreeds.AsNoTracking().ToList();
-                foreach (var item in gbreeds)
-                {
-                    _groundBreed.Add(new GuideBreed
-                    {
-                        IdBreed = item.IdBreed,
-                        NameBreed = item.NameBreed,
-                        NamersBred = item.NamersBred
-                    });
-                }
-                gbreeds.Clear();
-                for (int i = 0; i < _groundBreed.Count; i++)
-                {
-                    if (_groundBreed[i].IdBreed == ground.FBreedId && ground.FBreedId is not null)
-                        SelectedGroundBreed = _groundBreed[i];
-                }
+                GroundBreed = db.GuideBreeds.AsNoTracking().ToObservableCollection();
+                SelectedGroundBreed = GroundBreed.FirstOrDefault(g => g.IdBreed == ground.FBreedId && ground.FBreedId is not null);
 
                 var data = db.GuideColors.AsNoTracking().ToList();
                 foreach (var item in data)
@@ -1249,15 +1285,12 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                         SelectedGroundColor = _groundColor[i];
                 }
                 data.Clear();
+
                 //Выбранный список оттенка
                 if (ground.FDopcolor is not null)
                 {
-                    int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
-                    for (int i = 0; i < _groundDopcolor.Count; i++)
-                    {
-                        if (_groundDopcolor[i].IdColor == dpc)
-                            SelectedGroundDopcolor = _groundDopcolor[i];
-                    }
+                    int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));                    
+                    SelectedGroundDopcolor = _groundDopcolor.FirstOrDefault(dp=> dp.IdColor == dpc);
                 }
             }
         }
@@ -1266,117 +1299,28 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// </summary>
         private void QueryDataBaseGuideGeomorColumn()
         {
-            var gformrelief = db.GuideFormareliefas.AsNoTracking().ToList();
-            foreach (var item in gformrelief)
-            {
-                _formareliefa.Add(new GuideFormareliefa
-                {
-                    IdFormareliefa = item.IdFormareliefa,
-                    NameFormareliefa = item.NameFormareliefa
-                });
-            }
-            gformrelief.Clear();
-            for (int i = 0; i < _formareliefa.Count; i++)
-            {
-                if (_formareliefa[i].IdFormareliefa == watchpoint.IdFormareliefa && watchpoint.IdFormareliefa is not null)
-                    SelectedFormarelirfa = _formareliefa[i];
-            }
+            Formareliefa = db.GuideFormareliefas.AsNoTracking().ToObservableCollection();
+            SelectedFormarelirfa = Formareliefa.FirstOrDefault(f => f.IdFormareliefa == watchpoint.IdFormareliefa && watchpoint.IdFormareliefa is not null);
 
-            var gtyperelief = db.GuideTypereliefas.AsNoTracking().ToList();
-            foreach (var item in gtyperelief)
-            {
-                _typereliefa.Add(new GuideTypereliefa
-                {
-                    IdTypereliefa = item.IdTypereliefa,
-                    NameTypereliefa = item.NameTypereliefa
-                });
-            }
-            for (int i = 0; i < _typereliefa.Count; i++)
-            {
-                if (_typereliefa[i].IdTypereliefa == watchpoint.IdTypereliefa && watchpoint.IdTypereliefa is not null)
-                    SelectedTypereliefa = _typereliefa[i];
-            }
-            gtyperelief.Clear();
+            Typereliefa = db.GuideTypereliefas.AsNoTracking().ToObservableCollection();
+            SelectedTypereliefa = Typereliefa.FirstOrDefault(t => t.IdTypereliefa == watchpoint.IdTypereliefa && watchpoint.IdTypereliefa is not null);
 
-            var gheihtrelief = db.GuideHeightreliefas.AsNoTracking().ToList();
-            foreach (var item in gheihtrelief)
-            {
-                _heightreliefa.Add(new GuideHeightreliefa
-                {
-                    IdHeightreliefa = item.IdHeightreliefa,
-                    NameHeightreliefa = item.NameHeightreliefa
-                });
-            }
-            for (int i = 0; i < _heightreliefa.Count; i++)
-            {
-                if (_heightreliefa[i].IdHeightreliefa == watchpoint.IdHeightreliefa && watchpoint.IdHeightreliefa is not null)
-                    SelectedHeightreliefa = _heightreliefa[i];
-            }
+            Heightreliefa = db.GuideHeightreliefas.AsNoTracking().ToObservableCollection();
+            SelectedHeightreliefa = Heightreliefa.FirstOrDefault(h => h.IdHeightreliefa == watchpoint.IdHeightreliefa && watchpoint.IdHeightreliefa is not null);
 
-            var gsubtyprerelief = db.GuideSubtypereliefas.AsNoTracking().ToList();
-            foreach (var item in gsubtyprerelief)
-            {
-                _sybtypereliefa.Add(new GuideSubtypereliefa
-                {
-                    IdSubtypereliefa = item.IdSubtypereliefa,
-                    NameSubtypereliefa = item.NameSubtypereliefa
-                });
-            }
-            gsubtyprerelief.Clear();
-            for (int i = 0; i < _sybtypereliefa.Count; i++)
-            {
-                if (_sybtypereliefa[i].IdSubtypereliefa == watchpoint.IdSubtypereliefa && watchpoint.IdSubtypereliefa is not null)
-                    SelectedSybtypereliefa = _sybtypereliefa[i];
-            }
+            Sybtypereliefa = db.GuideSubtypereliefas.AsNoTracking().ToObservableCollection();
+            SelectedSybtypereliefa = Sybtypereliefa.FirstOrDefault(s => s.IdSubtypereliefa == watchpoint.IdSubtypereliefa && watchpoint.IdSubtypereliefa is not null);
 
-            var gsprexposit = db.GuideSprexpositions.AsNoTracking().ToList();
-            foreach (var item in gsprexposit)
-            {
-                _exposition.Add(new GuideSprexposition
-                {
-                    IdSprexposition = item.IdSprexposition,
-                    NameSprexposition = item.NameSprexposition
-                });
-            }
-            gsprexposit.Clear();
-            for (int i = 0; i < _exposition.Count; i++)
-            {
-                if (_exposition[i].IdSprexposition == watchpoint.IdExposition && watchpoint.IdExposition is not null)
-                    SelectedExposition = _exposition[i];
-            }
+            Exposition = db.GuideSprexpositions.AsNoTracking().ToObservableCollection();
+            SelectedExposition = Exposition.FirstOrDefault(e => e.IdSprexposition == watchpoint.IdExposition && watchpoint.IdExposition is not null);
 
-            var gslpoes = db.GuideSlopes.AsNoTracking().ToList();
-            foreach (var item in gslpoes)
-            {
-                _slope.Add(new GuideSlope
-                {
-                    IdSlope = item.IdSlope,
-                    NameSlope = item.NameSlope
-                });
-            }
-            gslpoes.Clear();
-            for (int i = 0; i < _slope.Count; i++)
-            {
-                if (_slope[i].IdSlope == watchpoint.IdSlope && watchpoint.IdSlope is not null)
-                    SelectedSlope = _slope[i];
-            }
+            Slope = db.GuideSlopes.AsNoTracking().ToObservableCollection();
+            SelectedSlope = Slope.FirstOrDefault(sl => sl.IdSlope == watchpoint.IdSlope && watchpoint.IdSlope is not null);
 
-            var gformrivers = db.GuideFormarivers.AsNoTracking().ToList();
-            foreach (var item in gformrivers)
-            {
-                _formariver.Add(new GuideFormariver
-                {
-                    IdFormariver = item.IdFormariver,
-                    NameFormariver = item.NameFormariver
-                });
-            }
-            gformrivers.Clear();
-            for (int i = 0; i < _formariver.Count; i++)
-            {
-                if (_formariver[i].IdFormariver == watchpoint.IdFormariver && watchpoint.IdFormariver is not null)
-                    SelectedFormariver = _formariver[i];
-            }
+            Formariver = db.GuideFormarivers.AsNoTracking().ToObservableCollection();
+            SelectedFormariver = Formariver.FirstOrDefault(f => f.IdFormariver == watchpoint.IdFormariver && watchpoint.IdFormariver is not null);
         }
+
         /// <summary>
         /// Читаем из базы данных все справочники по ЭГП 
         /// </summary>
@@ -1384,55 +1328,14 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         {
             if (egp is not null)
             {
-                var ggroupprocces = db.GuideGroupprocces.AsNoTracking().ToList();
-                foreach (var item in ggroupprocces)
-                {
-                    _egpgroupprocess.Add(new GuideGroupprocce
-                    {
-                        IdGroupprocces = item.IdGroupprocces,
-                        NameGroupprocess = item.NameGroupprocess
-                    });
-                }
-                ggroupprocces.Clear();
-                for (int i = 0; i < _egpgroupprocess.Count; i++)
-                {
-                    if (_egpgroupprocess[i].IdGroupprocces == egp.FGroupprocess && egp.FGroupprocess is not null)
-                        SelectedGroupprocce = _egpgroupprocess[i];
-                }
+                Egpgroupprocess = db.GuideGroupprocces.AsNoTracking().ToObservableCollection();
+                SelectedGroupprocce = Egpgroupprocess.FirstOrDefault(e => e.IdGroupprocces == egp.FGroupprocess && egp.FGroupprocess is not null);
 
-                var gTypeprocesses = db.GuideTypeprocesses.AsNoTracking().ToList();
-                foreach (var item in gTypeprocesses)
-                {
-                    _egptypeprocess.Add(new GuideTypeprocess
-                    {
-                        IdTypeprocess = item.IdTypeprocess,
-                        NameTypeprocess = item.NameTypeprocess
+                Egptypeprocess = db.GuideTypeprocesses.AsNoTracking().ToObservableCollection();
+                SelectedTypeprocess = Egptypeprocess.FirstOrDefault(e => e.IdTypeprocess == egp.FTypeprocess && egp.FTypeprocess is not null);
 
-                    });
-                }
-                gTypeprocesses.Clear();
-                for (int i = 0; i < _egptypeprocess.Count; i++)
-                {
-                    if (_egptypeprocess[i].IdTypeprocess == egp.FTypeprocess && egp.FTypeprocess is not null)
-                        SelectedTypeprocess = _egptypeprocess[i];
-                }
-
-                var gegpelements = db.GuideEgpelements.AsNoTracking().ToList();
-                foreach (var item in gegpelements)
-                {
-                    _egpElement.Add(new GuideEgpelement
-                    {
-                        IdEgpelement = item.IdEgpelement,
-                        NameEgpelement = item.NameEgpelement
-
-                    });
-                }
-                gegpelements.Clear();
-                for (int i = 0; i < _egpElement.Count; i++)
-                {
-                    if (_egpElement[i].IdEgpelement == egp.FEgpelement && egp.FTypeprocess is not null)
-                        SelectedEgpElement = _egpElement[i];
-                }
+                EgpElement = db.GuideEgpelements.AsNoTracking().ToObservableCollection();
+                SelectedEgpElement = EgpElement.FirstOrDefault(e => e.IdEgpelement == egp.FEgpelement && egp.FEgpelement is not null);
             }
 
         }
@@ -1441,23 +1344,24 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// Читаем из базы данных все справочники по Растительности
         /// </summary>
         private void QueryDataBaseGuidePlant()
-        {         if(plant is not null)
+        {
+            if (plant is not null)
             {
                 // Получаем данные по справочнику Густоты леса
                 _plantforestdensities = db.GuideForestDensities.AsNoTracking().ToObservableCollection();
                 // Выводим выбранный элемент густоты леса
-                SelectedPlantForestDensities = _plantforestdensities.FirstOrDefault( p => p.IdDforest == plant.PlantForestDensity );
+                SelectedPlantForestDensities = _plantforestdensities.FirstOrDefault(p => p.IdDforest == plant.PlantForestDensity);
 
                 // Получаем данные по справочнику Высоты подроста
                 _plantheightundergrowt = db.GuideHeightUndergrowths.AsNoTracking().ToObservableCollection();
                 // Выводим выбранный элемент Высоты подроста
-                SelectedPlantHeightUndergrowt = _plantheightundergrowt.FirstOrDefault(p => p.IdHeight == plant.PlantHeightUndergrowth );
+                SelectedPlantHeightUndergrowt = _plantheightundergrowt.FirstOrDefault(p => p.IdHeight == plant.PlantHeightUndergrowth);
 
                 // Получаем данные по справочнику проективное покрытие подроста
                 _plantprojcoverundergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
 
                 // Выводим выбранный элемент проективное покрытие подроста
-                SelectedPlantProjcoverUndergrowth = _plantprojcoverundergrowth.FirstOrDefault(p => p.IdPrjUnder == plant.PlantProjcoverUndergrowth  && plant.PlantProjcoverUndergrowth is not null);
+                SelectedPlantProjcoverUndergrowth = _plantprojcoverundergrowth.FirstOrDefault(p => p.IdPrjUnder == plant.PlantProjcoverUndergrowth && plant.PlantProjcoverUndergrowth is not null);
 
                 // Получаем данные по справочнику Густота кустарника
                 _plantdensitybush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
@@ -1466,7 +1370,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
                 //Проективное покрытие напочвенного покрова
                 _prjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
-                SelectedPlantPrjGround = _prjGround.FirstOrDefault(p => p.IdPrjGround == plant.PlantProjcoverGroundcover );
+                SelectedPlantPrjGround = _prjGround.FirstOrDefault(p => p.IdPrjGround == plant.PlantProjcoverGroundcover);
 
                 // санитрное состояние
                 PSanitar = AddGuideExpander(plant.PlantSanitarycondition, PSanitar, "Санитарное");
@@ -1482,7 +1386,6 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 PUndergrowth = AddGuideExpander(plant.PlantUndergrowth, PUndergrowth, 1);
                 //Напочвенный покров
                 PGroundcoverh = AddGuideExpander(plant.PlantGroundcover, PGroundcoverh, 3);
-
             }
         }
         /// <summary>
@@ -1524,7 +1427,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             {
                 foreach (var item in gplants)
                 {
-                    nodecoll.Add(new Node(item.NamePlant, false));
+                    if (typePlant == item.FTypePlant)
+                    {
+                        nodecoll.Add(new Node(item.NamePlant, false));
+                    }
                 }
             }
             gplants.Clear();
@@ -1638,8 +1544,5 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             get => _isSelected;
             set => Set(ref _isSelected, value);
         }
-
-
     }
-
 }
