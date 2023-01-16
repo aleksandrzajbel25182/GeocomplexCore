@@ -26,6 +26,7 @@
                 <StackPanel>
                     <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                               materialDesign:HintAssist.Hint="Маршрут"
+                              materialDesign:HintAssist.FloatingScale="1"
                               Height="50"
                               IsEnabled="False"
                               Margin="20"
@@ -35,6 +36,7 @@
                     <StackPanel Orientation="Horizontal">
                         <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Тип точки наблюдения"
+                                  materialDesign:HintAssist.FloatingScale="1"
                                   Height="50"
                                   Width="288"
                                   IsEnabled="False"
@@ -42,6 +44,7 @@
 
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Номер"
+                                  materialDesign:HintAssist.FloatingScale="1"
                                   Height="50"
                                   IsEnabled="False"
                                   Width="250"
@@ -50,6 +53,7 @@
                                   DataContext="{Binding WNumber}" />
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Населенный пункт"
+                                  materialDesign:HintAssist.FloatingScale="1"
                                   MinHeight="50"
                                   IsEnabled="False"
                                   Width="330"
@@ -59,6 +63,7 @@
 
                         <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     materialDesign:HintAssist.Hint="Дата создания"
+                                    materialDesign:HintAssist.FloatingScale="1"
                                     Height="50"
                                     Width="220"
                                     IsEnabled="False"
@@ -74,7 +79,8 @@
                                              Margin="50,50,0,20"
                                              materialDesign:ShadowAssist.Darken="True"
                                              materialDesign:ShadowAssist.ShadowDepth="Depth4"
-                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                                             materialDesign:HintAssist.FloatingScale="1">
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -104,6 +110,7 @@
                                               SelectedItem="{Binding SelectedFormarelirfa}" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Тип рельефа"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -113,6 +120,7 @@
                                               DisplayMemberPath="NameTypereliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Подтип рельефа"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -122,6 +130,7 @@
                                               DisplayMemberPath="NameSubtypereliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Высотность"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -131,6 +140,7 @@
                                               DisplayMemberPath="NameHeightreliefa" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Экспозиция"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -140,6 +150,7 @@
                                               DisplayMemberPath="NameSprexposition" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Крутизна склона"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -149,6 +160,7 @@
                                               DisplayMemberPath="NameSlope" />
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Форма речной долины"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="288"
                                               IsEnabled="False"
@@ -190,6 +202,7 @@
                                             Orientation="Vertical">
                                     <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                               materialDesign:HintAssist.Hint="Тип координат"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               Width="375"
                                               Margin="0,15,0,15"
@@ -205,6 +218,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Долгота °"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -212,6 +226,7 @@
                                                           Text="{Binding Longitude[0] , UpdateSourceTrigger=PropertyChanged}" />
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Широта °"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -221,6 +236,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Долгота &apos;"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -228,6 +244,7 @@
                                                           Text="{Binding Longitude[1]}" />
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Широта &apos;"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -259,6 +276,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="X"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -266,6 +284,7 @@
                                                           Text="{Binding WpointX , UpdateSourceTrigger=PropertyChanged}" />
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Y"
+                                                          materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
                                                           IsEnabled="False"
                                                           Width="174"
@@ -278,6 +297,7 @@
 
                                     <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                               materialDesign:HintAssist.Hint="Абсолютная отметка"
+                                              materialDesign:HintAssist.FloatingScale="1"
                                               Height="50"
                                               IsEnabled="False"
                                               Width="375"
@@ -357,6 +377,7 @@
                                     <StackPanel Orientation="Vertical">
                                         <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                     materialDesign:HintAssist.Hint="Дата создания"
+                                                    materialDesign:HintAssist.FloatingScale="1"
                                                     IsEnabled="False"
                                                     HorizontalAlignment="Left"
                                                     Width="250"
@@ -364,6 +385,7 @@
                                                     Margin="50,20,50,0"
                                                     SelectedDate="{Binding GroundData}" />
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   materialDesign:HintAssist.Hint="Пользователь"
                                                   IsEnabled="False"
                                                   HorizontalAlignment="Left"
@@ -376,6 +398,7 @@
 
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="ОТ"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   IsEnabled="False"
                                                   HorizontalAlignment="Left"
                                                   Width="250"
@@ -384,6 +407,7 @@
                                                   TextWrapping="Wrap"
                                                   Text="{Binding GroundFrom}" />
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   materialDesign:HintAssist.Hint="ДО"
                                                   IsEnabled="False"
                                                   Width="250"
@@ -395,6 +419,7 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   materialDesign:HintAssist.Hint="Порода"
                                                   Height="50"
                                                   Width="450"
@@ -405,6 +430,7 @@
                                                   DisplayMemberPath="NameBreed" />
 
                                         <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   materialDesign:HintAssist.Hint="Оттенок"
                                                   Height="50"
                                                   Width="250"
@@ -417,7 +443,6 @@
 
                                         <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                   materialDesign:HintAssist.Hint="Основной цвет"
-                                                  materialDesign:HintAssist.FloatingOffset="1,-42"
                                                   materialDesign:HintAssist.FloatingScale="1"
                                                   HorizontalAlignment="Left"
                                                   Height="50"
@@ -432,6 +457,7 @@
                                                 Width="320">
 
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
                                                   materialDesign:HintAssist.Hint="Описание"
                                                   IsEnabled="False"
                                                   HorizontalAlignment="Left"
@@ -484,6 +510,7 @@
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="0">
                                             <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                                        materialDesign:HintAssist.FloatingScale="1"
                                                         materialDesign:HintAssist.Hint="Дата создания"
                                                         IsEnabled="False"
                                                         HorizontalAlignment="Left"
@@ -493,6 +520,7 @@
                                                         SelectedDate="{Binding Egpdate}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Пользователь"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
                                                       Width="250"
@@ -504,6 +532,7 @@
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Группа процесса"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
                                                       Width="250"
@@ -514,6 +543,7 @@
                                                       DisplayMemberPath="NameGroupprocess"/>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Тип процесса"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       IsEnabled="False"
                                                       Width="250"
                                                       HorizontalAlignment="Left"
@@ -526,6 +556,7 @@
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="1">
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Глубина"
                                                       Height="50"
                                                       Width="250"
@@ -535,6 +566,7 @@
 
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Ширина"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="50,20,50,0"
@@ -637,6 +669,7 @@
 
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Наименование"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
@@ -645,6 +678,7 @@
                                                       Margin="50,20,0,0"
                                                       Text="{Binding TechogjName}" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Лицензия"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
@@ -654,6 +688,7 @@
                                                       TextWrapping="Wrap"
                                                       Text="{Binding TechobjLicense }" />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Воздействие"
                                                       IsEnabled="False"
                                                       HorizontalAlignment="Left"
@@ -686,6 +721,7 @@
                                 </Grid>
                                 <TextBox  Grid.Row="2"
                                           Style="{StaticResource StyleOutlinedTextBox}"
+                                          materialDesign:HintAssist.FloatingScale="1"
                                           materialDesign:HintAssist.Hint="Примечание"
                                           TextWrapping="Wrap"
                                           Margin="50,13,50,12"
@@ -756,6 +792,7 @@
                                             </Expander>
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Густота леса"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
@@ -790,6 +827,7 @@
                                             </Expander>
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Проективное покрытие"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
@@ -802,6 +840,7 @@
                                         </StackPanel>
                                         <StackPanel Margin="50,0,0,0">
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Высота подроста"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
@@ -836,6 +875,7 @@
                                             </Expander>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Густота кустарника"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
                                                       Height="50"
@@ -893,6 +933,7 @@
                                                 </Grid>
                                             </Expander>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Проективное покрытие"
                                                       HorizontalAlignment="Left"
                                                       IsEnabled="False"
