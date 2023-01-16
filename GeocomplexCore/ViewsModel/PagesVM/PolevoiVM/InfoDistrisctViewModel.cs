@@ -71,10 +71,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private ICollectionView? _collectiondata;
         public ICollectionView? CollectionData { get { _collectiondata = CollectionViewSource.GetDefaultView(DatacolRouDistcrit); return _collectiondata; } set => Set(ref _collectiondata, value); }
 
+
+        private ObservableCollection<CoordinatModel> _coordinatModels;
         /// <summary>
         /// Коллекция координат
         /// </summary>
-        private ObservableCollection<CoordinatModel> _coordinatModels;
         public ObservableCollection<CoordinatModel> CooordinatModels { get => _coordinatModels; set => Set(ref _coordinatModels, value); }
 
         /// <summary>
@@ -108,10 +109,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             set => Set(ref _dataWatchpoint, value);
         }
 
+        private Watchpoint? _selecteditem;
         /// <summary>
         /// Выбранный элемент в коллекиции "ТОЧКИ НАБЛЮДЕНИЯ"
         /// </summary>
-        private Watchpoint? _selecteditem;
         public Watchpoint? SelecetedItem
         {
             get { return _selecteditem; }
@@ -123,20 +124,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         }
 
+
+        private string? _namedistrict;
         /// <summary>
         /// Наименование участка
         /// </summary>
-        private string? _namedistrict;
         public string? NameDiscrict
         {
-            get=>_namedistrict;
+            get => _namedistrict;
             set => Set(ref _namedistrict, value);
         }
 
+       
+        private ObservableCollection<Route> _datacolRouDistcrit = new ObservableCollection<Route>();
         /// <summary>
         /// Колекция маршрутов
         /// </summary>
-        private ObservableCollection<Route> _datacolRouDistcrit = new ObservableCollection<Route>();
         public ObservableCollection<Route> DatacolRouDistcrit
         {
             get => _datacolRouDistcrit;
@@ -187,7 +190,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             GetCoolectionRoute();
 
             //Название участка и необходимы параметры 
-            _namedistrict = db.Districts?.FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict;
+            NameDiscrict = db.Districts?.FirstOrDefault(r => r.IdDistrict == PassedParameter).NameDistrict;
             LocatorStatic.Data.PageHeader = $"Участок: {_namedistrict}";
             GlobalSet.NameDis = PassedParameter;
         }
@@ -224,22 +227,22 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <returns></returns>
         private ObservableCollection<CoordinatModel> LoadDistrcit()
         {
-            using (GeocomplexContext db = new())
+
+            var data = db.DistrictPoints.Where(r => r.IdDistrict == PassedParameter).ToList();
+            _coordinatModels = new ObservableCollection<CoordinatModel>();
+            foreach (var item in data)
             {
-                var data = db.DistrictPoints.Where(r => r.IdDistrict == PassedParameter).ToList();
-                _coordinatModels = new ObservableCollection<CoordinatModel>();
-                foreach (var item in data)
+                _coordinatModels.Add(new CoordinatModel
                 {
-                    _coordinatModels.Add(new CoordinatModel
-                    {
-                        ID = item.IdDisctrictPoint,
-                        PointX_Longitude = item.DisctrictPointX.ToString(),
-                        PointY_Width = item.DisctrictPointY.ToString(),
-                        PointZ = item.DisctrictPointZ
-                    });
-                }
-                return _coordinatModels;
+                    ID = item.IdDisctrictPoint,
+                    PointX_Longitude = item.DisctrictPointX.ToString(),
+                    PointY_Width = item.DisctrictPointY.ToString(),
+                    PointZ = item.DisctrictPointZ
+                });
             }
+            CooordinatModels = _coordinatModels;
+            return CooordinatModels;
+
         }
 
         /// <summary>
@@ -248,18 +251,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <returns>Возвращаем DatacolRouDistcrit коллекцию маршрутов </returns>
         private ObservableCollection<Route> GetCoolectionRoute()
         {
-            var data = db.Routes.Where(r => r.IdDistrictNavigation.IdDistrict == PassedParameter).Include(us => us.User).ToList();
-            foreach (var item in data)
-            {
-                _datacolRouDistcrit.Add(new Route
-                {
-                    RouteId = item.RouteId,
-                    RouteName = item.RouteName,
-                    User = item.User,
-                    RouteData = item.RouteData
-                });
-            }
-            return _datacolRouDistcrit;
+            DatacolRouDistcrit = db.Routes.Where(r => r.IdDistrictNavigation.IdDistrict == PassedParameter).Include(us => us.User).AsNoTracking().ToObservableCollection();
+            return DatacolRouDistcrit;
         }
 
         /// <summary>
@@ -284,25 +277,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// <returns>Возвращаем коллекцию ObservableCollection<Watchpoint> точек наблюдения </returns>
         private ObservableCollection<Watchpoint> GetCoolectionWatchpoint()
         {
-            var data = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter)
+            _dataWatchpoint = db.Watchpoints.Where(r => r.Route.IdDistrictNavigation.IdDistrict == PassedParameter)
                 .Include(us => us.FUser)
-                .ThenInclude(rout => rout.Routes).ToList();
-            foreach (var item in data)
-            {
-                _dataWatchpoint.Add(new Watchpoint
-                {
-                    WpointId = item.WpointId,
-                    Route = item.Route,
-                    WpointType = item.WpointType,
-                    WpointNumber = item.WpointNumber,
-                    WpointLocation = item.WpointLocation,
-                    WpointDateAdd = item.WpointDateAdd,
-                    WpointNote = item.WpointNote,
-                    FUser = item.FUser,
-                    WpointIndLandscape = item.WpointIndLandscape
-                });
-            }
-            return _dataWatchpoint;
+                .ThenInclude(rout => rout.Routes).ToObservableCollection();
+            DataWatchpoint = _dataWatchpoint;
+            return DataWatchpoint;
         }
 
         #endregion
