@@ -27,7 +27,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private readonly NavigationManager _navigationmaneger;
         // Созадние экземлпяра класса сервиса-конвертера
         ConverterCordinatsService converter;
-        GeocomplexContext db = new GeocomplexContext();
+        GeocomplexContext db;
 
         #region Title таблиц точек координат участка      
         /// <summary>
@@ -313,10 +313,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
-        public InfoDistrisctViewModel(NavigationManager navigationmaneger)
+        public InfoDistrisctViewModel(NavigationManager navigationmaneger, GeocomplexContext _db)
         {
             _navigationmaneger = navigationmaneger;
-
+            db = _db;
             BackNavigateCommand = new LamdaCommand(OnBackNavigateCommandExcuted, BackNavigateCommandExecute);
             GoInfoPointOBCommand = new LamdaCommand(OnGoInfoPointOBCommandExcuted, CanGoInfoPointOBCommandExecute);
 

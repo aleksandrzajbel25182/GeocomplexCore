@@ -1,5 +1,6 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.DAL.Context;
 using GeocomplexCore.Model;
 using GeocomplexCore.Properties;
 using GeocomplexCore.Service;
@@ -18,6 +19,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
     {
         #region Parametrs/Параметры
         NavigationManager _navigationmaneger;
+        GeocomplexContext db;
 
         /// <summary>
         /// Список элементов меню
@@ -62,7 +64,7 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
         #endregion
 
 
-        public StartPageViewModel()
+        public StartPageViewModel(GeocomplexContext _db)
         {
 
             MenuItem = new List<MenuModel>()
@@ -78,12 +80,12 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
             };
             ContentControl = new MenuView();
             _navigationmaneger = new NavigationManager(ContentControl);
-
+            db = _db;
             ////Регистрация ключа (строки) с соответствующими View и ViewModel для него
             _navigationmaneger.Register<MenuView>("Menu", () => new MenuViewModel(_navigationmaneger));
-            _navigationmaneger.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(_navigationmaneger));
-            _navigationmaneger.Register<InfoDistrisctView>("InfoDistrict", () => new InfoDistrisctViewModel(_navigationmaneger));
-            _navigationmaneger.Register<InfoPointObservationView>("InfoPointObservation", () => new InfoPointObservationViewModel(_navigationmaneger));
+            _navigationmaneger.Register<ProjectPageView>("ProjectPage", () => new ProjectViewModel(_navigationmaneger, db));
+            _navigationmaneger.Register<InfoDistrisctView>("InfoDistrict", () => new InfoDistrisctViewModel(_navigationmaneger, db));
+            _navigationmaneger.Register<InfoPointObservationView>("InfoPointObservation", () => new InfoPointObservationViewModel(_navigationmaneger, db));
 
 
             //Отображение стартового UI

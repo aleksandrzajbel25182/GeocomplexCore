@@ -27,7 +27,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private NavigationManager navigationmaneger;
         private ConverterCordinatsService converter;
-        private GeocomplexContext db = new GeocomplexContext();
+        private GeocomplexContext db;
         private Ground? ground;
         private Egp? egp;
         private Watchpoint? watchpoint;
@@ -1506,9 +1506,10 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         // ---------------------------------------------------------------------------------------------------------------------
 
-        public InfoPointObservationViewModel(NavigationManager navigationmaneger)
+        public InfoPointObservationViewModel(NavigationManager navigationmaneger, GeocomplexContext _db)
         {
             this.navigationmaneger = navigationmaneger;
+            db = _db;
             // Создание данных для выпадающего списка по формату координат
             FormatCoordinat = new ObservableCollection<FormatCoordinatModel>()
             {

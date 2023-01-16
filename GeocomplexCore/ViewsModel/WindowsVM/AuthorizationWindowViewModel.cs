@@ -14,24 +14,23 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
     {
         #region Параметры / Parametrs
         NavigationManager _navigationmaneger;
-        GeocomplexContext db = new GeocomplexContext();        
+        GeocomplexContext db;        
 
         #region Логин
+        
+        private string login;
         /// <summary>
         /// Логин пользователя
         /// </summary>
-        private string login;
-
         public string Login { get => login; set => Set(ref login, value); }
         #endregion
 
         #region Пароль
+       
+        private string password;
         /// <summary>
         /// Пароль пользователя
         /// </summary>
-        private string password;
-        private NavigationManager navigationManager;
-
         public string Password { get => password; set => Set(ref password, value); }
         #endregion
 
@@ -92,9 +91,10 @@ namespace GeocomplexCore.ViewsModel.WindowsVM
 
         /*-------------------------------------------------------------------------------------------------------------------------------------------*/
 
-        public AuthorizationWindowViewModel(NavigationManager navigationManager)
+        public AuthorizationWindowViewModel(NavigationManager navigationManager , GeocomplexContext _db)
         {
             _navigationmaneger = navigationManager;
+            db = _db;
             ConnectionCommand = new LamdaCommand(OnConnectionCommandExcuted, CanConnectionCommandExecute);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Egor92.MvvmNavigation;
 using Egor92.MvvmNavigation.Abstractions;
+using GeocomplexCore.DAL.Context;
 using GeocomplexCore.Service;
 using GeocomplexCore.Views;
 using GeocomplexCore.Views.Windows;
@@ -26,10 +27,11 @@ namespace GeocomplexCore
             
             var mainWindow = new MainWindow();
             var navigationManager = new NavigationManager(mainWindow);
+            GeocomplexContext db = new GeocomplexContext();
             mainWindow.DataContext = new MainWindowViewModel();
             //Регистрация ключа (строки) с соответствующими View и ViewModel для него
-            navigationManager.Register<Autorization>("Autorization", () => new AuthorizationWindowViewModel(navigationManager));
-            navigationManager.Register<StartPageView>("StartPage", () => new StartPageViewModel());
+            navigationManager.Register<Autorization>("Autorization", () => new AuthorizationWindowViewModel(navigationManager , db));
+            navigationManager.Register<StartPageView>("StartPage", () => new StartPageViewModel(db));
 
             //Отображение стартового UI
             navigationManager.Navigate("Autorization");

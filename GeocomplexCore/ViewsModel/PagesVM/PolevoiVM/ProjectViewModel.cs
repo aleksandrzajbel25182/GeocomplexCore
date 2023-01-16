@@ -24,7 +24,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         private NavigationManager navigationManager;
         MainWindowViewModel mainWindowViewModel;
-        GeocomplexContext db = new GeocomplexContext();
+        GeocomplexContext db;
 
         //Временная переменная для хранения выделенного ID "Проекта" 
         private int _selectIDproject;
@@ -275,8 +275,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         /// Конструктор
         /// </summary>
         /// <param name="navigationManager"></param>
-        public ProjectViewModel(NavigationManager navigationManager)
+        public ProjectViewModel(NavigationManager navigationManager , GeocomplexContext _db)
         {
+            db = _db;
             this.navigationManager = navigationManager;
             GlobalSet.FlagStatic = "Project";
             // Обворачиваем ObservableCollection в ICollectionView
