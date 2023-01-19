@@ -18,9 +18,11 @@
     </UserControl.Resources>
 
     <Grid>
+
         <TabControl Style="{StaticResource MaterialDesignTabControl}"
                     mde:TabControlAssist.TabHeaderInactiveBrush="Black"
                     mde:TabControlAssist.TabHeaderHighlightBrush="#166051">
+
             <TabItem Header="Основная информация"
                      FontFamily="ARVO">
                 <StackPanel>
@@ -28,7 +30,7 @@
                               materialDesign:HintAssist.Hint="Маршрут"
                               materialDesign:HintAssist.FloatingScale="1"
                               Height="50"
-                              IsEnabled="False"
+                              IsReadOnly="True"
                               Margin="20"
                               Text="{Binding WRoute}"
                               Cursor="Arrow" />
@@ -46,7 +48,7 @@
                                   materialDesign:HintAssist.Hint="Номер"
                                   materialDesign:HintAssist.FloatingScale="1"
                                   Height="50"
-                                  IsEnabled="False"
+                                  IsReadOnly="True"
                                   Width="250"
                                   Margin="20"
                                   Cursor="Arrow"
@@ -55,7 +57,7 @@
                                   materialDesign:HintAssist.Hint="Населенный пункт"
                                   materialDesign:HintAssist.FloatingScale="1"
                                   MinHeight="50"
-                                  IsEnabled="False"
+                                  IsReadOnly="True"
                                   Width="330"
                                   Margin="20"
                                   TextWrapping="Wrap"
@@ -220,7 +222,7 @@
                                                           materialDesign:HintAssist.Hint="Долгота °"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Longitude[0] , UpdateSourceTrigger=PropertyChanged}" />
@@ -228,7 +230,7 @@
                                                           materialDesign:HintAssist.Hint="Широта °"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Width[0]}" />
@@ -238,7 +240,7 @@
                                                           materialDesign:HintAssist.Hint="Долгота &apos;"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Longitude[1]}" />
@@ -246,7 +248,7 @@
                                                           materialDesign:HintAssist.Hint="Широта &apos;"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Width[1]}" />
@@ -255,14 +257,14 @@
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Долгота &quot;"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Longitude[2]}" />
                                                 <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                           materialDesign:HintAssist.Hint="Широта &quot;"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding Width[2]}" />
@@ -278,7 +280,7 @@
                                                           materialDesign:HintAssist.Hint="X"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding WpointX , UpdateSourceTrigger=PropertyChanged}" />
@@ -286,7 +288,7 @@
                                                           materialDesign:HintAssist.Hint="Y"
                                                           materialDesign:HintAssist.FloatingScale="1"
                                                           Height="50"
-                                                          IsEnabled="False"
+                                                          IsReadOnly="True"
                                                           Width="174"
                                                           Margin="20"
                                                           Text="{Binding WpointX}" />
@@ -307,9 +309,12 @@
                             </Grid>
                         </materialDesign:Card>
                         <!-- .............................................-->
+
                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                   materialDesign:HintAssist.Hint="Описание точки"
-                                  IsEnabled="False"
+                                  materialDesign:HintAssist.FloatingScale="1"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  IsReadOnly="True"
                                   Width="300"
                                   Height="510"
                                   HorizontalAlignment="Left"
@@ -317,6 +322,7 @@
                                   Margin="50,50,0,0"
                                   TextWrapping="Wrap"
                                   Text="{Binding Wnote}" />
+
 
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
@@ -348,7 +354,6 @@
                             mde:TabControlAssist.TabHeaderHighlightBrush="#166051">
                     <TabItem Header="Почвы и грунт"
                              FontFamily="ARVO">
-
                         <materialDesign:Card Width="1245"
                                              Height="340"
                                              HorizontalAlignment="Left"
@@ -371,7 +376,6 @@
                                 <Border Background="Black"
                                         Height="0.5"
                                         VerticalAlignment="Bottom" />
-
                                 <StackPanel Grid.Row="1"
                                             Orientation="Horizontal">
                                     <StackPanel Orientation="Vertical">
@@ -394,8 +398,6 @@
                                                   Margin="50,20,50,0"
                                                   TextWrapping="Wrap"
                                                   Text="{Binding GroundUserName}" />
-
-
                                         <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                   materialDesign:HintAssist.Hint="ОТ"
                                                   materialDesign:HintAssist.FloatingScale="1"
@@ -467,8 +469,6 @@
                                                   Width="278"
                                                   Text="{Binding GroundDescription}" />
                                     </StackPanel>
-
-
                                 </StackPanel>
                             </Grid>
                         </materialDesign:Card>
@@ -490,7 +490,6 @@
                                     <RowDefinition Height="72*" />
                                     <RowDefinition Height="53*" />
                                 </Grid.RowDefinitions>
-
                                 <Label Content="Основная информация"
                                        Grid.Row="0"
                                        Margin="5,5,5,5"
@@ -499,7 +498,6 @@
                                         Height="0"
                                         VerticalAlignment="Top"
                                         Grid.Row="1" />
-
                                 <Grid Grid.Row="1">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -528,8 +526,6 @@
                                                       Margin="50,20,50,0"
                                                       TextWrapping="Wrap"
                                                       Text="{Binding EgpUserName}" />
-
-
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Группа процесса"
                                                       materialDesign:HintAssist.FloatingScale="1"
@@ -540,7 +536,7 @@
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding Egpgroupprocess}"
                                                       SelectedItem="{Binding SelectedGroupprocce}"
-                                                      DisplayMemberPath="NameGroupprocess"/>
+                                                      DisplayMemberPath="NameGroupprocess" />
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.Hint="Тип процесса"
                                                       materialDesign:HintAssist.FloatingScale="1"
@@ -551,7 +547,7 @@
                                                       Margin="50,20,0,0"
                                                       ItemsSource="{Binding Egptypeprocess}"
                                                       SelectedItem="{Binding SelectedTypeprocess}"
-                                                      DisplayMemberPath="NameTypeprocess"/>
+                                                      DisplayMemberPath="NameTypeprocess" />
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="1">
@@ -572,7 +568,6 @@
                                                       Margin="50,20,50,0"
                                                       IsEnabled="False"
                                                       Text="{Binding EgpWidth}" />
-
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Протяженность"
                                                       materialDesign:HintAssist.FloatingScale="1"
@@ -591,7 +586,6 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="2">
-
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.Hint="Площадь"
                                                       Height="50"
@@ -614,13 +608,9 @@
                                                       Margin="50,20,50,0"
                                                       ItemsSource="{Binding EgpElement}"
                                                       SelectedItem="{Binding SelectedEgpElement}"
-                                                      DisplayMemberPath="NameEgpelement"/>
+                                                      DisplayMemberPath="NameEgpelement" />
                                         </StackPanel>
-
                                     </Grid>
-
-
-
                                 </Grid>
                                 <TextBox  Grid.Row="2"
                                           Style="{StaticResource StyleOutlinedTextBox}"
@@ -662,11 +652,8 @@
                                         Height="0"
                                         VerticalAlignment="Top"
                                         Grid.Row="1" />
-
                                 <Grid Grid.Row="1">
                                     <StackPanel Orientation="Vertical">
-
-
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
@@ -729,16 +716,9 @@
                                           Text="{Binding TechobjDescription}" />
                             </Grid>
                         </materialDesign:Card>
-
-
-
-
-
-
                     </TabItem>
                     <TabItem Header="Растительность"
                              FontFamily="ARVO">
-
                         <materialDesign:Card Width="1100"
                                              Height="700"
                                              HorizontalAlignment="Center"
@@ -752,9 +732,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40" />
                                     <RowDefinition Height="73*" />
-
                                 </Grid.RowDefinitions>
-
                                 <Label Content="Основная информация"
                                        Grid.Row="0"
                                        Margin="5,5,5,5"
@@ -763,11 +741,9 @@
                                         Height="0"
                                         VerticalAlignment="Top"
                                         Grid.Row="1" />
-
                                 <Grid Grid.Row="1">
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel Margin="125,0,0,0">
-
                                             <Expander HorizontalAlignment="Stretch"
                                                       Header="Древостой"
                                                       FontFamily="Arvo"
@@ -787,10 +763,8 @@
                                                             </DataTemplate>
                                                         </ListBox.ItemTemplate>
                                                     </ListBox>
-
                                                 </Grid>
                                             </Expander>
-
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Густота леса"
@@ -802,7 +776,6 @@
                                                       SelectedItem="{Binding SelectedPlantForestDensities}"
                                                       ItemsSource="{Binding PlantForestDensities}"
                                                       DisplayMemberPath="NameDforest" />
-
                                             <Expander HorizontalAlignment="Stretch"
                                                       Header="Подрост"
                                                       FontFamily="Arvo"
@@ -825,7 +798,6 @@
 
                                                 </Grid>
                                             </Expander>
-
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Проективное покрытие"
@@ -843,14 +815,13 @@
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Высота подроста"
                                                       HorizontalAlignment="Left"
-                                                      IsEnabled="False"
+                                                      IsReadOnly="True"
                                                       Height="50"
                                                       Width="250"
                                                       Margin="0,30,0,0"
                                                       SelectedItem="{Binding SelectedPlantHeightUndergrowt}"
                                                       ItemsSource="{Binding PlantHeightUndergrowt}"
                                                       DisplayMemberPath="NameHeight" />
-
                                             <Expander HorizontalAlignment="Stretch"
                                                       Header="Кустарник"
                                                       FontFamily="Arvo"
@@ -870,7 +841,6 @@
                                                             </DataTemplate>
                                                         </ListBox.ItemTemplate>
                                                     </ListBox>
-
                                                 </Grid>
                                             </Expander>
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
@@ -884,7 +854,6 @@
                                                       SelectedItem="{Binding SelectedPlantDensityBush}"
                                                       ItemsSource="{Binding PlantDensityBush}"
                                                       DisplayMemberPath="NameDbush" />
-
                                             <Expander HorizontalAlignment="Stretch"
                                                       Header="Кустарничек"
                                                       FontFamily="Arvo"
@@ -942,7 +911,7 @@
                                                       Margin="0,30,0,0"
                                                       ItemsSource="{Binding PrjGround}"
                                                       SelectedItem="{Binding SelectedPlantPrjGround}"
-                                                      DisplayMemberPath="NamePrjGround"/>
+                                                      DisplayMemberPath="NamePrjGround" />
                                             <Expander HorizontalAlignment="Stretch"
                                                       Header="Санитарное состояние"
                                                       FontFamily="Arvo"
@@ -1043,5 +1012,6 @@
             <TabItem Header="Гидроструктура"
                      FontFamily="ARVO" />
         </TabControl>
+
     </Grid>
 </UserControl>

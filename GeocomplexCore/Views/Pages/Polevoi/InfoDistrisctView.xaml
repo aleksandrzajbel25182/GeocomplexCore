@@ -206,9 +206,6 @@
                                 </Grid>
                             </materialDesign:Card>
                         </StackPanel>
-
-
-
                         <!-- КАРТОЧКА : Маршруты-->
                         <materialDesign:Card Width="1235"
                                              Height="470"
@@ -356,20 +353,8 @@
                         </StackPanel>
 
                     </StackPanel>
-
-
-
-
-
                 </TabItem>
 
-
-                <!--<TabItem Header="Координаты участка">
-
-              
-
-
-            </TabItem>-->
                 <TabItem Header="Точки наблюдения">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top"

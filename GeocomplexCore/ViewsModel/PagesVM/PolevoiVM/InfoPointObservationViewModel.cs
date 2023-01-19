@@ -866,10 +866,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #region Растительность
 
+        
+        private ObservableCollection<GuideForestDensity> _plantforestdensities = new ObservableCollection<GuideForestDensity>();
         /// <summary>
         /// Справочник Густота леса
         /// </summary>
-        private ObservableCollection<GuideForestDensity> _plantforestdensities = new ObservableCollection<GuideForestDensity>();
         public ObservableCollection<GuideForestDensity> PlantForestDensities
         {
             get => _plantforestdensities;
@@ -881,10 +882,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public GuideForestDensity SelectedPlantForestDensities { get; set; }
 
 
+       
+        private ObservableCollection<GuideHeightUndergrowth> _plantheightundergrowt = new ObservableCollection<GuideHeightUndergrowth>();
         /// <summary>
         /// Справочник Высоты подроста
         /// </summary>
-        private ObservableCollection<GuideHeightUndergrowth> _plantheightundergrowt = new ObservableCollection<GuideHeightUndergrowth>();
         public ObservableCollection<GuideHeightUndergrowth> PlantHeightUndergrowt
         {
             get => _plantheightundergrowt;
@@ -897,10 +899,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
 
+        
+        private ObservableCollection<GuideProjcoverUndergrowth> _plantprojcoverundergrowth = new ObservableCollection<GuideProjcoverUndergrowth>();
         /// <summary>
         /// Справочник проективное покрытие подроста
         /// </summary>
-        private ObservableCollection<GuideProjcoverUndergrowth> _plantprojcoverundergrowth = new ObservableCollection<GuideProjcoverUndergrowth>();
         public ObservableCollection<GuideProjcoverUndergrowth> PlantProjcoverUndergrowth
         {
             get => _plantprojcoverundergrowth;
@@ -912,10 +915,11 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public GuideProjcoverUndergrowth SelectedPlantProjcoverUndergrowth { get; set; }
 
 
+       
+        private ObservableCollection<GuideDensityBush> _plantdensitybush = new ObservableCollection<GuideDensityBush>();
         /// <summary>
         /// Справочник Густота кустарников
         /// </summary>
-        private ObservableCollection<GuideDensityBush> _plantdensitybush = new ObservableCollection<GuideDensityBush>();
         public ObservableCollection<GuideDensityBush> PlantDensityBush
         {
             get => _plantdensitybush;
@@ -1256,7 +1260,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             data.Clear();
             return plant;
         }
-
+        #region Справочники
+       
         /// <summary>
         /// Читаем из базы данных все справочники по грунту и почве
         /// </summary>
@@ -1348,29 +1353,29 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             if (plant is not null)
             {
                 // Получаем данные по справочнику Густоты леса
-                _plantforestdensities = db.GuideForestDensities.AsNoTracking().ToObservableCollection();
+                PlantForestDensities = db.GuideForestDensities.AsNoTracking().ToObservableCollection();
                 // Выводим выбранный элемент густоты леса
-                SelectedPlantForestDensities = _plantforestdensities.FirstOrDefault(p => p.IdDforest == plant.PlantForestDensity);
+                SelectedPlantForestDensities = PlantForestDensities.FirstOrDefault(p => p.IdDforest == plant.PlantForestDensity);
 
                 // Получаем данные по справочнику Высоты подроста
-                _plantheightundergrowt = db.GuideHeightUndergrowths.AsNoTracking().ToObservableCollection();
+                PlantHeightUndergrowt = db.GuideHeightUndergrowths.AsNoTracking().ToObservableCollection();
                 // Выводим выбранный элемент Высоты подроста
-                SelectedPlantHeightUndergrowt = _plantheightundergrowt.FirstOrDefault(p => p.IdHeight == plant.PlantHeightUndergrowth);
+                SelectedPlantHeightUndergrowt = PlantHeightUndergrowt.FirstOrDefault(p => p.IdHeight == plant.PlantHeightUndergrowth);
 
                 // Получаем данные по справочнику проективное покрытие подроста
-                _plantprojcoverundergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
+                PlantProjcoverUndergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
 
                 // Выводим выбранный элемент проективное покрытие подроста
-                SelectedPlantProjcoverUndergrowth = _plantprojcoverundergrowth.FirstOrDefault(p => p.IdPrjUnder == plant.PlantProjcoverUndergrowth && plant.PlantProjcoverUndergrowth is not null);
+                SelectedPlantProjcoverUndergrowth = PlantProjcoverUndergrowth.FirstOrDefault(p => p.IdPrjUnder == plant.PlantProjcoverUndergrowth && plant.PlantProjcoverUndergrowth is not null);
 
                 // Получаем данные по справочнику Густота кустарника
-                _plantdensitybush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
+                PlantDensityBush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
                 // Выводим выбранный элемент ГУстота кустарника
-                SelectedPlantDensityBush = _plantdensitybush.FirstOrDefault(p => p.IdDbush == plant.PlantDensityBush && plant.PlantDensityBush is not null);
+                SelectedPlantDensityBush = PlantDensityBush.FirstOrDefault(p => p.IdDbush == plant.PlantDensityBush && plant.PlantDensityBush is not null);
 
                 //Проективное покрытие напочвенного покрова
-                _prjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
-                SelectedPlantPrjGround = _prjGround.FirstOrDefault(p => p.IdPrjGround == plant.PlantProjcoverGroundcover);
+                PrjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
+                SelectedPlantPrjGround = PrjGround.FirstOrDefault(p => p.IdPrjGround == plant.PlantProjcoverGroundcover);
 
                 // санитрное состояние
                 PSanitar = AddGuideExpander(plant.PlantSanitarycondition, PSanitar, "Санитарное");
@@ -1387,7 +1392,16 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 //Напочвенный покров
                 PGroundcoverh = AddGuideExpander(plant.PlantGroundcover, PGroundcoverh, 3);
             }
+            else
+            {
+                PlantForestDensities = db.GuideForestDensities.AsNoTracking().ToObservableCollection();
+                PlantHeightUndergrowt = db.GuideHeightUndergrowths.AsNoTracking().ToObservableCollection();
+                PlantProjcoverUndergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
+                PlantDensityBush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
+                PrjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
+            }
         }
+        #endregion
         /// <summary>
         /// Заполнение коллекции типа ObservableCollection<Node> из справочника GuidePlants(Растительность)
         /// </summary>
