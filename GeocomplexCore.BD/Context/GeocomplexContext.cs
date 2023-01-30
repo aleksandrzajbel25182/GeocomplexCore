@@ -22,6 +22,7 @@ namespace GeocomplexCore.DAL.Context
         public virtual DbSet<Egp> Egps { get; set; } = null!;
         public virtual DbSet<Ground> Grounds { get; set; } = null!;
         public virtual DbSet<GuideBreed> GuideBreeds { get; set; } = null!;
+        public virtual DbSet<GuideClaritywater> GuideClaritywaters { get; set; } = null!;
         public virtual DbSet<GuideColor> GuideColors { get; set; } = null!;
         public virtual DbSet<GuideDensityBush> GuideDensityBushes { get; set; } = null!;
         public virtual DbSet<GuideEgpelement> GuideEgpelements { get; set; } = null!;
@@ -37,13 +38,20 @@ namespace GeocomplexCore.DAL.Context
         public virtual DbSet<GuideProjcoverUndergrowth> GuideProjcoverUndergrowths { get; set; } = null!;
         public virtual DbSet<GuideSanitarycondition> GuideSanitaryconditions { get; set; } = null!;
         public virtual DbSet<GuideSlope> GuideSlopes { get; set; } = null!;
+        public virtual DbSet<GuideSmellwater> GuideSmellwaters { get; set; } = null!;
         public virtual DbSet<GuideSprexposition> GuideSprexpositions { get; set; } = null!;
         public virtual DbSet<GuideSubtypereliefa> GuideSubtypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideTastewater> GuideTastewaters { get; set; } = null!;
+        public virtual DbSet<GuideTuperaid> GuideTuperaids { get; set; } = null!;
         public virtual DbSet<GuideTypePlant> GuideTypePlants { get; set; } = null!;
+        public virtual DbSet<GuideTypebottom> GuideTypebottoms { get; set; } = null!;
         public virtual DbSet<GuideTypebreed> GuideTypebreeds { get; set; } = null!;
         public virtual DbSet<GuideTypeprocess> GuideTypeprocesses { get; set; } = null!;
         public virtual DbSet<GuideTypereliefa> GuideTypereliefas { get; set; } = null!;
+        public virtual DbSet<GuideTypeusewater> GuideTypeusewaters { get; set; } = null!;
         public virtual DbSet<GuideVidprocess> GuideVidprocesses { get; set; } = null!;
+        public virtual DbSet<GuideWaterseepage> GuideWaterseepages { get; set; } = null!;
+        public virtual DbSet<GyideTypewatercourse> GyideTypewatercourses { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
         public virtual DbSet<Organization> Organizations { get; set; } = null!;
         public virtual DbSet<PhotoWaterintake> PhotoWaterintakes { get; set; } = null!;
@@ -51,6 +59,7 @@ namespace GeocomplexCore.DAL.Context
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Route> Routes { get; set; } = null!;
         public virtual DbSet<StreetWaterpipe> StreetWaterpipes { get; set; } = null!;
+        public virtual DbSet<Surfacewater> Surfacewaters { get; set; } = null!;
         public virtual DbSet<Techobject> Techobjects { get; set; } = null!;
         public virtual DbSet<UserDatum> UserData { get; set; } = null!;
         public virtual DbSet<Watchpoint> Watchpoints { get; set; } = null!;
@@ -322,6 +331,24 @@ namespace GeocomplexCore.DAL.Context
                     .WithMany(p => p.GuideBreeds)
                     .HasForeignKey(d => d.FTypegroundId)
                     .HasConstraintName("fk_id_typebred");
+            });
+
+            modelBuilder.Entity<GuideClaritywater>(entity =>
+            {
+                entity.HasKey(e => e.IdClaritywater)
+                    .HasName("guide.claritywater_pkey");
+
+                entity.ToTable("guide.claritywater");
+
+                entity.HasComment("Справочник Прозрачность воды");
+
+                entity.Property(e => e.IdClaritywater)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_claritywater");
+
+                entity.Property(e => e.NameClaritywater)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_claritywater");
             });
 
             modelBuilder.Entity<GuideColor>(entity =>
@@ -612,6 +639,24 @@ namespace GeocomplexCore.DAL.Context
                     .HasColumnName("name_slope");
             });
 
+            modelBuilder.Entity<GuideSmellwater>(entity =>
+            {
+                entity.HasKey(e => e.IdSmellwater)
+                    .HasName("guide.smellwater_pkey");
+
+                entity.ToTable("guide.smellwater");
+
+                entity.HasComment("Справочник Запахи воды");
+
+                entity.Property(e => e.IdSmellwater)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_smellwater");
+
+                entity.Property(e => e.NameSmellwater)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_smellwater");
+            });
+
             modelBuilder.Entity<GuideSprexposition>(entity =>
             {
                 entity.HasKey(e => e.IdSprexposition)
@@ -648,6 +693,42 @@ namespace GeocomplexCore.DAL.Context
                     .HasColumnName("name_subtypereliefa");
             });
 
+            modelBuilder.Entity<GuideTastewater>(entity =>
+            {
+                entity.HasKey(e => e.IdTestwater)
+                    .HasName("guide.tastewater_pkey");
+
+                entity.ToTable("guide.tastewater");
+
+                entity.HasComment("Справочник Вкус воды");
+
+                entity.Property(e => e.IdTestwater)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_testwater");
+
+                entity.Property(e => e.NameTestwater)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_testwater");
+            });
+
+            modelBuilder.Entity<GuideTuperaid>(entity =>
+            {
+                entity.HasKey(e => e.IdTuperaid)
+                    .HasName("guide.tuperaid_pkey");
+
+                entity.ToTable("guide.tuperaid");
+
+                entity.HasComment("Справочник Тип Налетов");
+
+                entity.Property(e => e.IdTuperaid)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_tuperaid");
+
+                entity.Property(e => e.NameTuperaid)
+                    .HasColumnType("character varying")
+                    .HasColumnName("name_tuperaid");
+            });
+
             modelBuilder.Entity<GuideTypePlant>(entity =>
             {
                 entity.HasKey(e => e.IdTypePlant)
@@ -664,6 +745,24 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.NameTypePlant)
                     .HasMaxLength(50)
                     .HasColumnName("name_type_plant");
+            });
+
+            modelBuilder.Entity<GuideTypebottom>(entity =>
+            {
+                entity.HasKey(e => e.IdTypebottom)
+                    .HasName("guide.typebottom_pkey");
+
+                entity.ToTable("guide.typebottom");
+
+                entity.HasComment("Справочник Тип дна");
+
+                entity.Property(e => e.IdTypebottom)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typebottom");
+
+                entity.Property(e => e.NameTypebottom)
+                    .HasMaxLength(200)
+                    .HasColumnName("name_typebottom");
             });
 
             modelBuilder.Entity<GuideTypebreed>(entity =>
@@ -722,6 +821,24 @@ namespace GeocomplexCore.DAL.Context
                     .HasColumnName("name_typereliefa");
             });
 
+            modelBuilder.Entity<GuideTypeusewater>(entity =>
+            {
+                entity.HasKey(e => e.IdTypeusewater)
+                    .HasName("guide.typeusewater_pkey");
+
+                entity.ToTable("guide.typeusewater");
+
+                entity.HasComment("Справочник Тип использования");
+
+                entity.Property(e => e.IdTypeusewater)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typeusewater");
+
+                entity.Property(e => e.NameTypeusewater)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_typeusewater");
+            });
+
             modelBuilder.Entity<GuideVidprocess>(entity =>
             {
                 entity.HasKey(e => e.IdTypeprocess)
@@ -738,6 +855,42 @@ namespace GeocomplexCore.DAL.Context
                 entity.Property(e => e.NameTypeprocess)
                     .HasMaxLength(50)
                     .HasColumnName("name_typeprocess");
+            });
+
+            modelBuilder.Entity<GuideWaterseepage>(entity =>
+            {
+                entity.HasKey(e => e.IdWaterseepage)
+                    .HasName("guide.waterseepage_pkey");
+
+                entity.ToTable("guide.waterseepage");
+
+                entity.HasComment("Справочник Тип водопроявления");
+
+                entity.Property(e => e.IdWaterseepage)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_waterseepage");
+
+                entity.Property(e => e.NameWaterseepage)
+                    .HasMaxLength(250)
+                    .HasColumnName("name_waterseepage");
+            });
+
+            modelBuilder.Entity<GyideTypewatercourse>(entity =>
+            {
+                entity.HasKey(e => e.IdTypewatercourse)
+                    .HasName("gyide.typewatercourse_pkey");
+
+                entity.ToTable("gyide.typewatercourse");
+
+                entity.HasComment("Справочник Тип водотока");
+
+                entity.Property(e => e.IdTypewatercourse)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_typewatercourse");
+
+                entity.Property(e => e.NameTypewatercourse)
+                    .HasMaxLength(100)
+                    .HasColumnName("name_typewatercourse");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -1007,6 +1160,85 @@ namespace GeocomplexCore.DAL.Context
                     .HasForeignKey(d => d.WaterpipeWtrId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_street_waterpipe");
+            });
+
+            modelBuilder.Entity<Surfacewater>(entity =>
+            {
+                entity.HasKey(e => e.SwId)
+                    .HasName("surfacewater_pkey");
+
+                entity.ToTable("surfacewater");
+
+                entity.HasComment("Поверхностные воды");
+
+                entity.Property(e => e.SwId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("sw_id");
+
+                entity.Property(e => e.FWpointId).HasColumnName("f_wpoint_id");
+
+                entity.Property(e => e.SColorSecondary)
+                    .HasMaxLength(255)
+                    .HasColumnName("s_color_secondary")
+                    .HasComment("Дополнительный цвет");
+
+                entity.Property(e => e.SwAirtemp)
+                    .HasColumnName("sw_airtemp")
+                    .HasComment("Температура воздуха");
+
+                entity.Property(e => e.SwBloom)
+                    .HasColumnType("character varying")
+                    .HasColumnName("sw_bloom")
+                    .HasComment("Дополнительные параметры");
+
+                entity.Property(e => e.SwClaritywaterId)
+                    .HasColumnName("sw_claritywater_id")
+                    .HasComment("Прозрачность воды");
+
+                entity.Property(e => e.SwColorId)
+                    .HasColumnName("sw_color_id")
+                    .HasComment("Цвет");
+
+                entity.Property(e => e.SwDateAdd).HasColumnName("sw_date_add");
+
+                entity.Property(e => e.SwName)
+                    .HasMaxLength(1000)
+                    .HasColumnName("sw_name")
+                    .HasComment("Название.Примечание");
+
+                entity.Property(e => e.SwOdorwaterId)
+                    .HasColumnName("sw_odorwater_id")
+                    .HasComment("Запах");
+
+                entity.Property(e => e.SwSpeedwater)
+                    .HasColumnName("sw_speedwater")
+                    .HasComment("Скорость течения");
+
+                entity.Property(e => e.SwTastewaterId)
+                    .HasColumnName("sw_tastewater_id")
+                    .HasComment("Вкус воды");
+
+                entity.Property(e => e.SwTypebottomId)
+                    .HasColumnName("sw_typebottom_id")
+                    .HasComment("Тип дна");
+
+                entity.Property(e => e.SwTypewatercourseId)
+                    .HasColumnName("sw_typewatercourse_id")
+                    .HasComment("Тип водотока");
+
+                entity.Property(e => e.SwWaterFlowRate)
+                    .HasColumnName("sw_water_flow_rate")
+                    .HasComment("Расход потока м 3");
+
+                entity.Property(e => e.SwWatertemp)
+                    .HasColumnName("sw_watertemp")
+                    .HasComment("Температура воды");
+
+                entity.Property(e => e.SwWidth)
+                    .HasColumnName("sw_width")
+                    .HasComment("Ширина русла");
+
+                entity.Property(e => e.UserAddId).HasColumnName("user_add_id");
             });
 
             modelBuilder.Entity<Techobject>(entity =>
