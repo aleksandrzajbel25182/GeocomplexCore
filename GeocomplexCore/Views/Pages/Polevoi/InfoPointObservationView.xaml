@@ -988,6 +988,183 @@
                                        Text="Поверхностные воды"
                                        VerticalAlignment="Center" />
                         </TabItem.Header>
+
+                        <materialDesign:Card Width="1100"
+                                             Height="500"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Margin="0,50,0,20"
+                                             materialDesign:ShadowAssist.Darken="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                             materialDesign:ShadowAssist.ShadowEdges="Bottom,Left">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="73*" />
+                                </Grid.RowDefinitions>
+                                <Label Content="Основная информация"
+                                       Grid.Row="0"
+                                       Margin="5,5,5,5"
+                                       FontSize="18" />
+                                <Border Background="Black"
+                                        Height="0"
+                                        VerticalAlignment="Top"
+                                        Grid.Row="1" />
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Vertical">
+                                        
+                                   
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  materialDesign:HintAssist.Hint="Название"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="250"
+                                                  VerticalAlignment="Top"
+                                                  Margin="25,20,25,0"
+                                                  TextWrapping="Wrap" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  materialDesign:HintAssist.Hint="Глубина русла"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="150"
+                                                  VerticalAlignment="Top"
+                                                  Margin="25,20,25,0"
+                                                  TextWrapping="Wrap"
+                                                   />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  materialDesign:HintAssist.Hint="Ширина русла"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="150"
+                                                  VerticalAlignment="Top"
+                                                  Margin="25,20,25,0"
+                                                  TextWrapping="Wrap" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  materialDesign:HintAssist.Hint="Скорость течения"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="150"
+                                                  VerticalAlignment="Top"
+                                                  Margin="25,20,25,0"
+                                                  TextWrapping="Wrap" />
+                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                  materialDesign:HintAssist.FloatingScale="1"
+                                                  materialDesign:HintAssist.Hint="Расход потока м3/с"
+                                                  IsEnabled="False"
+                                                  HorizontalAlignment="Left"
+                                                  Width="150"
+                                                  VerticalAlignment="Top"
+                                                  Margin="25,20,25,0"
+                                                  TextWrapping="Wrap" />
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Тип дна"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0"
+                                                     />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="t°C воды"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="t°C воздуха"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap" />
+                                        
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Прозрачность воды"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0"
+                                                       />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="0,25,0,0">
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Оттенок цвета"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0" />
+                                           
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Цвет основной"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0" />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Запах"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="200"
+                                                      Margin="25,20,25,0" />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Вкус"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="200"
+                                                      Margin="25,20,25,0" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="0,25,0,0">
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Тип водотока"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0" />
+
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Дополнительные параметры"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0" />
+                                          
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                    
+                                </Grid>
+
+                            </Grid>
+                        </materialDesign:Card>
                     </TabItem>
                     <TabItem FontFamily="ARVO">
                         <TabItem.Header>
