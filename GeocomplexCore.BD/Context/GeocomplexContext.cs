@@ -1239,6 +1239,36 @@ namespace GeocomplexCore.DAL.Context
                     .HasComment("Ширина русла");
 
                 entity.Property(e => e.UserAddId).HasColumnName("user_add_id");
+
+                entity.HasOne(d => d.FWpoint)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.FWpointId)
+                    .HasConstraintName("f_wpoint_id");
+
+                entity.HasOne(d => d.SwColor)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.SwColorId)
+                    .HasConstraintName("f_color_id");
+
+                entity.HasOne(d => d.SwOdorwater)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.SwOdorwaterId)
+                    .HasConstraintName("f_smellwater_id");
+
+                entity.HasOne(d => d.SwTypebottom)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.SwTypebottomId)
+                    .HasConstraintName("f_typebottom_id");
+
+                entity.HasOne(d => d.SwTypewatercourse)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.SwTypewatercourseId)
+                    .HasConstraintName("f_tupewatercource_id");
+
+                entity.HasOne(d => d.UserAdd)
+                    .WithMany(p => p.Surfacewaters)
+                    .HasForeignKey(d => d.UserAddId)
+                    .HasConstraintName("f_user_id");
             });
 
             modelBuilder.Entity<Techobject>(entity =>

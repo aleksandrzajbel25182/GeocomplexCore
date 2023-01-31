@@ -13,6 +13,7 @@ namespace GeocomplexCore.DAL
             Egps = new HashSet<Egp>();
             Grounds = new HashSet<Ground>();
             Plants = new HashSet<Plant>();
+            Surfacewaters = new HashSet<Surfacewater>();
             Techobjects = new HashSet<Techobject>();
             WpointCoordinates = new HashSet<WpointCoordinate>();
         }
@@ -47,6 +48,7 @@ namespace GeocomplexCore.DAL
         public virtual ICollection<Egp> Egps { get; set; }
         public virtual ICollection<Ground> Grounds { get; set; }
         public virtual ICollection<Plant> Plants { get; set; }
+        public virtual ICollection<Surfacewater> Surfacewaters { get; set; }
         public virtual ICollection<Techobject> Techobjects { get; set; }
         public virtual ICollection<WpointCoordinate> WpointCoordinates { get; set; }
     }

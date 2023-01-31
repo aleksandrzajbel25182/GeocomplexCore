@@ -15,6 +15,7 @@ namespace GeocomplexCore.DAL
             Grounds = new HashSet<Ground>();
             Plants = new HashSet<Plant>();
             Routes = new HashSet<Route>();
+            Surfacewaters = new HashSet<Surfacewater>();
             Techobjects = new HashSet<Techobject>();
             Watchpoints = new HashSet<Watchpoint>();
         }
@@ -30,6 +31,7 @@ namespace GeocomplexCore.DAL
         public virtual ICollection<Ground> Grounds { get; set; }
         public virtual ICollection<Plant> Plants { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Surfacewater> Surfacewaters { get; set; }
         public virtual ICollection<Techobject> Techobjects { get; set; }
         public virtual ICollection<Watchpoint> Watchpoints { get; set; }
     }

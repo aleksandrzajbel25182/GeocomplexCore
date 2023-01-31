@@ -68,5 +68,12 @@ namespace GeocomplexCore.DAL
         /// Вкус воды
         /// </summary>
         public int? SwTastewaterId { get; set; }
+
+        public virtual Watchpoint? FWpoint { get; set; }
+        public virtual GuideColor? SwColor { get; set; }
+        public virtual GuideSmellwater? SwOdorwater { get; set; }
+        public virtual GuideTypebottom? SwTypebottom { get; set; }
+        public virtual GyideTypewatercourse? SwTypewatercourse { get; set; }
+        public virtual UserDatum? UserAdd { get; set; }
     }
 }

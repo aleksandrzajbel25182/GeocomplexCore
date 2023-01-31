@@ -11,6 +11,7 @@ namespace GeocomplexCore.DAL
         public GuideColor()
         {
             Grounds = new HashSet<Ground>();
+            Surfacewaters = new HashSet<Surfacewater>();
         }
 
         public int IdColor { get; set; }
@@ -21,5 +22,6 @@ namespace GeocomplexCore.DAL
         public int? SecondaryColor { get; set; }
 
         public virtual ICollection<Ground> Grounds { get; set; }
+        public virtual ICollection<Surfacewater> Surfacewaters { get; set; }
     }
 }
