@@ -12,5 +12,6 @@ namespace GeocomplexCore.Views.Pages.Polevoi
             InitializeComponent();
         }
 
+        
     }
 }

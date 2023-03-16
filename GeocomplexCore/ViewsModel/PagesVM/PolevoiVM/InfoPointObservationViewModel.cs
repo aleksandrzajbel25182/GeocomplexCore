@@ -32,7 +32,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         private Egp? egp;
         private Watchpoint? watchpoint;
         private Techobject? techobject;
-        private Plant plant;
+        private Plant? plant;
+        private Surfacewater? surfacewater;
+
 
         #region Свойства для видимости элементов
 
@@ -863,10 +865,9 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         }
         #endregion
 
-
         #region Растительность
 
-        
+
         private ObservableCollection<GuideForestDensity> _plantforestdensities = new ObservableCollection<GuideForestDensity>();
         /// <summary>
         /// Справочник Густота леса
@@ -882,7 +883,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public GuideForestDensity SelectedPlantForestDensities { get; set; }
 
 
-       
+
         private ObservableCollection<GuideHeightUndergrowth> _plantheightundergrowt = new ObservableCollection<GuideHeightUndergrowth>();
         /// <summary>
         /// Справочник Высоты подроста
@@ -899,7 +900,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
 
 
-        
+
         private ObservableCollection<GuideProjcoverUndergrowth> _plantprojcoverundergrowth = new ObservableCollection<GuideProjcoverUndergrowth>();
         /// <summary>
         /// Справочник проективное покрытие подроста
@@ -915,7 +916,7 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
         public GuideProjcoverUndergrowth SelectedPlantProjcoverUndergrowth { get; set; }
 
 
-       
+
         private ObservableCollection<GuideDensityBush> _plantdensitybush = new ObservableCollection<GuideDensityBush>();
         /// <summary>
         /// Справочник Густота кустарников
@@ -1023,6 +1024,269 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
 
         #endregion
 
+        #region Поверехностные воды
+
+        private string _swName;
+        /// <summary>
+        /// Поверхностные воды. Название 
+        /// </summary>
+        public string SwName
+        {
+            get
+            {
+                if (surfacewater?.SwName is not null)
+                {
+                    _swName = surfacewater.SwName;
+                    return _swName;
+                }
+                return _swName;
+            }
+            set => Set(ref _swName, value);
+        }
+
+        private double? _swWidth;
+        /// <summary>
+        /// Поверхностные воды. Ширина русла
+        /// </summary>
+        public double? SwWidth
+        {
+            get
+            {
+                if (surfacewater?.SwWidth is not null)
+                {
+                    _swWidth = surfacewater.SwWidth;
+                    return _swWidth;
+                }
+                return _swWidth;
+            }
+            set => Set(ref _swWidth, value);
+        }
+
+        private double? _swSpeedWater;
+        /// <summary>
+        /// Поверхностные воды. Скорость течения
+        /// </summary>
+        public double? SwSpeedWater
+        {
+            get
+            {
+                if (surfacewater?.SwSpeedwater is not null)
+                {
+                    _swSpeedWater = surfacewater.SwSpeedwater;
+                    return _swSpeedWater;
+                }
+                return _swSpeedWater;
+            }
+            set => Set(ref _swSpeedWater, value);
+        }
+
+        private double? _swWaterTemp;
+        /// <summary>
+        /// Поверхностные воды. Температура воды
+        /// </summary>
+        public double? SwWaterTemp
+        {
+            get
+            {
+                if (surfacewater?.SwWatertemp is not null)
+                {
+                    _swWaterTemp = surfacewater.SwWatertemp;
+                    return _swWaterTemp;
+                }
+                return _swWaterTemp;
+            }
+            set => Set(ref _swWaterTemp, value);
+        }
+
+        private double? _swAirTemp;
+        /// <summary>
+        /// Поверхностные воды. Температура воздуха
+        /// </summary>
+        public double? SwAirTemp
+        {
+            get
+            {
+                if (surfacewater?.SwAirtemp is not null)
+                {
+                    _swAirTemp = surfacewater.SwAirtemp;
+                    return _swAirTemp;
+                }
+                return _swAirTemp;
+            }
+            set => Set(ref _swAirTemp, value);
+        }
+
+        private string? _swBloom;
+        /// <summary>
+        /// Поверхностные воды. Дополнительные параметры
+        /// </summary>
+        public string? SwBloom
+        {
+            get
+            {
+                if (surfacewater?.SwBloom is not null)
+                {
+                    _swBloom = surfacewater.SwBloom;
+                    return _swBloom;
+                }
+                return _swBloom;
+            }
+            set => Set(ref _swBloom, value);
+        }
+
+        private double? _swWaterFlowRate;
+        /// <summary>
+        /// Поверхностные воды Расход потока м3/с
+        /// </summary>
+        public double? SwWaterFlowRate
+        {
+            get
+            {
+                if (surfacewater?.SwWaterFlowRate is not null)
+                {
+                    _swWaterFlowRate = surfacewater.SwWaterFlowRate;
+                    return surfacewater.SwWaterFlowRate;
+                }
+                return _swWaterFlowRate;
+            }
+            set => Set(ref _swWaterFlowRate, value);
+        }
+
+
+        private ObservableCollection<GuideTypebottom> _swTypeBottom= new ObservableCollection<GuideTypebottom>();
+        /// <summary>
+        /// Справочник Тип дна
+        /// </summary>
+        public ObservableCollection<GuideTypebottom> SwTypeBottom
+        {
+            get => _swTypeBottom;
+            set => Set(ref _swTypeBottom , value); 
+        }
+        /// <summary>
+        /// Выбранная группа Типа дна
+        /// </summary>
+        public GuideTypebottom SelectedSurwaterTypebottom { get; set; }
+
+        private ObservableCollection<GuideTastewater> _swTasteWater= new ObservableCollection<GuideTastewater>();
+        /// <summary>
+        /// Справочник Вкус воды
+        /// </summary>
+        public ObservableCollection<GuideTastewater> SwTasteWater
+        {
+            get => _swTasteWater;
+            set => Set(ref _swTasteWater, value);
+        }
+        /// <summary>
+        /// Выбранная группа Вкуса Воды
+        /// </summary>
+        public GuideTastewater SelectedSurwaterTastewater { get; set; }
+
+        private ObservableCollection<GuideSmellwater> _swSmellWater = new ObservableCollection<GuideSmellwater>();
+        /// <summary>
+        /// Справочник Запахи воды
+        /// </summary>
+        public ObservableCollection<GuideSmellwater> SwSmellWater
+        {
+            get => _swSmellWater;
+            set => Set(ref _swSmellWater, value);
+        }
+        /// <summary>
+        /// Выбранная группа Запаха воды
+        /// </summary>
+        public GuideSmellwater SelectedSurwaterSmellwater { get; set; }
+
+
+        private ObservableCollection<GuideClaritywater> _swClarityWater = new ObservableCollection<GuideClaritywater>();
+        /// <summary>
+        /// Справочник Прозрачность
+        /// </summary>
+        public ObservableCollection<GuideClaritywater> SwClarityWater
+        {
+            get => _swClarityWater;
+            set => Set(ref _swClarityWater, value);
+        }
+        /// <summary>
+        /// Выбранная группа Прозрачности
+        /// </summary>
+        public GuideClaritywater SelectedSurwaterClaritywater { get; set; }
+
+        private ObservableCollection<GyideTypewatercourse> _swTypeWaterCourse = new ObservableCollection<GyideTypewatercourse>();
+        /// <summary>
+        /// Справочник Тип Водотока
+        /// </summary>
+        public ObservableCollection<GyideTypewatercourse> SwTypeWaterCourse
+        {
+            get => _swTypeWaterCourse;
+            set => Set(ref _swTypeWaterCourse, value);
+        }
+        /// <summary>
+        /// Выбранная группа Типа Водотока
+        /// </summary>
+        public GyideTypewatercourse SelectedSurwaterTypeWateCourse { get; set; }
+
+        private ObservableCollection<GuideTypeusewater> _swTypeUseWater = new ObservableCollection<GuideTypeusewater>();
+        /// <summary>
+        /// Справочник Тип использования
+        /// </summary>
+        public ObservableCollection<GuideTypeusewater> SwTypeUseWater
+        {
+            get => _swTypeUseWater;
+            set => Set(ref _swTypeUseWater, value);
+        }
+        /// <summary>
+        /// Выбранная группа Типа использования
+        /// </summary>
+        public GuideTypeusewater SelectedSurwaterTypeUseWater { get; set; }
+
+        private ObservableCollection<GuideTuperaid> _swTyperaid = new ObservableCollection<GuideTuperaid>();
+        /// <summary>
+        /// Справочник Тип налетов
+        /// </summary>
+        public ObservableCollection<GuideTuperaid> SwTyperaid
+        {
+            get => _swTyperaid;
+            set => Set(ref _swTyperaid, value);
+        }
+        /// <summary>
+        /// Выбранная группа Типа налетов
+        /// </summary>
+        public GuideTuperaid SelectedSurwaterTyperaid { get; set; }
+
+        private ObservableCollection<GuideColor> _swColorPrimary;
+        /// <summary>
+        /// Справочник цвета
+        /// </summary>
+        public ObservableCollection<GuideColor> SwColorPrimary
+        {
+            get => _swColorPrimary; 
+            set => Set (ref _swColorPrimary, value);
+        }
+        /// <summary>
+        /// Выбранная группа Основного цвета
+        /// </summary>
+        public GuideColor SelectedSurwaterColorPrimary { get; set; }
+
+
+        private ObservableCollection<Node> dopColor = new ObservableCollection<Node>();
+        /// <summary>
+        /// Антропогенное воздействие
+        /// </summary>
+        public ObservableCollection<Node> DopColor
+        {
+            get => dopColor;
+            set => Set(ref dopColor, value);
+        }
+
+        private string swTextDopColor;
+
+        public string SwTextDopColor
+        {
+            get => swTextDopColor; 
+            set=>Set(ref swTextDopColor , value); 
+        }
+
+        #endregion
+
         #endregion
         // ---------------------------------------------------------------------------------------------------------------------
         #region Команды//Commands
@@ -1094,6 +1358,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             QueryDataBaseTechobject();
             QueryDataBasePlant();
             QueryDataBaseGuidePlant();
+            QueryDataBaseSurfacewater();
+            QueryDataBaseGuideSurwater();
             LocatorStatic.Data.PageHeader += $" Точка наблюдения: {watchpoint.WpointId}";
         }
 
@@ -1260,8 +1526,44 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
             data.Clear();
             return plant;
         }
+
+        /// <summary>
+        /// Чтение из базы данных Поверхностных вод
+        /// </summary>
+        /// <returns></returns>
+        private Surfacewater QueryDataBaseSurfacewater()
+        {
+            var data = db.Surfacewaters.Where(w => w.FWpointId == watchpoint.WpointId).ToList();
+            foreach (var item in data)
+            {
+                surfacewater = new Surfacewater()
+                {
+                    SwId = item.SwId,
+                    FWpoint = item.FWpoint,
+                    SwTypewatercourseId = item.SwTypewatercourseId,
+                    SwWidth = item.SwWidth,
+                    SwSpeedwater = item.SwSpeedwater,
+                    SwTypebottomId = item.SwTypebottomId,
+                    SwWatertemp = item.SwWatertemp,
+                    SwAirtemp = item.SwAirtemp,
+                    SwColorId = item.SwColorId,
+                    SwOdorwaterId= item.SwOdorwaterId,
+                    UserAddId = item.UserAddId,
+                    SwDateAdd = item.SwDateAdd,
+                    SwName = item.SwName,
+                    SwBloom = item.SwBloom,
+                    SwClaritywaterId = item.SwClaritywaterId,
+                    SColorSecondary = item.SColorSecondary,
+                    SwWaterFlowRate = item.SwWaterFlowRate,
+                    SwTastewaterId = item.SwTastewaterId
+                };
+            }
+            data.Clear();
+            return surfacewater;
+        }
+
         #region Справочники
-       
+
         /// <summary>
         /// Читаем из базы данных все справочники по грунту и почве
         /// </summary>
@@ -1294,8 +1596,8 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 //Выбранный список оттенка
                 if (ground.FDopcolor is not null)
                 {
-                    int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));                    
-                    SelectedGroundDopcolor = _groundDopcolor.FirstOrDefault(dp=> dp.IdColor == dpc);
+                    int dpc = Convert.ToInt32(ground.FDopcolor.Replace(";", ""));
+                    SelectedGroundDopcolor = _groundDopcolor.FirstOrDefault(dp => dp.IdColor == dpc);
                 }
             }
         }
@@ -1399,6 +1701,73 @@ namespace GeocomplexCore.ViewsModel.PagesVM.PolevoiVM
                 PlantProjcoverUndergrowth = db.GuideProjcoverUndergrowths.AsNoTracking().ToObservableCollection();
                 PlantDensityBush = db.GuideDensityBushes.AsNoTracking().ToObservableCollection();
                 PrjGround = db.GuideProjcoverGroundcovers.AsNoTracking().ToObservableCollection();
+            }
+        }
+
+        private void QueryDataBaseGuideSurwater()
+        {
+            if(surfacewater is not null)
+            {   //Тип дна
+                SwTypeBottom = db.GuideTypebottoms.AsNoTracking().ToObservableCollection();
+                SelectedSurwaterTypebottom = SwTypeBottom.FirstOrDefault(s => s.IdTypebottom == surfacewater?.SwTypebottomId && surfacewater.SwTypebottomId is not null);
+                //Вкус Воды
+                SwTasteWater = db.GuideTastewaters.AsNoTracking().ToObservableCollection();
+                SelectedSurwaterTastewater = SwTasteWater.FirstOrDefault(s => s.IdTestwater == surfacewater?.SwTastewaterId && surfacewater.SwTastewaterId is not null);
+                //Запахи воды
+                SwSmellWater = db.GuideSmellwaters.AsNoTracking().ToObservableCollection();
+                SelectedSurwaterSmellwater = SwSmellWater.FirstOrDefault(s => s.IdSmellwater == surfacewater?.SwOdorwaterId && surfacewater.SwOdorwaterId is not null);
+                // Прозрачность
+                SwClarityWater = db.GuideClaritywaters.AsNoTracking().ToObservableCollection();
+                SelectedSurwaterClaritywater = SwClarityWater.FirstOrDefault(s => s.IdClaritywater == surfacewater?.SwClaritywaterId && surfacewater.SwClaritywaterId is not null);
+                // Тип водотока
+                SwTypeWaterCourse = db.GyideTypewatercourses.AsNoTracking().ToObservableCollection();
+                SelectedSurwaterTypeWateCourse = SwTypeWaterCourse.FirstOrDefault(s => s.IdTypewatercourse == surfacewater?.SwTypewatercourseId && surfacewater.SwTypewatercourseId is not null);
+
+                // РАЗОБРАТЬСЯ ГДЕ ИСПОЛЬЗУЕТСЯ!!!!!
+                //SwTypeUseWater = db.GuideTypeusewaters.AsNoTracking().ToObservableCollection();
+                //SelectedSurwaterTypeUseWater = SwTypeUseWater.FirstOrDefault(s=>s.IdTypeusewater == surfacewater?.sw)
+
+                //SwTyperaid = db.GuideTuperaids.AsNoTracking().ToObservableCollection();
+                //SelectedSurwaterTyperaid = SwTyperaid.FirstOrDefault(s=>s.IdTuperaid == surfacewater.typeraid)
+
+                SwColorPrimary = db.GuideColors.AsNoTracking().Where(w=>w.WaterColor == 1 && w.PrimaryColor == 1).ToObservableCollection();
+                SelectedSurwaterColorPrimary = SwColorPrimary.FirstOrDefault(s => s.IdColor == surfacewater?.SwColorId && surfacewater.SwColorId is not null);
+                var id = surfacewater.SwColorId;
+
+                var str = surfacewater.SColorSecondary;
+                str.TrimEnd(';');
+                var array = str.Split(';');
+                var collection = db.GuideColors.AsNoTracking().Where(w => w.WaterColor == 1 && w.SecondaryColor == 1).ToList();
+                array = array.Where(val => val != "").ToArray();
+                DopColor.Clear();
+                
+                foreach (var item in collection)
+                {
+                    
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (Convert.ToInt32(array[i]) == item.IdColor)
+                        {
+                            DopColor.Add(new Node(item.NameColor, true));
+                            SwTextDopColor += item.NameColor +";";  
+                        }
+                        else
+                        {
+                            DopColor.Add(new Node(item.NameColor, false));
+                        }
+                    }                   
+
+                }
+                
+
+                
+                //DopColor 
+
+
+
+
+
+
             }
         }
         #endregion

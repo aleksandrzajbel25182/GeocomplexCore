@@ -990,7 +990,7 @@
                         </TabItem.Header>
 
                         <materialDesign:Card Width="1100"
-                                             Height="500"
+                                             Height="550"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Top"
                                              Margin="0,50,0,20"
@@ -1013,59 +1013,65 @@
                                         Grid.Row="1" />
                                 <Grid Grid.Row="1">
                                     <StackPanel Orientation="Vertical">
-                                        
-                                   
-                                    <StackPanel Orientation="Horizontal">
 
-                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                                                  materialDesign:HintAssist.FloatingScale="1"
-                                                  materialDesign:HintAssist.Hint="Название"
-                                                  IsEnabled="False"
-                                                  HorizontalAlignment="Left"
-                                                  Width="250"
-                                                  VerticalAlignment="Top"
-                                                  Margin="25,20,25,0"
-                                                  TextWrapping="Wrap" />
-                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                                                  materialDesign:HintAssist.FloatingScale="1"
-                                                  materialDesign:HintAssist.Hint="Глубина русла"
-                                                  IsEnabled="False"
-                                                  HorizontalAlignment="Left"
-                                                  Width="150"
-                                                  VerticalAlignment="Top"
-                                                  Margin="25,20,25,0"
-                                                  TextWrapping="Wrap"
-                                                   />
-                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                                                  materialDesign:HintAssist.FloatingScale="1"
-                                                  materialDesign:HintAssist.Hint="Ширина русла"
-                                                  IsEnabled="False"
-                                                  HorizontalAlignment="Left"
-                                                  Width="150"
-                                                  VerticalAlignment="Top"
-                                                  Margin="25,20,25,0"
-                                                  TextWrapping="Wrap" />
-                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                                                  materialDesign:HintAssist.FloatingScale="1"
-                                                  materialDesign:HintAssist.Hint="Скорость течения"
-                                                  IsEnabled="False"
-                                                  HorizontalAlignment="Left"
-                                                  Width="150"
-                                                  VerticalAlignment="Top"
-                                                  Margin="25,20,25,0"
-                                                  TextWrapping="Wrap" />
-                                        <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
-                                                  materialDesign:HintAssist.FloatingScale="1"
-                                                  materialDesign:HintAssist.Hint="Расход потока м3/с"
-                                                  IsEnabled="False"
-                                                  HorizontalAlignment="Left"
-                                                  Width="150"
-                                                  VerticalAlignment="Top"
-                                                  Margin="25,20,25,0"
-                                                  TextWrapping="Wrap" />
 
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Название"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="250"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap"
+                                                      Text="{ Binding SwName}" />
+                                            
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Глубина русла"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap" />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Ширина русла"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding SwWidth}"
+                                                      />
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Скорость течения"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding SwSpeedWater}"/>
+                                            <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Расход потока м3/с"
+                                                      IsEnabled="False"
+                                                      HorizontalAlignment="Left"
+                                                      Width="150"
+                                                      VerticalAlignment="Top"
+                                                      Margin="25,20,25,0"
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding SwWaterFlowRate}"/>
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="0,25,0,0">
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Тип дна"
@@ -1073,7 +1079,10 @@
                                                       Height="50"
                                                       Width="250"
                                                       Margin="25,20,25,0"
-                                                     />
+                                                      ItemsSource="{Binding SwTypeBottom}"
+                                                      SelectedItem="{Binding SelectedSurwaterTypebottom}"
+                                                      DisplayMemberPath="NameTypebottom"
+                                                      />
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="t°C воды"
@@ -1082,7 +1091,9 @@
                                                       Width="150"
                                                       VerticalAlignment="Top"
                                                       Margin="25,20,25,0"
-                                                      TextWrapping="Wrap" />
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding SwWaterTemp}"/>
+                                            
                                             <TextBox  Style="{StaticResource StyleOutlinedTextBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="t°C воздуха"
@@ -1091,8 +1102,9 @@
                                                       Width="150"
                                                       VerticalAlignment="Top"
                                                       Margin="25,20,25,0"
-                                                      TextWrapping="Wrap" />
-                                        
+                                                      TextWrapping="Wrap"
+                                                      Text="{Binding SwAirTemp}"/>
+
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
                                                       materialDesign:HintAssist.Hint="Прозрачность воды"
@@ -1101,42 +1113,10 @@
                                                       Height="50"
                                                       Width="250"
                                                       Margin="25,20,25,0"
-                                                       />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                                    Margin="0,25,0,0">
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.FloatingScale="1"
-                                                      materialDesign:HintAssist.Hint="Оттенок цвета"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="250"
-                                                      Margin="25,20,25,0" />
-                                           
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.FloatingScale="1"
-                                                      materialDesign:HintAssist.Hint="Цвет основной"
-                                                      HorizontalAlignment="Left"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="250"
-                                                      Margin="25,20,25,0" />
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.FloatingScale="1"
-                                                      materialDesign:HintAssist.Hint="Запах"
-                                                      HorizontalAlignment="Left"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="200"
-                                                      Margin="25,20,25,0" />
-                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
-                                                      materialDesign:HintAssist.FloatingScale="1"
-                                                      materialDesign:HintAssist.Hint="Вкус"
-                                                      HorizontalAlignment="Left"
-                                                      IsEnabled="False"
-                                                      Height="50"
-                                                      Width="200"
-                                                      Margin="25,20,25,0" />
+                                                      ItemsSource="{ Binding SwClarityWater}"
+                                                      SelectedItem="{Binding SelectedSurwaterClaritywater}"
+                                                      DisplayMemberPath="NameClaritywater"
+                                                      />
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"
                                                     Margin="0,25,0,0">
@@ -1146,7 +1126,10 @@
                                                       IsEnabled="False"
                                                       Height="50"
                                                       Width="250"
-                                                      Margin="25,20,25,0" />
+                                                      Margin="25,20,25,0"
+                                                      ItemsSource="{Binding SwTypeWaterCourse}"
+                                                      SelectedItem="{Binding SelectedSurwaterTypeWateCourse}"
+                                                      DisplayMemberPath="NameTypewatercourse" />
 
                                             <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
                                                       materialDesign:HintAssist.FloatingScale="1"
@@ -1156,11 +1139,83 @@
                                                       Height="50"
                                                       Width="250"
                                                       Margin="25,20,25,0" />
-                                          
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="0,25,0,0">
+                                            <StackPanel>
+                                                <Expander HorizontalAlignment="Stretch"
+                                                          Header="Оттенок цвета"
+                                                          FontFamily="Arvo"
+                                                          Margin="25,20,25,0"
+                                                          Width="250">
+                                                    <Grid MaxHeight="300"
+                                                          TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                          Margin="24,8,24,16">
+                                                        <StackPanel>
+                                                            <TextBlock Text="{ Binding SwTextDopColor}"
+                                                                       Margin="0,0,0,10" />
+                                                            <ListBox Style="{StaticResource MaterialDesignListBox}"
+                                                                     ItemsSource="{Binding DopColor}"
+                                                                     ScrollViewer.CanContentScroll="True"
+                                                                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                                <ListBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <CheckBox Content="{Binding Title}"
+                                                                                  IsChecked="{Binding Selected}"
+                                                                                  IsEnabled="False" />
+                                                                    </DataTemplate>
+                                                                </ListBox.ItemTemplate>
+                                                            </ListBox>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Expander>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                
+                                           
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Цвет основной"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="250"
+                                                      Margin="25,20,25,0"
+                                                      ItemsSource="{ Binding SwColorPrimary}"
+                                                      SelectedItem="{Binding SelectedSurwaterColorPrimary}"
+                                                      DisplayMemberPath="NameColor"
+                                                      />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Запах"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="200"
+                                                      Margin="25,20,25,0"
+                                                      ItemsSource="{Binding SwSmellWater}"
+                                                      SelectedItem="{Binding SelectedSurwaterSmellwater}"
+                                                      DisplayMemberPath="NameSmellwater"
+                                                      />
+                                            <ComboBox Style="{StaticResource StyleOutlinedComboBox}"
+                                                      materialDesign:HintAssist.FloatingScale="1"
+                                                      materialDesign:HintAssist.Hint="Вкус"
+                                                      HorizontalAlignment="Left"
+                                                      IsEnabled="False"
+                                                      Height="50"
+                                                      Width="200"
+                                                      Margin="25,20,25,0"
+                                                      ItemsSource="{Binding SwTasteWater}"
+                                                      SelectedItem="{Binding SelectedSurwaterTastewater}"
+                                                      DisplayMemberPath="NameTestwater"
+                                                      />
+                                            </StackPanel>
+                                        </StackPanel>
+                                     
 
                                     </StackPanel>
-                                    
+
                                 </Grid>
 
                             </Grid>
